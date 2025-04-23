@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#065F46" />
+  
+  <!-- Card Table -->
+  <rect x="150" y="200" width="430" height="330" rx="20" fill="#059669" stroke="#000000" stroke-width="5" />
+  <ellipse cx="365" cy="365" rx="215" ry="165" fill="#10B981" stroke="#000000" stroke-width="3" />
+  
+  <!-- Dealer Area -->
+  <text x="365" y="250" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">DEALER</text>
+  
+  <!-- Dealer Cards -->
+  <rect x="315" y="270" width="70" height="100" rx="5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <rect x="345" y="270" width="70" height="100" rx="5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  
+  <!-- Card Symbols (Spade and Diamond) -->
+  <path d="M350,300 C350,290 340,285 330,290 C320,295 325,310 350,330 C375,310 380,295 370,290 C360,285 350,290 350,300 Z" fill="#000000" />
+  <polygon points="380,330 395,310 410,330 395,350" fill="#EF4444" />
+  
+  <!-- Card Numbers -->
+  <text x="330" y="290" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">A</text>
+  <text x="410" y="290" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#EF4444">10</text>
+  
+  <!-- Player Area -->
+  <text x="365" y="480" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">PLAYER</text>
+  
+  <!-- Player Cards -->
+  <rect x="285" y="390" width="70" height="100" rx="5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <rect x="315" y="390" width="70" height="100" rx="5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <rect x="345" y="390" width="70" height="100" rx="5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  
+  <!-- Card Symbols (Heart, Club, Spade) -->
+  <path d="M320,420 C320,410 310,405 300,415 C290,425 300,440 320,455 C340,440 350,425 340,415 C330,405 320,410 320,420 Z" fill="#EF4444" />
+  <path d="M350,450 C350,440 345,435 335,435 C325,435 320,445 325,455 C330,465 340,465 350,460 C350,467 345,472 335,472 C330,472 325,470 325,465" fill="#000000" />
+  <path d="M380,420 C380,410 370,405 360,410 C350,415 355,430 380,450 C405,430 410,415 400,410 C390,405 380,410 380,420 Z" fill="#000000" />
+  
+  <!-- Card Numbers -->
+  <text x="300" y="410" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#EF4444">5</text>
+  <text x="350" y="410" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">7</text>
+  <text x="400" y="410" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">9</text>
+  
+  <!-- Chips -->
+  <circle cx="200" cy="400" r="30" fill="#FCD34D" stroke="#B45309" stroke-width="3" />
+  <circle cx="200" cy="400" r="22" fill="#FBBF24" />
+  <text x="200" y="408" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#B45309">$</text>
+  
+  <circle cx="220" cy="420" r="30" fill="#3B82F6" stroke="#1E40AF" stroke-width="3" />
+  <circle cx="220" cy="420" r="22" fill="#60A5FA" />
+  <text x="220" y="428" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E40AF">$</text>
+  
+  <circle cx="240" cy="400" r="30" fill="#EF4444" stroke="#B91C1C" stroke-width="3" />
+  <circle cx="240" cy="400" r="22" fill="#F87171" />
+  <text x="240" y="408" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#B91C1C">$</text>
+  
+  <!-- Total Score -->
+  <text x="485" y="410" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">21</text>
+  <text x="485" y="345" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">21</text>
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">BLACKJACK</text>
+</svg>

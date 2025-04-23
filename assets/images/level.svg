@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#6366F1" />
+  
+  <!-- Level Steps/Platforms -->
+  <rect x="130" y="450" width="140" height="50" fill="#A5B4FC" stroke="#4338CA" stroke-width="3" />
+  <rect x="270" y="400" width="140" height="100" fill="#818CF8" stroke="#4338CA" stroke-width="3" />
+  <rect x="410" y="350" width="140" height="150" fill="#6366F1" stroke="#4338CA" stroke-width="3" />
+  <rect x="550" y="300" width="50" height="200" fill="#4F46E5" stroke="#4338CA" stroke-width="3" />
+  
+  <!-- Level Numbers -->
+  <circle cx="200" cy="425" r="25" fill="#FFFFFF" stroke="#4338CA" stroke-width="2" />
+  <text x="200" y="435" font-family="Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" fill="#4338CA">1</text>
+  
+  <circle cx="340" cy="375" r="25" fill="#FFFFFF" stroke="#4338CA" stroke-width="2" />
+  <text x="340" y="385" font-family="Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" fill="#4338CA">2</text>
+  
+  <circle cx="480" cy="325" r="25" fill="#FFFFFF" stroke="#4338CA" stroke-width="2" />
+  <text x="480" y="335" font-family="Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" fill="#4338CA">3</text>
+  
+  <circle cx="575" cy="275" r="25" fill="#FFFFFF" stroke="#4338CA" stroke-width="2" />
+  <text x="575" y="285" font-family="Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" fill="#4338CA">4</text>
+  
+  <!-- Character/Avatar on Platform -->
+  <circle cx="340" cy="350" r="35" fill="#FEF3C7" stroke="#000000" stroke-width="2" />
+  <circle cx="325" cy="340" r="5" fill="#000000" />
+  <circle cx="355" cy="340" r="5" fill="#000000" />
+  <path d="M325,365 Q340,375 355,365" stroke="#000000" stroke-width="2" fill="none" />
+  
+  <!-- Trophy -->
+  <polygon points="575,210 595,240 555,240" fill="#FCD34D" stroke="#B45309" stroke-width="2" />
+  <rect x="565" y="240" width="20" height="15" fill="#FCD34D" stroke="#B45309" stroke-width="2" />
+  <rect x="570" y="255" width="10" height="15" fill="#FCD34D" stroke="#B45309" stroke-width="2" />
+  
+  <!-- Arrow Pointing Up -->
+  <polygon points="340,280 310,310 370,310" fill="#FFFFFF" />
+  <rect x="325" y="310" width="30" height="40" fill="#FFFFFF" />
+  
+  <!-- Stars -->
+  <polygon points="160,230 170,245 190,250 175,260 175,280 160,270 145,280 145,260 130,250 150,245" fill="#FCD34D" />
+  <polygon points="450,220 460,235 480,240 465,250 465,270 450,260 435,270 435,250 420,240 440,235" fill="#FCD34D" />
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">LEVEL</text>
+</svg>

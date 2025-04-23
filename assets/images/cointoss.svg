@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#F59E0B" />
+  
+  <!-- Flying/Spinning Coin -->
+  <!-- Outer ring with perspective (ellipse) -->
+  <ellipse cx="365" cy="320" rx="150" ry="60" fill="#FCD34D" stroke="#B45309" stroke-width="4" />
+  
+  <!-- Inner coin face -->
+  <ellipse cx="365" cy="320" rx="120" ry="40" fill="#FBBF24" stroke="#B45309" stroke-width="2" />
+  
+  <!-- Dollar sign -->
+  <text x="365" y="335" font-family="Arial, sans-serif" font-size="50" font-weight="bold" text-anchor="middle" fill="#B45309">$</text>
+  
+  <!-- Motion Lines -->
+  <path d="M250,250 C230,240 220,230 210,210" stroke="#FFFFFF" stroke-width="5" fill="none" />
+  <path d="M270,230 C250,220 240,210 230,190" stroke="#FFFFFF" stroke-width="5" fill="none" />
+  <path d="M290,210 C270,200 260,190 250,170" stroke="#FFFFFF" stroke-width="5" fill="none" />
+  
+  <path d="M480,250 C500,240 510,230 520,210" stroke="#FFFFFF" stroke-width="5" fill="none" />
+  <path d="M460,230 C480,220 490,210 500,190" stroke="#FFFFFF" stroke-width="5" fill="none" />
+  <path d="M440,210 C460,200 470,190 480,170" stroke="#FFFFFF" stroke-width="5" fill="none" />
+  
+  <!-- Hand Tossing the Coin -->
+  <path d="M365,520 C305,520 265,490 265,450 C265,420 285,400 315,400 C335,400 350,410 365,430 C380,410 395,400 415,400 C445,400 465,420 465,450 C465,490 425,520 365,520 Z" fill="#F8FAFC" stroke="#000000" stroke-width="3" />
+  <path d="M315,440 C325,430 340,430 350,440" stroke="#000000" stroke-width="2" fill="none" />
+  <path d="M380,440 C390,430 405,430 415,440" stroke="#000000" stroke-width="2" fill="none" />
+  
+  <!-- Heads and Tails text -->
+  <text x="150" y="360" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">HEADS</text>
+  <text x="580" y="360" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#FFFFFF">TAILS</text>
+  
+  <!-- Arrow from hand to coin -->
+  <path d="M365,410 C365,380 365,370 365,350" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="10,5" fill="none" />
+  <polygon points="365,350 355,370 375,370" fill="#FFFFFF" />
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">COIN TOSS</text>
+</svg>

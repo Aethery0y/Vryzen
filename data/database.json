@@ -2,16 +2,16 @@
   "users": {
     "918920659106@s.whatsapp.net": {
       "id": "918920659106@s.whatsapp.net",
-      "balance": 2001,
+      "balance": 2011,
       "bankBalance": 0,
       "bankCapacity": 10000,
-      "xp": 135,
+      "xp": 170,
       "level": 2,
       "prestige": 0,
       "lastDailyReward": null,
       "dailyStreak": 0,
-      "gamesPlayed": 5,
-      "gamesWon": 3,
+      "gamesPlayed": 6,
+      "gamesWon": 4,
       "investedCompanies": {},
       "shares": {},
       "challengesMade": 2,
@@ -209,6 +209,27 @@
       "lastChallengeTime": null,
       "lastOpponent": null,
       "joinDate": 1745440686509
+    },
+    "23057130371@s.whatsapp.net": {
+      "id": "23057130371@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745441107729
     }
   },
   "companies": {},
@@ -222,7 +243,7 @@
         "challenger": "918920659106@s.whatsapp.net",
         "opponent": "6282297577027@s.whatsapp.net",
         "amount": 10,
-        "status": "pending",
+        "status": "expired",
         "createdAt": 1745439367532,
         "expiresAt": 1745439427532
       },
@@ -231,7 +252,7 @@
         "challenger": "918920659106@s.whatsapp.net",
         "opponent": "918810502592@s.whatsapp.net",
         "amount": 10,
-        "status": "pending",
+        "status": "expired",
         "createdAt": 1745439396514,
         "expiresAt": 1745439456514
       }
@@ -243,9 +264,9 @@
     "lastDrawTime": null
   },
   "stats": {
-    "totalBets": 5,
-    "totalWagered": 241,
-    "totalWon": 1242,
+    "totalBets": 6,
+    "totalWagered": 251,
+    "totalWon": 1262,
     "totalLost": 20
   },
   "usernames": {

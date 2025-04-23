@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#16A34A" />
+  
+  <!-- Money Bag -->
+  <path d="M365,200 C350,200 310,230 310,290 L420,290 C420,230 380,200 365,200 Z" fill="#EAB308" stroke="#000000" stroke-width="6" />
+  <rect x="310" y="290" width="110" height="180" rx="55" fill="#EAB308" stroke="#000000" stroke-width="6" />
+  
+  <!-- Dollar Sign -->
+  <text x="365" y="400" font-family="Arial, sans-serif" font-size="140" font-weight="bold" text-anchor="middle" fill="#FFFFFF">$</text>
+  
+  <!-- Coins -->
+  <circle cx="275" cy="420" r="45" fill="#FCD34D" stroke="#B45309" stroke-width="4" />
+  <circle cx="275" cy="420" r="35" fill="#FBBF24" />
+  <text x="275" y="430" font-family="Arial, sans-serif" font-size="25" font-weight="bold" text-anchor="middle" fill="#B45309">$</text>
+  
+  <circle cx="455" cy="420" r="45" fill="#FCD34D" stroke="#B45309" stroke-width="4" />
+  <circle cx="455" cy="420" r="35" fill="#FBBF24" />
+  <text x="455" y="430" font-family="Arial, sans-serif" font-size="25" font-weight="bold" text-anchor="middle" fill="#B45309">$</text>
+  
+  <circle cx="230" cy="480" r="35" fill="#FCD34D" stroke="#B45309" stroke-width="4" />
+  <circle cx="230" cy="480" r="25" fill="#FBBF24" />
+  <text x="230" y="487" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#B45309">$</text>
+  
+  <circle cx="500" cy="480" r="35" fill="#FCD34D" stroke="#B45309" stroke-width="4" />
+  <circle cx="500" cy="480" r="25" fill="#FBBF24" />
+  <text x="500" y="487" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#B45309">$</text>
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">BALANCE</text>
+</svg>

@@ -1,76 +1,82 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
   <!-- Background -->
-  <rect width="730" height="730" rx="40" fill="#0369A1" />
+  <rect width="730" height="730" rx="40" fill="#0E7490" />
   
-  <!-- Skyscraper Building -->
-  <rect x="200" y="180" width="180" height="360" fill="#FFFFFF" />
-  <rect x="210" y="190" width="160" height="350" fill="#E5E7EB" />
+  <!-- Skyscraper/Office Building -->
+  <rect x="250" y="150" width="230" height="450" rx="5" fill="#0891B2" stroke="#000000" stroke-width="3" />
+  <rect x="250" y="150" width="230" height="60" rx="5" fill="#06B6D4" stroke="#000000" stroke-width="3" />
+  <rect x="250" y="210" width="230" height="60" rx="5" fill="#06B6D4" stroke="#000000" stroke-width="3" />
+  <rect x="250" y="270" width="230" height="60" rx="5" fill="#06B6D4" stroke="#000000" stroke-width="3" />
+  <rect x="250" y="330" width="230" height="60" rx="5" fill="#06B6D4" stroke="#000000" stroke-width="3" />
+  <rect x="250" y="390" width="230" height="60" rx="5" fill="#06B6D4" stroke="#000000" stroke-width="3" />
+  <rect x="250" y="450" width="230" height="60" rx="5" fill="#06B6D4" stroke="#000000" stroke-width="3" />
+  <rect x="250" y="510" width="230" height="60" rx="5" fill="#06B6D4" stroke="#000000" stroke-width="3" />
   
-  <!-- Windows on the building -->
-  <rect x="230" y="210" width="30" height="30" fill="#A5F3FC" />
-  <rect x="270" y="210" width="30" height="30" fill="#A5F3FC" />
-  <rect x="310" y="210" width="30" height="30" fill="#A5F3FC" />
+  <!-- Top Logo/Sign -->
+  <rect x="320" y="100" width="90" height="50" rx="5" fill="#F59E0B" stroke="#000000" stroke-width="3" />
+  <text x="365" y="135" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">CO.</text>
   
-  <rect x="230" y="250" width="30" height="30" fill="#A5F3FC" />
-  <rect x="270" y="250" width="30" height="30" fill="#A5F3FC" />
-  <rect x="310" y="250" width="30" height="30" fill="#A5F3FC" />
+  <!-- Windows -->
+  <!-- Floor 1 -->
+  <rect x="270" y="170" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="330" y="170" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="390" y="170" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
   
-  <rect x="230" y="290" width="30" height="30" fill="#A5F3FC" />
-  <rect x="270" y="290" width="30" height="30" fill="#A5F3FC" />
-  <rect x="310" y="290" width="30" height="30" fill="#A5F3FC" />
+  <!-- Floor 2 -->
+  <rect x="270" y="230" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="330" y="230" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="390" y="230" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
   
-  <rect x="230" y="330" width="30" height="30" fill="#A5F3FC" />
-  <rect x="270" y="330" width="30" height="30" fill="#A5F3FC" />
-  <rect x="310" y="330" width="30" height="30" fill="#A5F3FC" />
+  <!-- Floor 3 -->
+  <rect x="270" y="290" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="330" y="290" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="390" y="290" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
   
-  <rect x="230" y="370" width="30" height="30" fill="#A5F3FC" />
-  <rect x="270" y="370" width="30" height="30" fill="#A5F3FC" />
-  <rect x="310" y="370" width="30" height="30" fill="#A5F3FC" />
+  <!-- Floor 4 -->
+  <rect x="270" y="350" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="330" y="350" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="390" y="350" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
   
-  <rect x="230" y="410" width="30" height="30" fill="#A5F3FC" />
-  <rect x="270" y="410" width="30" height="30" fill="#A5F3FC" />
-  <rect x="310" y="410" width="30" height="30" fill="#A5F3FC" />
+  <!-- Floor 5 -->
+  <rect x="270" y="410" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="330" y="410" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="390" y="410" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
   
-  <rect x="230" y="450" width="30" height="30" fill="#A5F3FC" />
-  <rect x="270" y="450" width="30" height="30" fill="#A5F3FC" />
-  <rect x="310" y="450" width="30" height="30" fill="#A5F3FC" />
+  <!-- Floor 6 -->
+  <rect x="270" y="470" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="330" y="470" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
+  <rect x="390" y="470" width="40" height="30" rx="2" fill="#CFFAFE" stroke="#000000" stroke-width="1" />
   
-  <!-- Second Building -->
-  <rect x="400" y="280" width="130" height="260" fill="#FFFFFF" />
-  <rect x="410" y="290" width="110" height="250" fill="#E5E7EB" />
+  <!-- Entrance -->
+  <rect x="330" y="530" width="70" height="40" rx="2" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <line x1="365" y1="530" x2="365" y2="570" stroke="#000000" stroke-width="2" />
   
-  <!-- Windows on second building -->
-  <rect x="420" y="310" width="25" height="25" fill="#A5F3FC" />
-  <rect x="455" y="310" width="25" height="25" fill="#A5F3FC" />
-  <rect x="485" y="310" width="25" height="25" fill="#A5F3FC" />
+  <!-- Business Icons -->
+  <!-- Chart/Graph -->
+  <path d="M150,350 L150,450 L250,450 Z" fill="#10B981" fill-opacity="0.8" stroke="#000000" stroke-width="2" />
+  <path d="M160,440 L160,400 L180,420 L200,370 L220,390 L240,360 L240,440 Z" fill="#34D399" stroke="#000000" stroke-width="2" />
+  <circle cx="160" cy="400" r="5" fill="#000000" />
+  <circle cx="180" cy="420" r="5" fill="#000000" />
+  <circle cx="200" cy="370" r="5" fill="#000000" />
+  <circle cx="220" cy="390" r="5" fill="#000000" />
+  <circle cx="240" cy="360" r="5" fill="#000000" />
   
-  <rect x="420" y="345" width="25" height="25" fill="#A5F3FC" />
-  <rect x="455" y="345" width="25" height="25" fill="#A5F3FC" />
-  <rect x="485" y="345" width="25" height="25" fill="#A5F3FC" />
+  <!-- Document/Contract -->
+  <rect x="500" y="350" width="80" height="100" rx="5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <line x1="520" y1="380" x2="560" y2="380" stroke="#000000" stroke-width="2" />
+  <line x1="520" y1="400" x2="560" y2="400" stroke="#000000" stroke-width="2" />
+  <line x1="520" y1="420" x2="560" y2="420" stroke="#000000" stroke-width="2" />
+  <circle cx="540" cy="460" r="15" fill="#EF4444" stroke="#000000" stroke-width="1" />
   
-  <rect x="420" y="380" width="25" height="25" fill="#A5F3FC" />
-  <rect x="455" y="380" width="25" height="25" fill="#A5F3FC" />
-  <rect x="485" y="380" width="25" height="25" fill="#A5F3FC" />
+  <!-- Briefcase -->
+  <rect x="500" y="200" width="80" height="60" rx="5" fill="#F59E0B" stroke="#000000" stroke-width="2" />
+  <rect x="520" y="180" width="40" height="20" rx="5" fill="#F59E0B" stroke="#000000" stroke-width="2" />
+  <line x1="540" y1="200" x2="540" y2="260" stroke="#000000" stroke-width="1" />
   
-  <rect x="420" y="415" width="25" height="25" fill="#A5F3FC" />
-  <rect x="455" y="415" width="25" height="25" fill="#A5F3FC" />
-  <rect x="485" y="415" width="25" height="25" fill="#A5F3FC" />
-  
-  <rect x="420" y="450" width="25" height="25" fill="#A5F3FC" />
-  <rect x="455" y="450" width="25" height="25" fill="#A5F3FC" />
-  <rect x="485" y="450" width="25" height="25" fill="#A5F3FC" />
-  
-  <!-- Business Chart -->
-  <line x1="180" y1="260" x2="180" y2="420" stroke="#FFFFFF" stroke-width="4" />
-  <line x1="180" y1="420" x2="340" y2="420" stroke="#FFFFFF" stroke-width="4" />
-  
-  <polyline points="180,380 200,360 220,370 240,330 260,340 280,300 300,280 320,260 340,220" stroke="#22C55E" stroke-width="4" fill="none" />
-  
-  <!-- Coin/Money -->
-  <circle cx="500" cy="220" r="60" fill="#FFD700" stroke="#B8860B" stroke-width="4" />
-  <circle cx="500" cy="220" r="50" fill="#FFC000" />
-  <text x="500" y="235" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#B8860B">$</text>
+  <!-- Dollar Sign -->
+  <circle cx="150" cy="220" r="40" fill="#FCD34D" stroke="#000000" stroke-width="3" />
+  <text x="150" y="235" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#000000">$</text>
   
   <!-- Text -->
-  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">COMPANY COMMANDS</text>
+  <text x="365" y="650" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">COMPANY</text>
 </svg>

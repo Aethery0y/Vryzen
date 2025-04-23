@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#0284C7" />
+  
+  <!-- Smaller Bank Building -->
+  <rect x="220" y="320" width="150" height="150" rx="5" fill="#E5E7EB" />
+  <polygon points="220,320 370,320 295,270" fill="#9CA3AF" />
+  <rect x="245" y="350" width="30" height="120" fill="#9CA3AF" />
+  <rect x="315" y="350" width="30" height="120" fill="#9CA3AF" />
+  <rect x="260" y="420" width="70" height="50" fill="#6B7280" />
+  
+  <!-- Arrow Up -->
+  <polygon points="395,350 425,300 455,350" fill="#FFFFFF" />
+  <rect x="410" y="350" width="30" height="60" fill="#FFFFFF" />
+  
+  <!-- Larger Bank Building -->
+  <rect x="380" y="260" width="200" height="210" rx="5" fill="#FFFFFF" />
+  <polygon points="380,260 580,260 480,200" fill="#D1D5DB" />
+  <rect x="415" y="300" width="35" height="170" fill="#D1D5DB" />
+  <rect x="510" y="300" width="35" height="170" fill="#D1D5DB" />
+  <rect x="435" y="400" width="90" height="70" fill="#4B5563" />
+  
+  <!-- Star/Sparkle Effects -->
+  <polygon points="580,370 590,385 605,390 590,400 585,415 575,405 560,415 565,395 550,390 570,385" fill="#FDE68A" />
+  <polygon points="500,150 510,165 530,170 515,180 510,200 500,185 485,195 490,175 475,170 495,165" fill="#FDE68A" />
+  
+  <!-- Upper Level Indicator -->
+  <rect x="510" y="230" width="60" height="25" rx="5" fill="#F59E0B" />
+  <text x="540" y="248" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">LVL 2</text>
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">BANK UPGRADE</text>
+</svg>

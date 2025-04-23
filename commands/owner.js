@@ -47,26 +47,26 @@ async function handleBlacklist(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    // Need at least one mentioned user
-    if (!message.message.extendedTextMessage || !message.message.extendedTextMessage.contextInfo || !message.message.extendedTextMessage.contextInfo.mentionedJid || message.message.extendedTextMessage.contextInfo.mentionedJid.length === 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must mention a user to blacklist.\n\nExample: ${config.prefix}blacklist @user`);
+    // Need a username
+    if (args.length < 1) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a username to blacklist.\n\nExample: ${config.prefix}blacklist Username`);
       return;
     }
     
-    // Get the first mentioned user
-    const targetUserId = message.message.extendedTextMessage.contextInfo.mentionedJid[0];
+    // Get the target username
+    const username = args[0];
     
-    // Check if user exists in database
-    const targetUser = db.getUser(targetUserId);
+    // Find user by username
+    const targetUser = db.getUserByUsername(username);
     if (!targetUser) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nThe mentioned user has not used the bot before.`);
+      await sendReply(sock, message, `❌ *ERROR*\n\nUser "${username}" not found. Make sure the username is correct and the user has registered.`);
       return;
     }
     
     // Prevent blacklisting owners
     if (config.owners.some(owner => {
       const ownerNumberPart = owner.split('@')[0].split(':')[0];
-      const targetNumberPart = targetUserId.split('@')[0].split(':')[0];
+      const targetNumberPart = targetUser.id.split('@')[0].split(':')[0];
       return ownerNumberPart === targetNumberPart;
     })) {
       await sendReply(sock, message, `❌ *ERROR*\n\nYou cannot blacklist another bot owner.`);
@@ -74,13 +74,13 @@ async function handleBlacklist(sock, message, args, user, sender) {
     }
     
     // Blacklist the user
-    db.blacklistUser(targetUserId, true);
+    db.blacklistUser(targetUser.id, true);
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
     
     // Send success message
-    await sendReply(sock, message, `✅ *USER BLACKLISTED*\n\nThe user has been blacklisted and can no longer use the bot.`, adminImage);
+    await sendReply(sock, message, `✅ *USER BLACKLISTED*\n\n${targetUser.username} has been blacklisted and can no longer use the bot.`, adminImage);
   } catch (error) {
     console.error('Error handling blacklist command:', error);
     await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while blacklisting the user.`);
@@ -100,36 +100,36 @@ async function handleUnblacklist(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    // Need at least one mentioned user
-    if (!message.message.extendedTextMessage || !message.message.extendedTextMessage.contextInfo || !message.message.extendedTextMessage.contextInfo.mentionedJid || message.message.extendedTextMessage.contextInfo.mentionedJid.length === 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must mention a user to unblacklist.\n\nExample: ${config.prefix}unblacklist @user`);
+    // Need a username
+    if (args.length < 1) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a username to unblacklist.\n\nExample: ${config.prefix}unblacklist Username`);
       return;
     }
     
-    // Get the first mentioned user
-    const targetUserId = message.message.extendedTextMessage.contextInfo.mentionedJid[0];
+    // Get the target username
+    const username = args[0];
     
-    // Check if user exists in database
-    const targetUser = db.getUser(targetUserId);
+    // Find user by username
+    const targetUser = db.getUserByUsername(username);
     if (!targetUser) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nThe mentioned user has not used the bot before.`);
+      await sendReply(sock, message, `❌ *ERROR*\n\nUser "${username}" not found. Make sure the username is correct and the user has registered.`);
       return;
     }
     
     // Check if user is actually blacklisted
-    if (!db.isUserBlacklisted(targetUserId)) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nThe mentioned user is not currently blacklisted.`);
+    if (!db.isUserBlacklisted(targetUser.id)) {
+      await sendReply(sock, message, `❌ *ERROR*\n\n${targetUser.username} is not currently blacklisted.`);
       return;
     }
     
     // Unblacklist the user
-    db.blacklistUser(targetUserId, false);
+    db.blacklistUser(targetUser.id, false);
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
     
     // Send success message
-    await sendReply(sock, message, `✅ *USER UNBLACKLISTED*\n\nThe user has been removed from the blacklist and can now use the bot again.`, adminImage);
+    await sendReply(sock, message, `✅ *USER UNBLACKLISTED*\n\n${targetUser.username} has been removed from the blacklist and can now use the bot again.`, adminImage);
   } catch (error) {
     console.error('Error handling unblacklist command:', error);
     await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while unblacklisting the user.`);
@@ -182,37 +182,37 @@ async function handleAddCoins(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    // Need a mentioned user and an amount
-    if (!message.message.extendedTextMessage || !message.message.extendedTextMessage.contextInfo || !message.message.extendedTextMessage.contextInfo.mentionedJid || message.message.extendedTextMessage.contextInfo.mentionedJid.length === 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must mention a user to add coins.\n\nExample: ${config.prefix}addcoins @user 1000`);
+    // Need a username and an amount
+    if (args.length < 2) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a username and amount of coins to add.\n\nExample: ${config.prefix}addcoins Username 1000`);
       return;
     }
     
-    // Get the first mentioned user
-    const targetUserId = message.message.extendedTextMessage.contextInfo.mentionedJid[0];
+    // Get the target username and amount
+    const username = args[0];
+    const amount = parseInt(args[1]);
     
-    // Check if user exists in database
-    const targetUser = db.getUser(targetUserId);
-    if (!targetUser) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nThe mentioned user has not used the bot before.`);
-      return;
-    }
-    
-    // Get the amount
-    const amount = parseInt(args[0]);
+    // Validate amount
     if (isNaN(amount) || amount <= 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a valid positive amount of coins to add.\n\nExample: ${config.prefix}addcoins @user 1000`);
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a valid positive amount of coins to add.\n\nExample: ${config.prefix}addcoins Username 1000`);
+      return;
+    }
+    
+    // Find user by username
+    const targetUser = db.getUserByUsername(username);
+    if (!targetUser) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nUser "${username}" not found. Make sure the username is correct and the user has registered.`);
       return;
     }
     
     // Add the coins
-    db.updateUser(targetUserId, { coins: targetUser.coins + amount });
+    db.updateUser(targetUser.id, { coins: targetUser.coins + amount });
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
     
     // Send success message
-    await sendReply(sock, message, `✅ *COINS ADDED*\n\n${amount.toLocaleString()} coins have been added to ${targetUser.username || targetUserId}'s account.\n\nNew balance: ${(targetUser.coins + amount).toLocaleString()} coins`, adminImage);
+    await sendReply(sock, message, `✅ *COINS ADDED*\n\n${amount.toLocaleString()} coins have been added to ${targetUser.username}'s account.\n\nNew balance: ${(targetUser.coins + amount).toLocaleString()} coins`, adminImage);
   } catch (error) {
     console.error('Error handling add coins command:', error);
     await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while adding coins.`);
@@ -232,26 +232,26 @@ async function handleRemoveCoins(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    // Need a mentioned user and an amount
-    if (!message.message.extendedTextMessage || !message.message.extendedTextMessage.contextInfo || !message.message.extendedTextMessage.contextInfo.mentionedJid || message.message.extendedTextMessage.contextInfo.mentionedJid.length === 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must mention a user to remove coins.\n\nExample: ${config.prefix}removecoins @user 1000`);
+    // Need a username and an amount
+    if (args.length < 2) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a username and amount of coins to remove.\n\nExample: ${config.prefix}removecoins Username 1000`);
       return;
     }
     
-    // Get the first mentioned user
-    const targetUserId = message.message.extendedTextMessage.contextInfo.mentionedJid[0];
+    // Get the target username and amount
+    const username = args[0];
+    const amount = parseInt(args[1]);
     
-    // Check if user exists in database
-    const targetUser = db.getUser(targetUserId);
-    if (!targetUser) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nThe mentioned user has not used the bot before.`);
-      return;
-    }
-    
-    // Get the amount
-    const amount = parseInt(args[0]);
+    // Validate amount
     if (isNaN(amount) || amount <= 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a valid positive amount of coins to remove.\n\nExample: ${config.prefix}removecoins @user 1000`);
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a valid positive amount of coins to remove.\n\nExample: ${config.prefix}removecoins Username 1000`);
+      return;
+    }
+    
+    // Find user by username
+    const targetUser = db.getUserByUsername(username);
+    if (!targetUser) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nUser "${username}" not found. Make sure the username is correct and the user has registered.`);
       return;
     }
     
@@ -260,13 +260,13 @@ async function handleRemoveCoins(sock, message, args, user, sender) {
     const actualAmountRemoved = targetUser.coins - newBalance;
     
     // Update the balance
-    db.updateUser(targetUserId, { coins: newBalance });
+    db.updateUser(targetUser.id, { coins: newBalance });
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
     
     // Send success message
-    await sendReply(sock, message, `✅ *COINS REMOVED*\n\n${actualAmountRemoved.toLocaleString()} coins have been removed from ${targetUser.username || targetUserId}'s account.\n\nNew balance: ${newBalance.toLocaleString()} coins`, adminImage);
+    await sendReply(sock, message, `✅ *COINS REMOVED*\n\n${actualAmountRemoved.toLocaleString()} coins have been removed from ${targetUser.username}'s account.\n\nNew balance: ${newBalance.toLocaleString()} coins`, adminImage);
   } catch (error) {
     console.error('Error handling remove coins command:', error);
     await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while removing coins.`);
@@ -286,29 +286,36 @@ async function handleMakeOwner(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    // Need a mentioned user
-    if (!message.message.extendedTextMessage || !message.message.extendedTextMessage.contextInfo || !message.message.extendedTextMessage.contextInfo.mentionedJid || message.message.extendedTextMessage.contextInfo.mentionedJid.length === 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must mention a user to make them an owner.\n\nExample: ${config.prefix}makeowner @user`);
+    // Need a username
+    if (args.length < 1) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a username to make them an owner.\n\nExample: ${config.prefix}makeowner Username`);
       return;
     }
     
-    // Get the first mentioned user
-    const targetUserId = message.message.extendedTextMessage.contextInfo.mentionedJid[0];
+    // Get the target username
+    const username = args[0];
+    
+    // Find user by username
+    const targetUser = db.getUserByUsername(username);
+    if (!targetUser) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nUser "${username}" not found. Make sure the username is correct and the user has registered.`);
+      return;
+    }
     
     // Check if user is already an owner
-    if (config.owners.includes(targetUserId)) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nThe mentioned user is already a bot owner.`);
+    if (config.owners.includes(targetUser.id)) {
+      await sendReply(sock, message, `❌ *ERROR*\n\n${targetUser.username} is already a bot owner.`);
       return;
     }
     
     // Add to owners
-    config.owners.push(targetUserId);
+    config.owners.push(targetUser.id);
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
     
     // Send success message
-    await sendReply(sock, message, `✅ *OWNER ADDED*\n\nThe user has been given bot owner privileges and can now use all admin commands.`, adminImage);
+    await sendReply(sock, message, `✅ *OWNER ADDED*\n\n${targetUser.username} has been given bot owner privileges and can now use all admin commands.`, adminImage);
   } catch (error) {
     console.error('Error handling make owner command:', error);
     await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while making the user an owner.`);
@@ -328,14 +335,21 @@ async function handleRemoveOwner(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    // Need a mentioned user
-    if (!message.message.extendedTextMessage || !message.message.extendedTextMessage.contextInfo || !message.message.extendedTextMessage.contextInfo.mentionedJid || message.message.extendedTextMessage.contextInfo.mentionedJid.length === 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must mention a user to remove their owner status.\n\nExample: ${config.prefix}removeowner @user`);
+    // Need a username
+    if (args.length < 1) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a username to remove owner status.\n\nExample: ${config.prefix}removeowner Username`);
       return;
     }
     
-    // Get the first mentioned user
-    const targetUserId = message.message.extendedTextMessage.contextInfo.mentionedJid[0];
+    // Get the target username
+    const username = args[0];
+    
+    // Find user by username
+    const targetUser = db.getUserByUsername(username);
+    if (!targetUser) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nUser "${username}" not found. Make sure the username is correct and the user has registered.`);
+      return;
+    }
     
     // Check if target is in the original owners (hardcoded in config.js)
     const hardcodedOwners = [
@@ -344,26 +358,26 @@ async function handleRemoveOwner(sock, message, args, user, sender) {
       '+263 789771339'
     ];
     
-    const targetNumberPart = targetUserId.split('@')[0].split(':')[0];
+    const targetNumberPart = targetUser.id.split('@')[0].split(':')[0];
     if (hardcodedOwners.some(owner => targetNumberPart.includes(owner.replace(/\s+/g, '')))) {
       await sendReply(sock, message, `❌ *ERROR*\n\nCannot remove privileges from a primary bot owner.`);
       return;
     }
     
     // Check if user is an owner
-    if (!config.owners.includes(targetUserId)) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nThe mentioned user is not a bot owner.`);
+    if (!config.owners.includes(targetUser.id)) {
+      await sendReply(sock, message, `❌ *ERROR*\n\n${targetUser.username} is not a bot owner.`);
       return;
     }
     
     // Remove from owners
-    config.owners = config.owners.filter(id => id !== targetUserId);
+    config.owners = config.owners.filter(id => id !== targetUser.id);
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
     
     // Send success message
-    await sendReply(sock, message, `✅ *OWNER REMOVED*\n\nThe user's bot owner privileges have been revoked.`, adminImage);
+    await sendReply(sock, message, `✅ *OWNER REMOVED*\n\n${targetUser.username}'s bot owner privileges have been revoked.`, adminImage);
   } catch (error) {
     console.error('Error handling remove owner command:', error);
     await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while removing the user's owner status.`);
@@ -383,26 +397,26 @@ async function handleSetXP(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    // Need a mentioned user and an amount
-    if (!message.message.extendedTextMessage || !message.message.extendedTextMessage.contextInfo || !message.message.extendedTextMessage.contextInfo.mentionedJid || message.message.extendedTextMessage.contextInfo.mentionedJid.length === 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must mention a user to set their XP.\n\nExample: ${config.prefix}setxp @user 5000`);
+    // Need a username and an amount
+    if (args.length < 2) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a username and amount of XP to set.\n\nExample: ${config.prefix}setxp Username 5000`);
       return;
     }
     
-    // Get the first mentioned user
-    const targetUserId = message.message.extendedTextMessage.contextInfo.mentionedJid[0];
+    // Get the target username and amount
+    const username = args[0];
+    const amount = parseInt(args[1]);
     
-    // Check if user exists in database
-    const targetUser = db.getUser(targetUserId);
-    if (!targetUser) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nThe mentioned user has not used the bot before.`);
-      return;
-    }
-    
-    // Get the amount
-    const amount = parseInt(args[0]);
+    // Validate amount
     if (isNaN(amount) || amount < 0) {
-      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a valid non-negative amount of XP.\n\nExample: ${config.prefix}setxp @user 5000`);
+      await sendReply(sock, message, `❌ *ERROR*\n\nYou must specify a valid non-negative amount of XP.\n\nExample: ${config.prefix}setxp Username 5000`);
+      return;
+    }
+    
+    // Find user by username
+    const targetUser = db.getUserByUsername(username);
+    if (!targetUser) {
+      await sendReply(sock, message, `❌ *ERROR*\n\nUser "${username}" not found. Make sure the username is correct and the user has registered.`);
       return;
     }
     
@@ -410,13 +424,13 @@ async function handleSetXP(sock, message, args, user, sender) {
     const newLevel = Math.floor(Math.sqrt(amount / 100) + 1);
     
     // Update the XP
-    db.updateUser(targetUserId, { xp: amount });
+    db.updateUser(targetUser.id, { xp: amount });
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
     
     // Send success message
-    await sendReply(sock, message, `✅ *XP UPDATED*\n\n${targetUser.username || targetUserId}'s XP has been set to ${amount.toLocaleString()}.\n\nNew Level: ${newLevel}`, adminImage);
+    await sendReply(sock, message, `✅ *XP UPDATED*\n\n${targetUser.username}'s XP has been set to ${amount.toLocaleString()}.\n\nNew Level: ${newLevel}`, adminImage);
   } catch (error) {
     console.error('Error handling set XP command:', error);
     await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while setting XP.`);

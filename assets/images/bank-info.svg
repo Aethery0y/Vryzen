@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#0369A1" />
+  
+  <!-- Bank Building -->
+  <rect x="200" y="250" width="330" height="230" rx="10" fill="#FFFFFF" />
+  
+  <!-- Bank Roof -->
+  <polygon points="200,250 530,250 365,180" fill="#D1D5DB" />
+  
+  <!-- Bank Steps -->
+  <rect x="260" y="480" width="210" height="20" fill="#D1D5DB" />
+  <rect x="245" y="500" width="240" height="20" fill="#D1D5DB" />
+  
+  <!-- Bank Columns -->
+  <rect x="235" y="250" width="25" height="230" fill="#D1D5DB" />
+  <rect x="340" y="250" width="25" height="230" fill="#D1D5DB" />
+  <rect x="470" y="250" width="25" height="230" fill="#D1D5DB" />
+  
+  <!-- Bank Door -->
+  <rect x="320" y="400" width="90" height="100" fill="#2563EB" />
+  
+  <!-- Information Icon -->
+  <circle cx="365" cy="320" r="60" fill="#2563EB" />
+  <text x="365" y="345" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="#FFFFFF">i</text>
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">BANK INFO</text>
+</svg>

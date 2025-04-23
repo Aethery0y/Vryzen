@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#EF4444" />
+  
+  <!-- Dice 1 -->
+  <rect x="180" y="240" width="140" height="140" rx="20" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+  <!-- Dice 1 Dot -->
+  <circle cx="250" cy="310" r="15" fill="#000000" />
+  
+  <!-- Dice 2 -->
+  <rect x="300" y="160" width="140" height="140" rx="20" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+  <!-- Dice 2 Dots -->
+  <circle cx="335" cy="195" r="15" fill="#000000" />
+  <circle cx="405" cy="265" r="15" fill="#000000" />
+  
+  <!-- Dice 3 (Angled/Rolling) -->
+  <rect x="410" y="240" width="140" height="140" rx="20" transform="rotate(15, 480, 310)" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+  <!-- Dice 3 Dots -->
+  <circle cx="450" cy="275" r="15" transform="rotate(15, 480, 310)" fill="#000000" />
+  <circle cx="480" cy="310" r="15" transform="rotate(15, 480, 310)" fill="#000000" />
+  <circle cx="510" cy="345" r="15" transform="rotate(15, 480, 310)" fill="#000000" />
+  
+  <!-- Dice 4 - Bottom left -->
+  <rect x="180" y="400" width="140" height="140" rx="20" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+  <!-- Dice 4 Dots -->
+  <circle cx="215" cy="435" r="15" fill="#000000" />
+  <circle cx="285" cy="435" r="15" fill="#000000" />
+  <circle cx="215" cy="505" r="15" fill="#000000" />
+  <circle cx="285" cy="505" r="15" fill="#000000" />
+  
+  <!-- Dice 5 - Bottom right -->
+  <rect x="340" y="400" width="140" height="140" rx="20" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+  <!-- Dice 5 Dots -->
+  <circle cx="375" cy="435" r="15" fill="#000000" />
+  <circle cx="445" cy="435" r="15" fill="#000000" />
+  <circle cx="410" cy="470" r="15" fill="#000000" />
+  <circle cx="375" cy="505" r="15" fill="#000000" />
+  <circle cx="445" cy="505" r="15" fill="#000000" />
+  
+  <!-- Dice 6 - On right -->
+  <rect x="500" y="400" width="140" height="140" rx="20" transform="rotate(-10, 570, 470)" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+  <!-- Dice 6 Dots -->
+  <circle cx="535" cy="435" r="15" transform="rotate(-10, 570, 470)" fill="#000000" />
+  <circle cx="605" cy="435" r="15" transform="rotate(-10, 570, 470)" fill="#000000" />
+  <circle cx="535" cy="470" r="15" transform="rotate(-10, 570, 470)" fill="#000000" />
+  <circle cx="605" cy="470" r="15" transform="rotate(-10, 570, 470)" fill="#000000" />
+  <circle cx="535" cy="505" r="15" transform="rotate(-10, 570, 470)" fill="#000000" />
+  <circle cx="605" cy="505" r="15" transform="rotate(-10, 570, 470)" fill="#000000" />
+  
+  <!-- Motion Lines -->
+  <path d="M300,280 C280,270 270,265 250,260" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="5,3" fill="none" />
+  <path d="M470,410 C450,400 440,395 420,390" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="5,3" fill="none" />
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">DICE</text>
+</svg>

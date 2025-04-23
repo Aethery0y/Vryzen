@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#DC2626" />
+  
+  <!-- Bank Vault Door (Similar to deposit, but open) -->
+  <rect x="200" y="180" width="330" height="330" fill="#6B7280" stroke="#000000" stroke-width="5" />
+  <path d="M215,195 L515,195 L515,495 L215,495 Z" fill="#374151" stroke="#000000" stroke-width="5" />
+  
+  <!-- Open Vault Door -->
+  <path d="M515,195 L530,180 L530,510 L515,495 Z" fill="#1F2937" stroke="#000000" stroke-width="3" />
+  <path d="M515,195 L515,495 L215,495 L215,195 Z" fill="#374151" stroke="#000000" stroke-width="3" />
+  <path d="M385,195 L385,495" stroke="#1F2937" stroke-width="2" stroke-dasharray="15,10" />
+  
+  <!-- Vault Interior (Open Door Variant) -->
+  <rect x="215" y="195" width="170" height="300" fill="#4B5563" stroke="#000000" stroke-width="2" />
+  
+  <!-- Vault Door Mechanism -->
+  <circle cx="475" cy="345" r="25" fill="#F59E0B" stroke="#000000" stroke-width="3" />
+  <rect x="475" y="325" width="5" height="40" rx="2" fill="#000000" />
+  <rect x="455" y="345" width="40" height="5" rx="2" fill="#000000" />
+  
+  <!-- Money/Coins Coming Out -->
+  <circle cx="460" cy="290" r="30" fill="#FCD34D" stroke="#B45309" stroke-width="3" />
+  <circle cx="460" cy="290" r="20" fill="#FBBF24" />
+  <text x="460" y="297" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#B45309">$</text>
+  
+  <circle cx="500" cy="250" r="25" fill="#FCD34D" stroke="#B45309" stroke-width="3" />
+  <circle cx="500" cy="250" r="15" fill="#FBBF24" />
+  <text x="500" y="256" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#B45309">$</text>
+  
+  <!-- Arrow pointing out of vault -->
+  <polygon points="120,330 180,300 180,360" fill="#FFFFFF" />
+  <rect x="180" y="330" width="60" height="30" fill="#FFFFFF" />
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">WITHDRAW</text>
+</svg>

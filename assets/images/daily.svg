@@ -1,75 +1,120 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
   <!-- Background -->
-  <rect width="730" height="730" rx="40" fill="#F59E0B" />
+  <rect width="730" height="730" rx="40" fill="#F97316" />
   
-  <!-- Calendar Outline -->
-  <rect x="180" y="180" width="370" height="320" rx="20" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+  <!-- Calendar Background -->
+  <rect x="215" y="165" width="300" height="280" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="3" />
   
   <!-- Calendar Header -->
-  <rect x="180" y="180" width="370" height="60" rx="20" fill="#EF4444" stroke="#000000" stroke-width="4" />
+  <rect x="215" y="165" width="300" height="50" rx="10" fill="#FB923C" stroke="#000000" stroke-width="2" />
+  <text x="365" y="200" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">APRIL 2025</text>
   
-  <!-- Calendar Binding Holes -->
-  <circle cx="230" y="210" r="10" fill="#4B5563" />
-  <circle cx="320" y="210" r="10" fill="#4B5563" />
-  <circle cx="410" y="210" r="10" fill="#4B5563" />
-  <circle cx="500" y="210" r="10" fill="#4B5563" />
+  <!-- Calendar Grid -->
+  <!-- Day Headers -->
+  <text x="250" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">S</text>
+  <text x="290" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">M</text>
+  <text x="330" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">T</text>
+  <text x="370" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">W</text>
+  <text x="410" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">T</text>
+  <text x="450" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">F</text>
+  <text x="490" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">S</text>
   
-  <!-- Calendar Grid Lines -->
-  <line x1="180" y1="240" x2="550" y2="240" stroke="#000000" stroke-width="4" />
-  <line x1="180" y1="300" x2="550" y2="300" stroke="#000000" stroke-width="2" />
-  <line x1="180" y1="360" x2="550" y2="360" stroke="#000000" stroke-width="2" />
-  <line x1="180" y1="420" x2="550" y2="420" stroke="#000000" stroke-width="2" />
+  <!-- Week 1 -->
+  <text x="250" y="280" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">1</text>
+  <text x="290" y="280" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">2</text>
+  <text x="330" y="280" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">3</text>
+  <text x="370" y="280" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">4</text>
+  <text x="410" y="280" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">5</text>
   
-  <line x1="240" y1="240" x2="240" y2="500" stroke="#000000" stroke-width="2" />
-  <line x1="302" y1="240" x2="302" y2="500" stroke="#000000" stroke-width="2" />
-  <line x1="364" y1="240" x2="364" y2="500" stroke="#000000" stroke-width="2" />
-  <line x1="426" y1="240" x2="426" y2="500" stroke="#000000" stroke-width="2" />
-  <line x1="488" y1="240" x2="488" y2="500" stroke="#000000" stroke-width="2" />
+  <!-- Week 2 -->
+  <text x="250" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">6</text>
+  <text x="290" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">7</text>
+  <text x="330" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">8</text>
+  <text x="370" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">9</text>
+  <text x="410" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">10</text>
+  <text x="450" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">11</text>
+  <text x="490" y="320" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">12</text>
   
-  <!-- Calendar Dates -->
-  <text x="210" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">1</text>
-  <text x="270" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">2</text>
-  <text x="332" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">3</text>
-  <text x="394" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">4</text>
-  <text x="456" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">5</text>
-  <text x="518" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">6</text>
+  <!-- Week 3 -->
+  <text x="250" y="360" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">13</text>
+  <text x="290" y="360" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">14</text>
+  <text x="330" y="360" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">15</text>
+  <text x="370" y="360" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">16</text>
+  <text x="410" y="360" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">17</text>
+  <text x="450" y="360" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">18</text>
+  <text x="490" y="360" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">19</text>
   
-  <text x="210" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">7</text>
-  <text x="270" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">8</text>
-  <text x="332" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">9</text>
-  <text x="394" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">10</text>
-  <text x="456" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">11</text>
-  <text x="518" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">12</text>
+  <!-- Week 4 -->
+  <text x="250" y="400" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">20</text>
+  <text x="290" y="400" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">21</text>
+  <text x="330" y="400" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">22</text>
   
-  <text x="210" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">13</text>
-  <text x="270" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">14</text>
-  <text x="332" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">15</text>
+  <!-- Current Day -->
+  <circle cx="370" cy="400" r="18" fill="#FB923C" stroke="#000000" stroke-width="1" />
+  <text x="370" y="400" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">23</text>
   
-  <!-- Highlighted Date with Checkmark -->
-  <circle cx="394" cy="390" r="15" fill="#22C55E" />
-  <text x="394" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">16</text>
+  <text x="410" y="400" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">24</text>
+  <text x="450" y="400" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">25</text>
+  <text x="490" y="400" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#000000">26</text>
   
-  <!-- More Dates -->
-  <text x="456" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">17</text>
-  <text x="518" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">18</text>
+  <!-- Gift Box -->
+  <rect x="315" y="470" width="100" height="80" rx="5" fill="#FCD34D" stroke="#000000" stroke-width="3" />
+  <rect x="315" y="470" width="100" height="25" rx="5" fill="#FBBF24" stroke="#000000" stroke-width="2" />
+  <line x1="365" y1="470" x2="365" y2="550" stroke="#000000" stroke-width="2" />
+  <line x1="315" y1="510" x2="415" y2="510" stroke="#000000" stroke-width="2" />
   
-  <text x="210" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">19</text>
-  <text x="270" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">20</text>
-  <text x="332" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">21</text>
-  <text x="394" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">22</text>
-  <text x="456" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">23</text>
-  <text x="518" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">24</text>
+  <!-- Gift Box Ribbon -->
+  <rect x="335" y="450" width="60" height="20" rx="10" fill="#EF4444" stroke="#000000" stroke-width="2" />
+  <path d="M365,450 C350,440 340,420 365,410 C390,420 380,440 365,450 Z" fill="#EF4444" stroke="#000000" stroke-width="2" />
   
-  <text x="210" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">25</text>
-  <text x="270" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">26</text>
-  <text x="332" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">27</text>
-  <text x="394" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">28</text>
-  <text x="456" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">29</text>
-  <text x="518" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">30</text>
+  <!-- Check Marks for Completed Days -->
+  <path d="M245,280 L255,290 L265,270" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M285,280 L295,290 L305,270" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M325,280 L335,290 L345,270" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M365,280 L375,290 L385,270" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M405,280 L415,290 L425,270" stroke="#22C55E" stroke-width="3" fill="none" />
   
-  <!-- Month Display -->
-  <text x="365" y="220" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">APRIL</text>
+  <path d="M245,320 L255,330 L265,310" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M285,320 L295,330 L305,310" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M325,320 L335,330 L345,310" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M365,320 L375,330 L385,310" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M405,320 L415,330 L425,310" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M445,320 L455,330 L465,310" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M485,320 L495,330 L505,310" stroke="#22C55E" stroke-width="3" fill="none" />
+  
+  <path d="M245,360 L255,370 L265,350" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M285,360 L295,370 L305,350" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M325,360 L335,370 L345,350" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M365,360 L375,370 L385,350" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M405,360 L415,370 L425,350" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M445,360 L455,370 L465,350" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M485,360 L495,370 L505,350" stroke="#22C55E" stroke-width="3" fill="none" />
+  
+  <path d="M245,400 L255,410 L265,390" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M285,400 L295,410 L305,390" stroke="#22C55E" stroke-width="3" fill="none" />
+  <path d="M325,400 L335,410 L345,390" stroke="#22C55E" stroke-width="3" fill="none" />
+  
+  <!-- Coins/Rewards -->
+  <circle cx="180" cy="280" r="25" fill="#FCD34D" stroke="#000000" stroke-width="2" />
+  <circle cx="180" cy="280" r="18" fill="#FBBF24" />
+  <text x="180" y="287" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">$</text>
+  
+  <circle cx="550" cy="280" r="25" fill="#FCD34D" stroke="#000000" stroke-width="2" />
+  <circle cx="550" cy="280" r="18" fill="#FBBF24" />
+  <text x="550" y="287" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">$</text>
+  
+  <circle cx="180" cy="400" r="25" fill="#FCD34D" stroke="#000000" stroke-width="2" />
+  <circle cx="180" cy="400" r="18" fill="#FBBF24" />
+  <text x="180" y="407" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">$</text>
+  
+  <circle cx="550" cy="400" r="25" fill="#FCD34D" stroke="#000000" stroke-width="2" />
+  <circle cx="550" cy="400" r="18" fill="#FBBF24" />
+  <text x="550" y="407" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">$</text>
+  
+  <!-- Streak Counter -->
+  <rect x="265" y="550" width="200" height="40" rx="20" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <text x="365" y="578" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">STREAK: 22 DAYS</text>
   
   <!-- Text -->
-  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">DAILY COMMANDS</text>
+  <text x="365" y="620" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">DAILY REWARDS</text>
 </svg>

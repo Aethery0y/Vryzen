@@ -1,43 +1,92 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
   <!-- Background -->
-  <rect width="730" height="730" rx="40" fill="#7C3AED" />
+  <rect width="730" height="730" rx="40" fill="#7E22CE" />
+  
+  <!-- Casino Table -->
+  <rect x="150" y="250" width="430" height="270" rx="20" fill="#4C1D95" stroke="#000000" stroke-width="5" />
+  <ellipse cx="365" cy="385" rx="200" ry="120" fill="#6D28D9" stroke="#000000" stroke-width="3" />
+  
+  <!-- Roulette Wheel -->
+  <circle cx="280" cy="385" r="80" fill="#1E1B4B" stroke="#000000" stroke-width="3" />
+  <circle cx="280" cy="385" r="70" fill="#312E81" stroke="#000000" stroke-width="2" />
+  <circle cx="280" cy="385" r="60" fill="#4338CA" stroke="#000000" stroke-width="2" />
+  <circle cx="280" cy="385" r="20" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  
+  <!-- Roulette Dividers -->
+  <line x1="280" y1="325" x2="280" y2="445" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="220" y1="385" x2="340" y2="385" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="235" y1="340" x2="325" y2="430" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="235" y1="430" x2="325" y2="340" stroke="#FFFFFF" stroke-width="1" />
   
   <!-- Dice -->
-  <rect x="140" y="180" width="160" height="160" rx="20" fill="#FFFFFF" />
-  <circle cx="180" cy="220" r="20" fill="#000000" />
-  <circle cx="260" cy="220" r="20" fill="#000000" />
-  <circle cx="180" cy="300" r="20" fill="#000000" />
-  <circle cx="260" cy="300" r="20" fill="#000000" />
-  <circle cx="220" cy="260" r="20" fill="#000000" />
+  <rect x="380" y="330" width="50" height="50" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <circle cx="395" cy="345" r="5" fill="#000000" />
+  <circle cx="415" cy="345" r="5" fill="#000000" />
+  <circle cx="395" cy="365" r="5" fill="#000000" />
+  <circle cx="415" cy="365" r="5" fill="#000000" />
   
-  <!-- Card -->
-  <rect x="340" y="180" width="120" height="180" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
-  <rect x="350" y="190" width="100" height="20" rx="5" fill="#FF0000" />
-  <text x="400" y="236" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="#000000">A</text>
-  <text x="400" y="300" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#000000">♥</text>
+  <rect x="450" y="330" width="50" height="50" rx="10" transform="rotate(-15, 475, 355)" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <circle cx="465" cy="345" r="5" transform="rotate(-15, 475, 355)" fill="#000000" />
+  <circle cx="485" cy="345" r="5" transform="rotate(-15, 475, 355)" fill="#000000" />
+  <circle cx="475" cy="355" r="5" transform="rotate(-15, 475, 355)" fill="#000000" />
+  <circle cx="465" cy="365" r="5" transform="rotate(-15, 475, 355)" fill="#000000" />
+  <circle cx="485" cy="365" r="5" transform="rotate(-15, 475, 355)" fill="#000000" />
   
-  <!-- Coins -->
-  <circle cx="180" cy="420" r="60" fill="#FFD700" stroke="#B8860B" stroke-width="4" />
-  <circle cx="180" cy="420" r="50" fill="#FFC000" />
-  <text x="180" y="435" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#B8860B">$</text>
+  <!-- Playing Cards -->
+  <rect x="390" y="400" width="40" height="60" rx="3" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <rect x="420" y="400" width="40" height="60" rx="3" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <rect x="450" y="400" width="40" height="60" rx="3" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
   
-  <circle cx="260" cy="450" r="60" fill="#FFD700" stroke="#B8860B" stroke-width="4" />
-  <circle cx="260" cy="450" r="50" fill="#FFC000" />
-  <text x="260" y="465" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#B8860B">$</text>
+  <!-- Card Symbols -->
+  <text x="400" y="420" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FF0000">A</text>
+  <path d="M400,435 C400,425 390,425 390,435 C390,445 410,455 410,445 C410,435 400,425 400,435 Z" fill="#FF0000" />
   
-  <circle cx="340" cy="420" r="60" fill="#FFD700" stroke="#B8860B" stroke-width="4" />
-  <circle cx="340" cy="420" r="50" fill="#FFC000" />
-  <text x="340" y="435" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#B8860B">$</text>
+  <text x="440" y="420" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">K</text>
+  <path d="M440,435 C440,430 430,430 430,440 C430,450 440,450 440,445 C440,450 450,450 450,440 C450,430 440,430 440,435 Z" fill="#000000" />
   
-  <!-- Slot Machine -->
-  <rect x="480" y="180" width="120" height="200" rx="10" fill="#8B0000" />
-  <rect x="490" y="200" width="100" height="80" rx="5" fill="#FFFFFF" />
-  <text x="540" y="250" font-family="Arial, sans-serif" font-size="36" text-anchor="middle" fill="#FF0000">7</text>
-  <circle cx="510" cy="310" r="12" fill="#FFD700" />
-  <circle cx="540" cy="340" r="12" fill="#FFD700" />
-  <circle cx="570" cy="310" r="12" fill="#FFD700" />
-  <rect x="500" y="360" width="80" height="10" rx="5" fill="#FFD700" />
+  <text x="470" y="420" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FF0000">Q</text>
+  <path d="M470,435 C470,425 460,425 460,435 C460,445 480,455 480,445 C480,435 470,425 470,435 Z" fill="#FF0000" />
+  
+  <!-- Chips -->
+  <circle cx="200" cy="350" r="20" fill="#EF4444" stroke="#000000" stroke-width="2" />
+  <circle cx="200" cy="350" r="15" fill="#F87171" stroke="#000000" stroke-width="1" />
+  <text x="200" y="355" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">10</text>
+  
+  <circle cx="220" cy="330" r="20" fill="#3B82F6" stroke="#000000" stroke-width="2" />
+  <circle cx="220" cy="330" r="15" fill="#60A5FA" stroke="#000000" stroke-width="1" />
+  <text x="220" y="335" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">25</text>
+  
+  <circle cx="180" cy="325" r="20" fill="#FCD34D" stroke="#000000" stroke-width="2" />
+  <circle cx="180" cy="325" r="15" fill="#FBBF24" stroke="#000000" stroke-width="1" />
+  <text x="180" y="330" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">50</text>
+  
+  <circle cx="350" cy="320" r="20" fill="#10B981" stroke="#000000" stroke-width="2" />
+  <circle cx="350" cy="320" r="15" fill="#34D399" stroke="#000000" stroke-width="1" />
+  <text x="350" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">100</text>
+  
+  <!-- Coin Flip -->
+  <circle cx="200" cy="440" r="25" fill="#FCD34D" stroke="#000000" stroke-width="2" />
+  <circle cx="200" cy="440" r="20" fill="#FBBF24" stroke="#000000" stroke-width="1" />
+  <text x="200" y="447" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#000000">$</text>
+  
+  <!-- Slots Icon -->
+  <rect x="350" y="450" width="30" height="40" rx="3" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <text x="365" y="470" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#EF4444">7</text>
+  <rect x="380" y="450" width="30" height="40" rx="3" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <text x="395" y="470" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#3B82F6">7</text>
+  <rect x="410" y="450" width="30" height="40" rx="3" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  <text x="425" y="470" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#10B981">7</text>
+  
+  <!-- Casino Signs -->
+  <path d="M150,180 L230,180 L240,200 L140,200 Z" fill="#F59E0B" stroke="#000000" stroke-width="2" />
+  <text x="190" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">SLOTS</text>
+  
+  <path d="M500,180 L580,180 L590,200 L490,200 Z" fill="#F59E0B" stroke="#000000" stroke-width="2" />
+  <text x="540" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">DICE</text>
+  
+  <path d="M320,160 L410,160 L420,180 L310,180 Z" fill="#F59E0B" stroke="#000000" stroke-width="2" />
+  <text x="365" y="175" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">BLACKJACK</text>
   
   <!-- Text -->
-  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">GAMBLING COMMANDS</text>
+  <text x="365" y="580" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">GAMBLING</text>
 </svg>
