@@ -182,43 +182,64 @@ async function handleResetAllData(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    // Double confirmation with specific text to prevent accidental wiping
-    if (!args[0] || args[0].toLowerCase() !== 'wipealldatabase' || !args[1] || args[1].toLowerCase() !== 'confirm') {
+    console.log("RESETALLDATA DEBUG: Args received:", args);
+    
+    // Get the full command text from the message
+    const fullCommand = message.message?.extendedTextMessage?.text || 
+                       message.message?.conversation || 
+                       "";
+    
+    console.log("RESETALLDATA DEBUG: Full command:", fullCommand);
+    
+    // Check if the full command contains the exact confirmation text
+    const confirmationText = `${config.prefix}resetalldata wipealldatabase confirm`;
+    const isExactConfirmation = fullCommand.trim().toLowerCase() === confirmationText.toLowerCase();
+    
+    console.log("RESETALLDATA DEBUG: Exact confirmation match:", isExactConfirmation);
+    
+    if (isExactConfirmation) {
+      console.log("RESETALLDATA DEBUG: Confirmation matched, proceeding with reset");
+      
+      // Get the admin image
+      const adminImage = await getCategoryImage('admin');
+      
+      // Show processing message
+      await sendReply(sock, message, `⏳ *PROCESSING COMPLETE DATABASE WIPE*\n\nThis might take a moment...`);
+      
+      // Reset the database
+      console.log("RESETALLDATA DEBUG: Initializing database with reset flag");
+      db.initializeDatabase(true); // true = force reset
+      console.log("RESETALLDATA DEBUG: Database reset complete");
+      
+      // Send success message
       await sendReply(
         sock, 
         message, 
-        `⚠️ *EXTREME WARNING: COMPLETE DATABASE WIPE* ⚠️\n\n` +
-        `This command will permanently erase ALL DATABASE DATA including:\n` +
-        `- All registered users\n` +
-        `- All companies and investments\n` +
-        `- All transactions and balances\n` +
-        `- All market orders and shares\n` +
-        `- All streaks, stats, and progression\n\n` +
-        `This action is NOT REVERSIBLE and will reset the bot to a fresh state.\n\n` +
-        `To confirm this extreme action, type:\n` +
-        `${config.prefix}resetalldata wipealldatabase confirm`
+        `✅ *COMPLETE DATABASE WIPE SUCCESSFUL* ✅\n\n` +
+        `The entire database has been reset to its initial empty state.\n\n` +
+        `All users will need to register again to use the bot.\n` +
+        `Bot is ready for a fresh start.`, 
+        adminImage
       );
+      console.log("RESETALLDATA DEBUG: Success message sent");
       return;
     }
     
-    // Get the admin image
-    const adminImage = await getCategoryImage('admin');
-    
-    // Show processing message
-    await sendReply(sock, message, `⏳ *PROCESSING COMPLETE DATABASE WIPE*\n\nThis might take a moment...`);
-    
-    // Reset the database
-    db.initializeDatabase(true); // true = force reset
-    
-    // Send success message
+    console.log("RESETALLDATA DEBUG: Sending warning message");
+    // Send warning message if confirmation not matched
     await sendReply(
       sock, 
       message, 
-      `✅ *COMPLETE DATABASE WIPE SUCCESSFUL* ✅\n\n` +
-      `The entire database has been reset to its initial empty state.\n\n` +
-      `All users will need to register again to use the bot.\n` +
-      `Bot is ready for a fresh start.`, 
-      adminImage
+      `⚠️ *EXTREME WARNING: COMPLETE DATABASE WIPE* ⚠️\n\n` +
+      `This command will permanently erase ALL DATABASE DATA including:\n` +
+      `- All registered users\n` +
+      `- All companies and investments\n` +
+      `- All transactions and balances\n` +
+      `- All market orders and shares\n` +
+      `- All streaks, stats, and progression\n\n` +
+      `This action is NOT REVERSIBLE and will reset the bot to a fresh state.\n\n` +
+      `To confirm this extreme action, type:\n` +
+      `${config.prefix}resetalldata wipealldatabase confirm`
     );
   } catch (error) {
     console.error('Error handling reset all data command:', error);
