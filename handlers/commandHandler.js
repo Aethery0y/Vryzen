@@ -382,9 +382,10 @@ async function handleCommand(sock, message, commandText, sender, user) {
         await ownerCommands.handleSetXP(sock, message, args, user, sender);
         break;
       
-      // Unknown command
+      // Unknown command - silently ignore
       default:
-        await sendReply(sock, message, `❌ Unknown command. Type "${config.prefix}help" to see available commands.`);
+        // Don't respond to unknown commands
+        console.log(`Ignoring unknown command: ${command}`);
         break;
     }
   } catch (error) {
