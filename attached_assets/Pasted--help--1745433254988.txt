@@ -1,0 +1,166 @@
+.help                                                                                                                                              CATEGORIES: 
+• Gambling - Games of chance and jackpot
+   .help gambling
+
+• PvP - Challenge other players
+   .help pvp
+
+• Daily - Daily rewards and streaks
+   .help daily
+
+• Company - Create and manage companies
+   .help company
+
+• Leaderboards - View top players
+   .help leaderboard
+
+• XP & Levels - Level up and prestige
+   .help xp
+
+• Shop - Buy items and boosts
+   .help shop
+
+• Banking - Manage your bank account
+   .help bank
+
+• Market – Browse and trade user‑posted share orders
+   .help market
+
+• Basic Commands:
+   .ping - Check if bot is online
+   .balance - Check your balance
+   .profile - View your profile
+   .maingc - Join our official group
+
+1 Gambling - Games of chance and jackpot:-
+
+• .cointoss [amount] [heads/tails] - Bet on coin toss
+  Example: .cointoss 100 heads
+
+• .dice [amount] [number] - Bet on dice roll (1-6)
+  Example: .dice 200 4
+
+• .highstakes [amount] [heads/tails] - High-stakes coin toss with 10x multiplier
+  Example: .highstakes 1000 tails
+
+• .slots [amount] - Play slot machine
+  Example: .slots 500
+
+• .blackjack [amount] - Play blackjack
+  Example: .blackjack 250
+
+• .wheelSpin [amount] - Spin the wheel of fortune
+  Example: .wheelSpin 300
+
+• Jackpot Commands:
+  .jackpot [amount] - Enter the hourly jackpot
+  .jackpotStatus - Check current jackpot status
+
+Min bet: 10 coins
+Max bet: 1000000 coins
+
+2.Banking - Manage your bank account
+🏦 Vryzen BANKING HELP 🏦
+
+• .dep [amount/all] or .deposit [amount/all] - Add coins to your bank
+  Example: .dep 5000 or .deposit all
+
+• .with [amount/all] or .withdraw [amount/all] - Take coins from your bank
+  Example: .with 2000 or .withdraw all
+
+• .int or .interest - Claim daily interest on your bank balance
+  Interest rate: 1% base + prestige bonus
+
+• .bank-upgrade or .upgradebank - Increase your bank capacity
+  Capacity increases by 50%, cost is 15% of current capacity
+
+• .bank or .bank-info - View your bank details
+  Shows balance, capacity, interest rate and upgrade costs
+
+Benefits of using the bank:
+• Earn daily interest on your savings
+• Keep coins safe from certain losses
+• Upgrade your capacity to store more coins
+
+Tip: Higher prestige levels increase your interest rate!
+
+3. Leaderboards - View top players 
+• .topRich - View richest players
+
+• .topWins - Players with most wins
+
+• .topStreak - Highest daily streaks
+
+• .topLevels - Highest level players
+
+• .topPrestige - Highest prestige players
+
+• .topCompanies - Most valuable companies
+
+Leaderboards update in real-time and show the top 10 in each category
+
+4.Company - Create and manage companies
+
+• .cc [amount] [name] - Create a company
+  Example: .cc 6000 TechCorp
+  A random sector will be assigned
+  Min investment: 5000 coins
+
+• .cinfo [name] - View company details
+  Example: .cinfo TechCorp
+
+• .ci [name] [amount] - Invest in a company
+  Example: .ci TechCorp 5000
+
+• .cw [name] [amount] - Withdraw investment
+  Example: .cw TechCorp 2000
+  Withdrawal fee: 10%
+
+• .ctop - View top companies
+
+• .crq [name] - Request to invest in a company
+  Example: .crq TechCorp
+
+• Management Commands (owner only):
+  .crn [oldName] [newName] - Rename company
+  .cclose [name] - Close your company
+  .ckick [name] @user - Remove an investor
+
+5.XP & Levels - Level up and prestige
+ .xp - View your current XP
+
+• .level - Check your level and progress
+
+• .prestige - Prestige when you reach level 50
+  Resets your level but gives bonus rewards
+
+How to earn XP:
+• Betting: +10 XP per bet
+• Winning: +25 XP per win
+• Losing: +5 XP per loss
+
+Level formula: level = sqrt(xp/100) + 1
+
+Each prestige level gives +2% daily reward bonus!
+
+6.PvP - Challenge other players
+• .challenge @user [amount] - Challenge another user
+  Example: .challenge @John 1000
+
+• .accept - Accept a pending challenge
+
+• .decline - Decline a pending challenge
+
+• .rematch - Request a rematch with last opponent
+
+PvP Limits:
+- Max 5 challenges per hour
+- Timeout: 60 seconds to accept/decline
+- Refund: 5%-10% if opponent doesn't respond
+7. • Market – Browse and trade user‑posted share orders
+• .market – View all active sell orders
+• .market [Company] – View sell orders for that company
+• .buyshares [OrderID] [qty] – Buy shares from an order
+• .sellshares [Company] [qty] [price] – Post shares for sale
+• .cancelorder [OrderID] – Cancel your sell order
+• .transfer [Company] [@user] [qty] – Transfer shares directly
