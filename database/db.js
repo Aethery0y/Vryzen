@@ -351,41 +351,15 @@ function isGroupApproved(groupId) {
     db.groups.approved = {};
   }
   
-  // Get the main group ID from config
-  const config = require('../config');
-  const VRYZEN_GROUP_ID = config.mainGroupID;
-  
   // Debug group approval
   console.log(`DEBUG-GROUP: Checking group approval for: ${groupId}`);
-  console.log(`DEBUG-GROUP: Main Vryzen group ID from config: ${VRYZEN_GROUP_ID}`);
-  console.log(`DEBUG-GROUP: Is this the main group? ${groupId === VRYZEN_GROUP_ID}`);
   
-  // Allow the official Vryzen group
-  if (groupId === VRYZEN_GROUP_ID) {
-    // Auto-approve the Vryzen group if not already approved
-    if (!db.groups.approved[VRYZEN_GROUP_ID]) {
-      console.log('DEBUG-GROUP: Auto-approving main Vryzen group');
-      approveGroup(VRYZEN_GROUP_ID, { name: "Vryzen Official", isMain: true });
-      saveDatabase();
-      console.log('DEBUG-GROUP: Main group approved and saved to database');
-    }
-    return true;
-  }
+  // Check if this group is in the approved list
+  const isApproved = !!db.groups.approved[groupId];
+  console.log(`DEBUG-GROUP: Group approved directly: ${isApproved}`);
   
-  // Also approve the commonly used testing group
-  const TEST_GROUP_ID = "120363417906900559@g.us"; // Testing group
-  if (groupId === TEST_GROUP_ID) {
-    if (!db.groups.approved[TEST_GROUP_ID]) {
-      console.log('DEBUG-GROUP: Auto-approving testing group');
-      approveGroup(TEST_GROUP_ID, { name: "Testing Group", isTesting: true });
-      saveDatabase();
-      console.log('DEBUG-GROUP: Testing group approved and saved to database');
-    }
-    return true;
-  }
-  
-  // Check if this group is approved
-  return !!db.groups.approved[groupId];
+  // Return approval status
+  return isApproved;
 }
 
 function getAllApprovedGroups() {

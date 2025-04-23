@@ -2,9 +2,11 @@ const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = requi
 const P = require('pino');
 const qrcode = require('qrcode-terminal');
 const fs = require('fs');
+const path = require('path');
 const config = require('./config');
 const { initializeDatabase, saveDatabase } = require('./database/db');
 const { handleMessage } = require('./handlers/messageHandler');
+const { getBotProfileImage } = require('./utils/imageUtils');
 
 // Initialize the database
 initializeDatabase();

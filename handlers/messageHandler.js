@@ -154,63 +154,53 @@ async function handleMessage(sock, message) {
     }
     
     // Handle group messages
-    if (isGroupMessage) {
-      // Allow if it's the main Vryzen group
-      if (isFromMainGroup) {
-        const user = getUser(sender);
-        await handleCommand(sock, message, commandText, sender, user);
-        return;
-      }
-      
-      // Check if the group is already approved
-      console.log(`Checking if group ${remoteJid} is approved`);
-      const groupApproved = isGroupApproved(remoteJid);
-      console.log(`Group approval status: ${groupApproved}`);
-      
-      if (groupApproved) {
-        console.log(`Group is approved, handling command`);
-        const user = getUser(sender);
-        await handleCommand(sock, message, commandText, sender, user);
-        return;
-      }
-      
+    if (isGroupMessage) {      
       // Check if bot is an admin in this group
+      console.log(`Checking if bot is an admin in group ${remoteJid}`);
       const admin = await isBotAdmin(sock, remoteJid);
+      console.log(`Bot admin status: ${admin}`);
       
-      // If bot is admin, approve the group
       if (admin) {
         try {
-          // Get group metadata
-          const groupMetadata = await sock.groupMetadata(remoteJid);
+          // Check if the group is already approved
+          console.log(`Checking if group ${remoteJid} is approved`);
+          const groupApproved = isGroupApproved(remoteJid);
+          console.log(`Group approval status: ${groupApproved}`);
           
-          // Approve the group
-          approveGroup(remoteJid, {
-            name: groupMetadata.subject,
-            participants: groupMetadata.participants.length
-          });
+          // If not already approved, approve it
+          if (!groupApproved) {
+            // Get group metadata
+            const groupMetadata = await sock.groupMetadata(remoteJid);
+            
+            // Approve the group
+            approveGroup(remoteJid, {
+              name: groupMetadata.subject,
+              participants: groupMetadata.participants.length
+            });
+            
+            // Save the database
+            saveDatabase();
+            
+            // Send approval message
+            await sock.sendMessage(remoteJid, {
+              text: `🎉 *GROUP ACTIVATED* 🎉\n\n` +
+                   `This bot is now active in this group! All commands are available to members.\n\n` +
+                   `Use "${config.prefix}help" to see available commands.`
+            });
+          }
           
-          // Save the database
-          saveDatabase();
-          
-          // Send approval message
-          await sock.sendMessage(remoteJid, {
-            text: `🎉 *GROUP APPROVED* 🎉\n\n` +
-                 `This group has been approved for bot usage! All commands are now available to members.\n\n` +
-                 `Use "${config.prefix}help" to see available commands.`
-          });
-          
-          // Process the original command
+          // Process the command
           const user = getUser(sender);
           await handleCommand(sock, message, commandText, sender, user);
         } catch (error) {
-          console.error('Error approving group:', error);
+          console.error('Error handling group command:', error);
         }
       } else {
         // Bot is not admin, ask to make it admin
         await sendReply(sock, message, 
           `⚠️ *ADMIN REQUIRED* ⚠️\n\n` +
           `To use this bot in this group, please make the bot an admin first.\n\n` +
-          `Once the bot is made an admin, it will automatically approve this group for usage!`
+          `Once the bot is made an admin, it will automatically be activated for everyone in this group!`
         );
       }
       return;
@@ -218,11 +208,12 @@ async function handleMessage(sock, message) {
     
     // If DM and not owner, reject
     await sendReply(sock, message, 
-      `⚠️ This bot primarily works in groups where it's an admin, or in the Vryzen group.\n\n` +
-      `To add this bot to your group:\n` +
+      `⚠️ *GROUP ONLY* ⚠️\n\n` +
+      `This bot only works in groups where it's an admin.\n\n` +
+      `To use this bot in your group:\n` +
       `1. Add the bot to your group\n` +
       `2. Make the bot an admin\n` +
-      `3. The bot will automatically approve your group`
+      `3. The bot will automatically activate all commands for everyone`
     );
     
   } catch (error) {

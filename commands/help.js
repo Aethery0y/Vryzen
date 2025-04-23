@@ -1,6 +1,6 @@
 const { sendReply } = require('../utils/messageUtils');
 const config = require('../config');
-const { getCategoryImage } = require('../utils/imageUtils');
+const { getCategoryImage, getBotProfileImage } = require('../utils/imageUtils');
 const fs = require('fs');
 const path = require('path');
 
@@ -117,13 +117,12 @@ async function handleHelp(sock, message, args, sender) {
  */
 async function sendMainHelp(sock, message) {
   debug('Starting sendMainHelp function');
-  // Create a composite image of all the category icons for the main help menu
-  // For now, just use a generic help image
+  // Get the help category image and convert it to PNG
   try {
-    const imagePath = path.join(__dirname, '../assets/images/help.svg');
-    debug('Reading help image from:', imagePath);
-    const mainHelpImage = fs.readFileSync(imagePath);
-    debug('Successfully read help image, size:', mainHelpImage.length);
+    // Get the main help image - will be converted to PNG automatically
+    debug('Getting help category image');
+    const mainHelpImage = await getCategoryImage('help');
+    debug('Successfully got help image, size:', mainHelpImage ? mainHelpImage.length : 0);
     
     const helpText = `🎮 *VRYZEN BOT COMMANDS* 🎮
 
@@ -205,10 +204,10 @@ async function sendCategoryHelp(sock, message, category) {
   let helpText = '';
   
   try {
-    // Get the appropriate image for this category
+    // Get the appropriate image for this category and convert it to PNG
     debug('Getting image for category:', category);
-    const categoryImage = getCategoryImage(category);
-    debug('Got category image');
+    const categoryImage = await getCategoryImage(category);
+    debug('Got category image, size:', categoryImage ? categoryImage.length : 0);
 
     switch (category) {
       case 'gambling':
@@ -446,28 +445,29 @@ After registering, you'll have full access to all bot features.`;
       case 'group':
         helpText = `👥 *GROUP USAGE HELP* 👥
 
-*Using the Bot in Different Groups:*
-This bot can work in any group where it is an admin, not just in the Vryzen group.
+*Using the Bot in Groups:*
+This bot works in any group where it's an admin - no exceptions.
 
-*How to Set Up in a New Group:*
+*How to Use in Your Group:*
 1. Add the bot to your group
-2. Make the bot an admin in your group
-3. The bot will automatically approve your group for usage
+2. Make the bot an admin
+3. It will automatically activate for everyone
 
-*If the Bot Isn't Working:*
-• Check if the bot is an admin - this is required for functionality
-• If you use a command and the bot asks for admin privileges, you need to make it an admin first
-• Once made admin, the bot will automatically approve your group
+*Important Notes:*
+• Bot MUST be an admin to work - this is required
+• All commands work in all groups where bot is admin
+• Users must register with ${config.prefix}register before using most commands
+• Bot responses use quoted replies to the original message
 
-*Why Admin Privileges?*
-Admin privileges allow the bot to:
-• Monitor group activity to prevent abuse
-• Send messages without restrictions
-• Provide full functionality to all group members
+*Why Admin is Required:*
+• Admin status lets the bot monitor group activity
+• Prevents abuse and ensures reliable functionality
+• Enables proper message delivery and responses
 
-*Official Vryzen Group:*
-• Use ${config.prefix}maingc to get an invite to the official Vryzen group
-• The official group always has full bot functionality
+*For Bot Owners:*
+• Bot owners can use commands anywhere, including DMs
+• Use ${config.prefix}help whoami to check your owner status
+• Use ${config.prefix}help fixowner if owner recognition isn't working
 
 Questions or issues? Contact the bot owners.`;
         break;

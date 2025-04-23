@@ -2,20 +2,20 @@
   "users": {
     "918920659106@s.whatsapp.net": {
       "id": "918920659106@s.whatsapp.net",
-      "balance": 1111,
+      "balance": 2001,
       "bankBalance": 0,
       "bankCapacity": 10000,
-      "xp": 35,
-      "level": 1,
+      "xp": 135,
+      "level": 2,
       "prestige": 0,
       "lastDailyReward": null,
       "dailyStreak": 0,
-      "gamesPlayed": 1,
-      "gamesWon": 1,
+      "gamesPlayed": 5,
+      "gamesWon": 3,
       "investedCompanies": {},
       "shares": {},
-      "challengesMade": 0,
-      "lastChallengeTime": null,
+      "challengesMade": 2,
+      "lastChallengeTime": 1745439396514,
       "lastOpponent": null,
       "joinDate": 1745435726599,
       "username": "Aether",
@@ -83,6 +83,90 @@
       "lastChallengeTime": null,
       "lastOpponent": null,
       "joinDate": 1745437788137
+    },
+    "916387206822@s.whatsapp.net": {
+      "id": "916387206822@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745438195383
+    },
+    "923188672232@s.whatsapp.net": {
+      "id": "923188672232@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745438706282
+    },
+    "6282297577027@s.whatsapp.net": {
+      "id": "6282297577027@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745439367532
+    },
+    "918810502592@s.whatsapp.net": {
+      "id": "918810502592@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745439396514
     }
   },
   "companies": {},
@@ -90,7 +174,26 @@
     "orders": []
   },
   "pvp": {
-    "challenges": {}
+    "challenges": {
+      "918920659106@s.whatsapp.net_6282297577027@s.whatsapp.net_1745439367532": {
+        "id": "918920659106@s.whatsapp.net_6282297577027@s.whatsapp.net_1745439367532",
+        "challenger": "918920659106@s.whatsapp.net",
+        "opponent": "6282297577027@s.whatsapp.net",
+        "amount": 10,
+        "status": "pending",
+        "createdAt": 1745439367532,
+        "expiresAt": 1745439427532
+      },
+      "918920659106@s.whatsapp.net_918810502592@s.whatsapp.net_1745439396514": {
+        "id": "918920659106@s.whatsapp.net_918810502592@s.whatsapp.net_1745439396514",
+        "challenger": "918920659106@s.whatsapp.net",
+        "opponent": "918810502592@s.whatsapp.net",
+        "amount": 10,
+        "status": "pending",
+        "createdAt": 1745439396514,
+        "expiresAt": 1745439456514
+      }
+    }
   },
   "jackpot": {
     "entries": [],
@@ -98,10 +201,10 @@
     "lastDrawTime": null
   },
   "stats": {
-    "totalBets": 1,
-    "totalWagered": 111,
-    "totalWon": 222,
-    "totalLost": 0
+    "totalBets": 5,
+    "totalWagered": 241,
+    "totalWon": 1242,
+    "totalLost": 20
   },
   "usernames": {
     "aether": "918920659106@s.whatsapp.net"
@@ -113,6 +216,12 @@
         "approvedAt": 1745437077079,
         "name": "𝛯𝑅𝑌𝛸",
         "participants": 157
+      },
+      "120363417348169981@g.us": {
+        "id": "120363417348169981@g.us",
+        "approvedAt": 1745438706141,
+        "name": "Vryzen",
+        "participants": 6
       }
     }
   }

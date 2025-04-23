@@ -21,18 +21,67 @@ async function sendReply(sock, message, text, image = null) {
     
     if (image) {
       console.log('REPLY_DEBUG: Sending message with image');
-      // Send reply with image
-      // Convert SVG to generic binary image type without mimetype
-      await sock.sendMessage(
-        remoteJid,
-        { 
-          image,
-          caption: text,
-          // Remove the mimetype specification to let Baileys auto-detect
-        },
-        { quoted: message }
-      );
-      console.log('REPLY_DEBUG: Image message sent successfully');
+      
+      try {
+        // Get the filename or use a default
+        const filename = text.split('\n')[0].replace(/[^\w\s]/gi, '').trim() + '.png'; 
+        
+        // First method: Try sending with mimetype specified as PNG
+        await sock.sendMessage(
+          remoteJid,
+          { 
+            image,
+            caption: text,
+            mimetype: 'image/png',  // Force image/png for better compatibility with SVG
+            fileName: filename       // Give it a filename
+          },
+          { quoted: message }
+        );
+        console.log('REPLY_DEBUG: Image message sent successfully as PNG');
+      } catch (imageError) {
+        console.error('REPLY_DEBUG: Error sending image as PNG:', imageError.message);
+        
+        // Second method: Try as JPEG
+        try {
+          console.log('REPLY_DEBUG: Trying JPEG format');
+          await sock.sendMessage(
+            remoteJid,
+            { 
+              image,
+              caption: text,
+              mimetype: 'image/jpeg',
+              fileName: 'image.jpg'
+            },
+            { quoted: message }
+          );
+          console.log('REPLY_DEBUG: JPEG message sent successfully');
+        } catch (jpegError) {
+          console.error('REPLY_DEBUG: JPEG method failed:', jpegError.message);
+          
+          // Third method: Try with no mimetype
+          try {
+            console.log('REPLY_DEBUG: Trying without mimetype');
+            await sock.sendMessage(
+              remoteJid,
+              { 
+                image,
+                caption: text
+              },
+              { quoted: message }
+            );
+            console.log('REPLY_DEBUG: No-mimetype method succeeded');
+          } catch (noMimeError) {
+            console.error('REPLY_DEBUG: All image methods failed:', noMimeError.message);
+            // If all methods fail, fall back to text-only
+            await sock.sendMessage(
+              remoteJid,
+              { text },
+              { quoted: message }
+            );
+            console.log('REPLY_DEBUG: Fell back to text-only message');
+          }
+        }
+      }
     } else {
       console.log('REPLY_DEBUG: Sending text-only message');
       // Send text-only reply
