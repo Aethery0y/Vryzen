@@ -37,8 +37,14 @@ function getCategoryImage(category) {
     
     // Check if the image exists
     if (fs.existsSync(imagePath)) {
-      // Read and return the image buffer
-      return fs.readFileSync(imagePath);
+      // Read the image buffer
+      const imageBuffer = fs.readFileSync(imagePath);
+      
+      // Debug info about the image
+      console.log(`Image ${imageName} size: ${imageBuffer.length} bytes`);
+      
+      // Return the image buffer
+      return imageBuffer;
     }
     
     return null;

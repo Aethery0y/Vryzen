@@ -3,11 +3,16 @@ module.exports = {
   prefix: '.',
   
   // Main group details
-  mainGroupID: 'LtrF4pOjBZGLIuOxMMO44U@g.us', // The group ID where bot functions
+  mainGroupID: '120363417906900559@g.us', // Testing group ID (temporary)
   mainGroupLink: 'https://chat.whatsapp.com/LtrF4pOjBZGLIuOxMMO44U',
   
   // Owner numbers (have full access to bot commands)
-  owners: ['918920659106@s.whatsapp.net', '918810502592@s.whatsapp.net'],
+  owners: [
+    '918920659106@s.whatsapp.net', 
+    '918810502592@s.whatsapp.net',
+    // Adding the number from the screenshot (temporary for testing)
+    '263789771339@s.whatsapp.net'
+  ],
   
   // Game settings
   minBet: 10,

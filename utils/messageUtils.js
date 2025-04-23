@@ -22,12 +22,13 @@ async function sendReply(sock, message, text, image = null) {
     if (image) {
       console.log('REPLY_DEBUG: Sending message with image');
       // Send reply with image
+      // Convert SVG to generic binary image type without mimetype
       await sock.sendMessage(
         remoteJid,
         { 
           image,
           caption: text,
-          mimetype: 'image/svg+xml' // Specify MIME type for SVG
+          // Remove the mimetype specification to let Baileys auto-detect
         },
         { quoted: message }
       );

