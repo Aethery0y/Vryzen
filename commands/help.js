@@ -363,9 +363,9 @@ Each prestige level gives +${config.prestigeRewardBonus * 100}% daily reward bon
 
 • ${config.prefix}market – View all active sell orders
 • ${config.prefix}market [Company] – View sell orders for that company
-• ${config.prefix}buyshares [OrderID] [qty] – Buy shares from an order
+• ${config.prefix}buyshares [Company] [qty] – Buy shares at lowest price
 • ${config.prefix}sellshares [Company] [qty] [price] – Post shares for sale
-• ${config.prefix}cancelorder [OrderID] – Cancel your sell order
+• ${config.prefix}cancelorder [Company/OrderID] – Cancel your sell order
 • ${config.prefix}transfer [Company] [@user] [qty] – Transfer shares directly
 
 *Market fees:* ${config.marketFee * 100}% transaction fee on all trades`;
@@ -490,8 +490,9 @@ Questions or issues? Contact the bot owners.`;
 • ${config.prefix}removecoins @user [amount] - Remove coins from a user's balance
 • ${config.prefix}setxp @user [amount] - Set a user's XP to a specific amount
 
-*Global Commands:*
-• ${config.prefix}resetdata - Reset all data (use with extreme caution)
+*Database Commands:*
+• ${config.prefix}resetdata - Reset all user data (use with caution)
+• ${config.prefix}resetalldata - Completely wipe ALL database data (extreme caution)
 
 *NOTE: These commands are ONLY available to bot owners*`;
         break;

@@ -40,21 +40,56 @@ function ensureDirectoryExists() {
   }
 }
 
+// Get default empty database structure
+function getEmptyDatabase() {
+  return {
+    users: {},       // User profiles, balances, XP, levels
+    usernames: {},   // Maps usernames to user IDs
+    companies: {},   // Company data
+    market: {        // Market orders
+      orders: []     // List of sell orders
+    },
+    pvp: {           // PvP challenges
+      challenges: {} // Active challenges
+    },
+    jackpot: {       // Jackpot data
+      entries: [],
+      totalAmount: 0,
+      lastDrawTime: null
+    },
+    stats: {         // Global stats
+      totalBets: 0,
+      totalWagered: 0,
+      totalWon: 0,
+      totalLost: 0
+    },
+    groups: {        // Group data
+      approved: {}   // Approved groups where bot can function
+    },
+    blacklist: {}    // Blacklisted users who can't use the bot
+  };
+}
+
 // Initialize the database
-function initializeDatabase() {
+function initializeDatabase(forceReset = false) {
   ensureDirectoryExists();
   
   try {
-    if (fs.existsSync(DB_PATH)) {
+    if (fs.existsSync(DB_PATH) && !forceReset) {
       const data = fs.readFileSync(DB_PATH, 'utf8');
       db = JSON.parse(data);
       console.log('Database loaded successfully');
     } else {
+      // Reset database to empty state
+      db = getEmptyDatabase();
       saveDatabase();
-      console.log('New database created');
+      console.log(forceReset ? 'Database reset successfully' : 'New database created');
     }
   } catch (error) {
     console.error('Error initializing database:', error);
+    // Fallback to empty database on error
+    db = getEmptyDatabase();
+    saveDatabase();
   }
 }
 

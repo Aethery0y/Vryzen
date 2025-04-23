@@ -1,5 +1,5 @@
 const { sendReply } = require('../utils/messageUtils');
-const { getAllUsers, getAllCompanies } = require('../database/db');
+const { getAllUsers, getAllCompanies, getUser } = require('../database/db');
 const { formatNumber } = require('../utils/formatter');
 
 /**
@@ -249,7 +249,11 @@ async function handleTopCompanies(sock, message) {
     
     for (let i = 0; i < topCompanies.length; i++) {
       const company = topCompanies[i];
-      leaderboardText += `${i + 1}. ${company.name} (${company.sector}): ${formatNumber(company.value)} coins\n   Owner: ${company.owner.split('@')[0]}\n`;
+      // Get user object by ID to find username
+      const owner = getUser(company.owner);
+      // Use username if available, otherwise use the phone number
+      const ownerName = owner && owner.username ? owner.username : company.owner.split('@')[0];
+      leaderboardText += `${i + 1}. ${company.name} (${company.sector}): ${formatNumber(company.value)} coins\n   Owner: ${ownerName}\n`;
     }
     
     await sendReply(sock, message, leaderboardText);

@@ -2,7 +2,7 @@
   "users": {
     "918920659106@s.whatsapp.net": {
       "id": "918920659106@s.whatsapp.net",
-      "balance": 2011,
+      "balance": 7020,
       "bankBalance": 0,
       "bankCapacity": 10000,
       "xp": 170,
@@ -12,14 +12,19 @@
       "dailyStreak": 0,
       "gamesPlayed": 6,
       "gamesWon": 4,
-      "investedCompanies": {},
-      "shares": {},
+      "investedCompanies": {
+        "Vryzen": 4990
+      },
+      "shares": {
+        "Vryzen": 100
+      },
       "challengesMade": 2,
       "lastChallengeTime": 1745439396514,
       "lastOpponent": null,
       "joinDate": 1745435726599,
       "username": "Aether",
-      "isRegistered": true
+      "isRegistered": true,
+      "coins": null
     },
     "263789771339@s.whatsapp.net": {
       "id": "263789771339@s.whatsapp.net",
@@ -230,11 +235,77 @@
       "lastChallengeTime": null,
       "lastOpponent": null,
       "joinDate": 1745441107729
+    },
+    "3584573983718@s.whatsapp.net": {
+      "id": "3584573983718@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745441901570
+    },
+    "2347044907879@s.whatsapp.net": {
+      "id": "2347044907879@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745443356892
     }
   },
-  "companies": {},
+  "companies": {
+    "Vryzen": {
+      "name": "Vryzen",
+      "owner": "918920659106@s.whatsapp.net",
+      "sector": "Food & Beverage",
+      "value": 4990,
+      "investors": {
+        "918920659106@s.whatsapp.net": 4990
+      },
+      "createdAt": 1745442219322,
+      "totalShares": 100,
+      "shareDistribution": {
+        "918920659106@s.whatsapp.net": 100
+      }
+    }
+  },
   "market": {
-    "orders": []
+    "orders": [
+      {
+        "seller": "918920659106@s.whatsapp.net",
+        "company": "Vryzen",
+        "quantity": 2,
+        "price": 20,
+        "createdAt": 1745442550201,
+        "id": 1745442550238
+      }
+    ]
   },
   "pvp": {
     "challenges": {

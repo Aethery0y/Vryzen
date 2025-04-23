@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="250" viewBox="0 0 500 250">
+  <!-- Background -->
+  <rect width="500" height="250" rx="20" fill="#F97316" />
+  
+  <!-- Calendar -->
+  <rect x="60" y="50" width="220" height="160" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+  
+  <!-- Calendar Header -->
+  <rect x="60" y="50" width="220" height="30" rx="10" fill="#FB923C" stroke="#000000" stroke-width="2" />
+  <text x="170" y="72" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">APRIL 2025</text>
+  
+  <!-- Calendar Grid Lines -->
+  <line x1="60" y1="90" x2="280" y2="90" stroke="#000000" stroke-width="1" />
+  <line x1="60" y1="120" x2="280" y2="120" stroke="#000000" stroke-width="1" />
+  <line x1="60" y1="150" x2="280" y2="150" stroke="#000000" stroke-width="1" />
+  <line x1="60" y1="180" x2="280" y2="180" stroke="#000000" stroke-width="1" />
+  
+  <line x1="91" y1="90" x2="91" y2="210" stroke="#000000" stroke-width="1" />
+  <line x1="122" y1="90" x2="122" y2="210" stroke="#000000" stroke-width="1" />
+  <line x1="153" y1="90" x2="153" y2="210" stroke="#000000" stroke-width="1" />
+  <line x1="184" y1="90" x2="184" y2="210" stroke="#000000" stroke-width="1" />
+  <line x1="215" y1="90" x2="215" y2="210" stroke="#000000" stroke-width="1" />
+  <line x1="246" y1="90" x2="246" y2="210" stroke="#000000" stroke-width="1" />
+  
+  <!-- Day Names -->
+  <text x="76" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">S</text>
+  <text x="107" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">M</text>
+  <text x="138" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">T</text>
+  <text x="169" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">W</text>
+  <text x="200" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">T</text>
+  <text x="231" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">F</text>
+  <text x="262" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">S</text>
+  
+  <!-- Week 1 (partial) -->
+  <text x="76" y="135" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#000000">1</text>
+  <text x="107" y="135" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#000000">2</text>
+  
+  <!-- Check marks on completed days -->
+  <path d="M70,135 L76,140 L82,130" stroke="#22C55E" stroke-width="2" fill="none" />
+  <path d="M100,135 L106,140 L112,130" stroke="#22C55E" stroke-width="2" fill="none" />
+  
+  <!-- Current day highlighted -->
+  <circle cx="138" cy="135" r="12" fill="#FB923C" stroke="#000000" stroke-width="1" />
+  <text x="138" y="139" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">3</text>
+  
+  <!-- Streak Counter -->
+  <rect x="60" y="180" width="220" height="30" rx="5" fill="#FBBF24" stroke="#000000" stroke-width="2" />
+  <text x="170" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">STREAK: 2 DAYS</text>
+  
+  <!-- Gift Box -->
+  <rect x="320" y="80" width="120" height="100" rx="10" fill="#FCD34D" stroke="#000000" stroke-width="3" />
+  <rect x="320" y="80" width="120" height="25" rx="5" fill="#FBBF24" stroke="#000000" stroke-width="2" />
+  <line x1="380" y1="80" x2="380" y2="180" stroke="#000000" stroke-width="2" />
+  <line x1="320" y1="130" x2="440" y2="130" stroke="#000000" stroke-width="2" />
+  
+  <!-- Gift Box Ribbon -->
+  <rect x="350" y="60" width="60" height="20" rx="10" fill="#EF4444" stroke="#000000" stroke-width="2" />
+  <path d="M380,60 C365,50 360,30 380,20 C400,30 395,50 380,60 Z" fill="#EF4444" stroke="#000000" stroke-width="2" />
+  
+  <!-- Coins/Rewards -->
+  <circle cx="380" cy="200" r="20" fill="#FCD34D" stroke="#000000" stroke-width="2" />
+  <circle cx="380" cy="200" r="15" fill="#FBBF24" />
+  <text x="380" y="206" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">$</text>
+  
+  <!-- Text -->
+  <text x="250" y="235" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">DAILY REWARDS</text>
+</svg>

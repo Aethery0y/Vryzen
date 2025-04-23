@@ -118,19 +118,26 @@ async function handleCompanyInfo(sock, message, args) {
     let investorsText = '';
     for (const [investorId, investment] of investors) {
       const investorPercentage = ((investment / company.value) * 100).toFixed(1);
-      investorsText += `- ${investorId.split('@')[0]}: ${formatNumber(investment)} coins (${investorPercentage}%)\n`;
+      // Get investor name from username if available
+      const investor = getUser(investorId);
+      const investorName = investor && investor.username ? investor.username : investorId.split('@')[0];
+      investorsText += `- ${investorName}: ${formatNumber(investment)} coins (${investorPercentage}%)\n`;
     }
     
     if (investorsText === '') {
       investorsText = 'No investors yet';
     }
     
+    // Get owner info
+    const owner = getUser(company.owner);
+    const ownerName = owner && owner.username ? owner.username : company.owner.split('@')[0];
+    
     // Send company info
     await sendReply(sock, message, `🏢 *COMPANY INFORMATION* 🏢\n\n` +
       `Name: ${company.name}\n` +
       `Sector: ${company.sector}\n` +
       `Value: ${formatNumber(company.value)} coins\n` +
-      `Owner: ${company.owner.split('@')[0]}\n` +
+      `Owner: ${ownerName}\n` +
       `Created: ${creationDate}\n` +
       `Total Shares: ${company.totalShares}\n\n` +
       `*Top Investors:*\n${investorsText}\n\n` +
@@ -391,7 +398,11 @@ async function handleCompanyTop(sock, message) {
     let topCompaniesText = '';
     for (let i = 0; i < sortedCompanies.length; i++) {
       const company = sortedCompanies[i];
-      topCompaniesText += `${i + 1}. ${company.name} (${company.sector}) - ${formatNumber(company.value)} coins\n   Owner: ${company.owner.split('@')[0]}\n`;
+      // Get user object by ID to find username
+      const owner = getUser(company.owner);
+      // Use username if available, otherwise use the phone number
+      const ownerName = owner && owner.username ? owner.username : company.owner.split('@')[0];
+      topCompaniesText += `${i + 1}. ${company.name} (${company.sector}) - ${formatNumber(company.value)} coins\n   Owner: ${ownerName}\n`;
     }
     
     // Send top companies
@@ -429,10 +440,14 @@ async function handleCompanyRequest(sock, message, args, sender) {
     
     // Send request to company owner
     try {
+      // Get requester info
+      const requester = getUser(sender);
+      const requesterName = requester && requester.username ? requester.username : sender.split('@')[0];
+      
       await sock.sendMessage(
         company.owner,
         {
-          text: `📨 *INVESTMENT REQUEST* 📨\n\n${sender.split('@')[0]} wants to invest in your company "${companyName}".\n\nThey can use "${config.prefix}ci ${companyName} [amount]" to invest.`
+          text: `📨 *INVESTMENT REQUEST* 📨\n\n${requesterName} wants to invest in your company "${companyName}".\n\nThey can use "${config.prefix}ci ${companyName} [amount]" to invest.`
         }
       );
       
@@ -733,8 +748,12 @@ async function handleCompanyKick(sock, message, args, sender) {
       }
     }
     
+    // Get kicked user's username
+    const kickedUserObj = getUser(kickUser);
+    const kickedUsername = kickedUserObj && kickedUserObj.username ? kickedUserObj.username : kickUser.split('@')[0];
+    
     // Send confirmation to owner
-    await sendReply(sock, message, `✅ Investor ${kickUser.split('@')[0]} has been removed from "${companyName}".\n\nTheir investment of ${formatNumber(investmentAmount)} coins has been returned to them, minus a ${(config.companyWithdrawalFee * 2) * 100}% fee.\n\nNew company value: ${formatNumber(newCompanyValue)} coins`);
+    await sendReply(sock, message, `✅ Investor ${kickedUsername} has been removed from "${companyName}".\n\nTheir investment of ${formatNumber(investmentAmount)} coins has been returned to them, minus a ${(config.companyWithdrawalFee * 2) * 100}% fee.\n\nNew company value: ${formatNumber(newCompanyValue)} coins`);
   } catch (error) {
     console.error('Error handling company kick command:', error);
     await sendReply(sock, message, "❌ An error occurred while kicking the investor.");

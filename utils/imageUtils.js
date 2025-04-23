@@ -5,8 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-// Default Vryzen bot image to use as fallback
-const BOT_IMAGE_PATH = path.join(__dirname, '..', 'assets', 'images', 'bot', 'Vryzen.jpg');
+// Default bot logo to use as fallback
+const BOT_IMAGE_PATH = path.join(__dirname, '..', 'assets', 'images', 'bot', 'bot_logo.svg');
 
 // Cache for converted images to improve performance
 const imageCache = {};
@@ -68,7 +68,8 @@ async function getCategoryImage(category) {
       'groups': 'groups.svg',
       'register': 'register.svg',
       'registration': 'register.svg',
-      'help': 'help.svg'  // Added help.svg for main help menu
+      'help': 'help.svg',  // Added help.svg for main help menu
+      'admin': 'admin_new.svg'  // New admin image for owner commands
     };
 
     // Determine the correct image path based on category

@@ -102,7 +102,7 @@ async function handleProfile(sock, message, user) {
 async function handleMainGC(sock, message, sender) {
   try {
     // First, reply to the user's message
-    await sendReply(sock, message, "🔗 Sending you an invite to the official Vryzen group...");
+    await sendReply(sock, message, "🔗 Sending you an invite to the official WhatsApp Bot group...");
     
     // Try to add the user to the group if the bot is an admin
     try {
@@ -111,7 +111,7 @@ async function handleMainGC(sock, message, sender) {
         [sender],
         "add"
       );
-      await sendReply(sock, message, "✅ You've been added to the official Vryzen group!");
+      await sendReply(sock, message, "✅ You've been added to the official WhatsApp Bot group!");
     } catch (addError) {
       // If adding fails, send them the group invite link instead
       console.log('Error adding user to group, sending invite link instead:', addError);
@@ -120,7 +120,7 @@ async function handleMainGC(sock, message, sender) {
       await sock.sendMessage(
         sender,
         { 
-          text: `🔗 Join our official Vryzen group:\n${config.mainGroupLink}\n\nClick the link to join!` 
+          text: `🔗 Join our official WhatsApp Bot group:\n${config.mainGroupLink}\n\nClick the link to join!` 
         }
       );
       

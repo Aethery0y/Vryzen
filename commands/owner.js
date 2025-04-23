@@ -170,6 +170,63 @@ async function handleResetData(sock, message, args, user, sender) {
 }
 
 /**
+ * Reset ALL data - complete database wipe
+ * @param {Object} sock - WhatsApp connection
+ * @param {Object} message - Message object
+ * @param {Array} args - Command arguments
+ * @param {Object} user - User data
+ * @param {String} sender - Sender ID
+ */
+async function handleResetAllData(sock, message, args, user, sender) {
+  try {
+    // Check if user is owner
+    if (!await isOwner(sock, message, sender)) return;
+    
+    // Double confirmation with specific text to prevent accidental wiping
+    if (!args[0] || args[0].toLowerCase() !== 'wipealldatabase' || !args[1] || args[1].toLowerCase() !== 'confirm') {
+      await sendReply(
+        sock, 
+        message, 
+        `⚠️ *EXTREME WARNING: COMPLETE DATABASE WIPE* ⚠️\n\n` +
+        `This command will permanently erase ALL DATABASE DATA including:\n` +
+        `- All registered users\n` +
+        `- All companies and investments\n` +
+        `- All transactions and balances\n` +
+        `- All market orders and shares\n` +
+        `- All streaks, stats, and progression\n\n` +
+        `This action is NOT REVERSIBLE and will reset the bot to a fresh state.\n\n` +
+        `To confirm this extreme action, type:\n` +
+        `${config.prefix}resetalldata wipealldatabase confirm`
+      );
+      return;
+    }
+    
+    // Get the admin image
+    const adminImage = await getCategoryImage('admin');
+    
+    // Show processing message
+    await sendReply(sock, message, `⏳ *PROCESSING COMPLETE DATABASE WIPE*\n\nThis might take a moment...`);
+    
+    // Reset the database
+    db.initializeDatabase(true); // true = force reset
+    
+    // Send success message
+    await sendReply(
+      sock, 
+      message, 
+      `✅ *COMPLETE DATABASE WIPE SUCCESSFUL* ✅\n\n` +
+      `The entire database has been reset to its initial empty state.\n\n` +
+      `All users will need to register again to use the bot.\n` +
+      `Bot is ready for a fresh start.`, 
+      adminImage
+    );
+  } catch (error) {
+    console.error('Error handling reset all data command:', error);
+    await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while attempting to wipe the database.`);
+  }
+}
+
+/**
  * Add coins to a user
  * @param {Object} sock - WhatsApp connection
  * @param {Object} message - Message object
@@ -205,14 +262,15 @@ async function handleAddCoins(sock, message, args, user, sender) {
       return;
     }
     
-    // Add the coins
-    db.updateUser(targetUser.id, { coins: targetUser.coins + amount });
+    // Add the coins - note that coins field is actually called "balance" in the user object
+    const newBalance = targetUser.balance + amount;
+    db.updateUser(targetUser.id, { balance: newBalance });
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
     
     // Send success message
-    await sendReply(sock, message, `✅ *COINS ADDED*\n\n${amount.toLocaleString()} coins have been added to ${targetUser.username}'s account.\n\nNew balance: ${(targetUser.coins + amount).toLocaleString()} coins`, adminImage);
+    await sendReply(sock, message, `✅ *COINS ADDED*\n\n${amount.toLocaleString()} coins have been added to ${targetUser.username}'s account.\n\nNew balance: ${newBalance.toLocaleString()} coins`, adminImage);
   } catch (error) {
     console.error('Error handling add coins command:', error);
     await sendReply(sock, message, `❌ *ERROR*\n\nAn error occurred while adding coins.`);
@@ -256,11 +314,11 @@ async function handleRemoveCoins(sock, message, args, user, sender) {
     }
     
     // Calculate new balance (minimum 0)
-    const newBalance = Math.max(0, targetUser.coins - amount);
-    const actualAmountRemoved = targetUser.coins - newBalance;
+    const newBalance = Math.max(0, targetUser.balance - amount);
+    const actualAmountRemoved = targetUser.balance - newBalance;
     
     // Update the balance
-    db.updateUser(targetUser.id, { coins: newBalance });
+    db.updateUser(targetUser.id, { balance: newBalance });
     
     // Get the admin image
     const adminImage = await getCategoryImage('admin');
@@ -441,6 +499,7 @@ module.exports = {
   handleBlacklist,
   handleUnblacklist,
   handleResetData,
+  handleResetAllData,
   handleAddCoins,
   handleRemoveCoins,
   handleMakeOwner,

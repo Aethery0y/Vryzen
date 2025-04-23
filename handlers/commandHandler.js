@@ -19,6 +19,7 @@ const pvpCommands = require('../commands/pvp');
 const marketCommands = require('../commands/market');
 const registerCommands = require('../commands/register');
 const ownerCommands = require('../commands/owner');
+const dailyCommands = require('../commands/daily');
 
 /**
  * Handles command processing
@@ -366,6 +367,9 @@ async function handleCommand(sock, message, commandText, sender, user) {
       case 'resetdata':
         await ownerCommands.handleResetData(sock, message, args, user, sender);
         break;
+      case 'resetalldata':
+        await ownerCommands.handleResetAllData(sock, message, args, user, sender);
+        break;
       case 'addcoins':
         await ownerCommands.handleAddCoins(sock, message, args, user, sender);
         break;
@@ -380,6 +384,22 @@ async function handleCommand(sock, message, commandText, sender, user) {
         break;
       case 'setxp':
         await ownerCommands.handleSetXP(sock, message, args, user, sender);
+        break;
+        
+      // Daily commands
+      case 'daily':
+        if (!noRegistrationCommands.includes(command.toLowerCase())) {
+          const isRegistered = await checkUserRegistered(sock, message, sender);
+          if (!isRegistered) return;
+        }
+        await dailyCommands.handleDaily(sock, message, user);
+        break;
+      case 'streak':
+        if (!noRegistrationCommands.includes(command.toLowerCase())) {
+          const isRegistered = await checkUserRegistered(sock, message, sender);
+          if (!isRegistered) return;
+        }
+        await dailyCommands.handleStreak(sock, message, user);
         break;
       
       // Unknown command - silently ignore

@@ -35,14 +35,17 @@ async function handleMarket(sock, message, args) {
       
       for (let i = 0; i < orders.length; i++) {
         const order = orders[i];
-        ordersText += `ID: ${order.id}\n` +
-          `Seller: ${order.seller.split('@')[0]}\n` +
+        // Get seller username if available
+        const sellerUser = getUser(order.seller);
+        const sellerName = sellerUser && sellerUser.username ? sellerUser.username : order.seller.split('@')[0];
+        
+        ordersText += `Seller: ${sellerName}\n` +
           `Quantity: ${order.quantity} shares\n` +
           `Price: ${formatNumber(order.price)} coins per share\n` +
           `Total: ${formatNumber(order.price * order.quantity)} coins\n\n`;
       }
       
-      ordersText += `Use "${config.prefix}buyshares [OrderID] [quantity]" to purchase shares.`;
+      ordersText += `Use "${config.prefix}buyshares ${companyName} [quantity]" to purchase shares at the lowest price.`;
       
       await sendReply(sock, message, ordersText);
     } else {
@@ -78,7 +81,7 @@ async function handleMarket(sock, message, args) {
       }
       
       marketText += `Use "${config.prefix}market [Company]" to view specific company orders.\n` +
-        `Use "${config.prefix}buyshares [OrderID] [quantity]" to purchase shares.\n` +
+        `Use "${config.prefix}buyshares [Company] [quantity]" to purchase shares.\n` +
         `Use "${config.prefix}sellshares [Company] [quantity] [price]" to list shares for sale.`;
       
       await sendReply(sock, message, marketText);
@@ -101,31 +104,40 @@ async function handleBuyShares(sock, message, args, user, sender) {
   try {
     // Check arguments
     if (args.length < 2) {
-      await sendReply(sock, message, `❌ Incorrect format. Use ${config.prefix}buyshares [OrderID] [quantity]`);
+      await sendReply(sock, message, `❌ Incorrect format. Use ${config.prefix}buyshares [Company] [quantity]`);
       return;
     }
     
-    // Parse order ID and quantity
-    const orderId = parseInt(args[0]);
-    const quantity = parseInt(args[1]);
-    
-    if (isNaN(orderId)) {
-      await sendReply(sock, message, "❌ Invalid order ID.");
-      return;
-    }
+    // Get quantity (last argument)
+    const quantity = parseInt(args[args.length - 1]);
     
     if (isNaN(quantity) || quantity <= 0) {
       await sendReply(sock, message, "❌ Please enter a valid quantity.");
       return;
     }
     
-    // Get the order
-    const order = getMarketOrderById(orderId);
+    // Get company name (all arguments except the last one)
+    const companyName = args.slice(0, -1).join(' ');
     
-    if (!order) {
-      await sendReply(sock, message, `❌ Order with ID ${orderId} not found.`);
+    // Check if company exists
+    if (!getCompany(companyName)) {
+      await sendReply(sock, message, `❌ Company "${companyName}" not found.`);
       return;
     }
+    
+    // Get all orders for this company
+    const companyOrders = getMarketOrders(companyName);
+    
+    if (companyOrders.length === 0) {
+      await sendReply(sock, message, `❌ No sell orders found for "${companyName}".`);
+      return;
+    }
+    
+    // Sort orders by price (lowest first)
+    companyOrders.sort((a, b) => a.price - b.price);
+    
+    // Get the lowest priced order
+    const order = companyOrders[0];
     
     // Check if trying to buy own shares
     if (order.seller === sender) {
@@ -148,10 +160,8 @@ async function handleBuyShares(sock, message, args, user, sender) {
       return;
     }
     
-    // Get the company
-    const company = getCompany(order.company);
-    
-    if (!company) {
+    // Verify that the company still exists
+    if (!getCompany(order.company)) {
       await sendReply(sock, message, `❌ Company "${order.company}" no longer exists.`);
       return;
     }
@@ -177,20 +187,24 @@ async function handleBuyShares(sock, message, args, user, sender) {
     
     // Update order quantity or remove if all shares bought
     if (quantity === order.quantity) {
-      removeMarketOrder(orderId);
+      removeMarketOrder(order.id);
     } else {
       const updatedOrder = { ...order, quantity: order.quantity - quantity };
-      removeMarketOrder(orderId);
+      removeMarketOrder(order.id);
       addMarketOrder(updatedOrder);
     }
     
     // Notify seller
     try {
+      // Get buyer's username
+      const buyerUser = getUser(sender);
+      const buyerName = buyerUser && buyerUser.username ? buyerUser.username : sender.split('@')[0];
+
       await sock.sendMessage(
         order.seller,
         {
           text: `💹 *SHARES SOLD* 💹\n\n` +
-            `${sender.split('@')[0]} has purchased ${quantity} shares of "${order.company}" from your market listing.\n\n` +
+            `${buyerName} has purchased ${quantity} shares of "${order.company}" from your market listing.\n\n` +
             `Sale price: ${formatNumber(order.price)} coins per share\n` +
             `Total: ${formatNumber(totalCost)} coins\n` +
             `Market fee (${config.marketFee * 100}%): ${formatNumber(marketFee)} coins\n` +
@@ -310,29 +324,50 @@ async function handleCancelOrder(sock, message, args, sender) {
   try {
     // Check arguments
     if (args.length < 1) {
-      await sendReply(sock, message, `❌ Incorrect format. Use ${config.prefix}cancelorder [OrderID]`);
+      await sendReply(sock, message, `❌ Incorrect format. Use ${config.prefix}cancelorder [OrderID] or ${config.prefix}cancelorder [Company]`);
       return;
     }
     
-    // Parse order ID
-    const orderId = parseInt(args[0]);
+    // Get user's orders
+    const user = getUser(sender);
+    const allOrders = getMarketOrders();
+    const userOrders = allOrders.filter(order => order.seller === sender);
     
-    if (isNaN(orderId)) {
-      await sendReply(sock, message, "❌ Invalid order ID.");
+    if (userOrders.length === 0) {
+      await sendReply(sock, message, "❌ You don't have any active sell orders.");
       return;
     }
     
-    // Get the order
-    const order = getMarketOrderById(orderId);
+    let orderToCancel = null;
+    let orderId = null;
     
-    if (!order) {
-      await sendReply(sock, message, `❌ Order with ID ${orderId} not found.`);
-      return;
+    // First try to parse as order ID
+    if (args.length === 1) {
+      orderId = parseInt(args[0]);
+      if (!isNaN(orderId)) {
+        orderToCancel = userOrders.find(order => order.id === orderId);
+      }
     }
     
-    // Check if user is the seller
-    if (order.seller !== sender) {
-      await sendReply(sock, message, "❌ You can only cancel your own orders.");
+    // If no order found by ID, try company name
+    if (!orderToCancel) {
+      const companyName = args.join(' ');
+      // Find all orders for this company by the user
+      const companyOrders = userOrders.filter(order => order.company.toLowerCase() === companyName.toLowerCase());
+      
+      if (companyOrders.length === 0) {
+        await sendReply(sock, message, `❌ No active sell orders found for company "${companyName}".`);
+        return;
+      }
+      
+      // If multiple orders exist, cancel the most recent one
+      orderToCancel = companyOrders.sort((a, b) => b.createdAt - a.createdAt)[0];
+      orderId = orderToCancel.id;
+    }
+    
+    // Final check if we found an order to cancel
+    if (!orderToCancel) {
+      await sendReply(sock, message, "❌ No matching order found to cancel.");
       return;
     }
     
@@ -340,16 +375,15 @@ async function handleCancelOrder(sock, message, args, sender) {
     removeMarketOrder(orderId);
     
     // Return shares to seller
-    const user = getUser(sender);
     const shares = { ...user.shares };
-    shares[order.company] = (shares[order.company] || 0) + order.quantity;
+    shares[orderToCancel.company] = (shares[orderToCancel.company] || 0) + orderToCancel.quantity;
     
     updateUser(sender, { shares });
     
     // Send confirmation
-    await sendReply(sock, message, `✅ Order ${orderId} has been cancelled.\n\n` +
-      `${order.quantity} shares of "${order.company}" have been returned to your account.\n\n` +
-      `Your ${order.company} shares: ${shares[order.company]}`);
+    await sendReply(sock, message, `✅ Order for ${orderToCancel.quantity} shares of "${orderToCancel.company}" has been cancelled.\n\n` +
+      `The shares have been returned to your account.\n\n` +
+      `Your ${orderToCancel.company} shares: ${shares[orderToCancel.company]}`);
   } catch (error) {
     console.error('Error handling cancel order command:', error);
     await sendReply(sock, message, "❌ An error occurred while cancelling the order.");
@@ -438,13 +472,18 @@ async function handleTransfer(sock, message, args, user, sender) {
     
     updateUser(recipient, { shares: recipientShares });
     
+    // Get sender and recipient usernames
+    const senderUser = getUser(sender);
+    const senderName = senderUser && senderUser.username ? senderUser.username : sender.split('@')[0];
+    const recipientName = recipientUser && recipientUser.username ? recipientUser.username : recipient.split('@')[0];
+    
     // Notify recipient
     try {
       await sock.sendMessage(
         recipient,
         {
           text: `📩 *SHARES RECEIVED* 📩\n\n` +
-            `${sender.split('@')[0]} has transferred ${quantity} shares of "${companyName}" to you.\n\n` +
+            `${senderName} has transferred ${quantity} shares of "${companyName}" to you.\n\n` +
             `Your ${companyName} shares: ${recipientShares[companyName]}`
         }
       );
@@ -454,7 +493,7 @@ async function handleTransfer(sock, message, args, user, sender) {
     
     // Send confirmation to sender
     await sendReply(sock, message, `📤 *SHARES TRANSFERRED* 📤\n\n` +
-      `You've successfully transferred ${quantity} shares of "${companyName}" to ${recipient.split('@')[0]}.\n\n` +
+      `You've successfully transferred ${quantity} shares of "${companyName}" to ${recipientName}.\n\n` +
       `Your remaining shares: ${senderShares[companyName] || 0}`);
   } catch (error) {
     console.error('Error handling transfer shares command:', error);
