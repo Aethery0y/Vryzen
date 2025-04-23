@@ -192,8 +192,8 @@ async function handleResetAllData(sock, message, args, user, sender) {
     console.log("RESETALLDATA DEBUG: Full command:", fullCommand);
     
     // Check if the full command contains the exact confirmation text
-    const confirmationText = `${config.prefix}resetalldata wipealldatabase confirm`;
-    const isExactConfirmation = fullCommand.trim().toLowerCase() === confirmationText.toLowerCase();
+    const confirmationText = `resetalldata wipealldatabase confirm`;
+    const isExactConfirmation = fullCommand.trim().toLowerCase().endsWith(confirmationText.toLowerCase());
     
     console.log("RESETALLDATA DEBUG: Exact confirmation match:", isExactConfirmation);
     
