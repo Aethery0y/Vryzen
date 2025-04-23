@@ -44,6 +44,13 @@
     "aether": "918920659106@s.whatsapp.net"
   },
   "groups": {
-    "approved": {}
+    "approved": {
+      "120363417906900559@g.us": {
+        "id": "120363417906900559@g.us",
+        "approvedAt": 1745437077079,
+        "name": "𝛯𝑅𝑌𝛸",
+        "participants": 157
+      }
+    }
   }
 }

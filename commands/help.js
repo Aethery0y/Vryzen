@@ -1,6 +1,13 @@
 const { sendReply } = require('../utils/messageUtils');
 const config = require('../config');
 const { getCategoryImage } = require('../utils/imageUtils');
+const fs = require('fs');
+const path = require('path');
+
+// Debug helper
+function debug(...args) {
+  console.log('[HELP_DEBUG]', ...args);
+}
 
 /**
  * Handles help command
@@ -11,15 +18,22 @@ const { getCategoryImage } = require('../utils/imageUtils');
  */
 async function handleHelp(sock, message, args, sender) {
   try {
+    debug('Help command received from', sender);
+    debug('Args:', args);
+    debug('Message:', JSON.stringify(message.key));
+    
     // If no specific help category is provided, show the main help menu
     if (args.length === 0) {
+      debug('Showing main help menu');
       await sendMainHelp(sock, message);
     } else {
       // Show specific help category
+      debug('Showing help for category:', args[0].toLowerCase());
       await sendCategoryHelp(sock, message, args[0].toLowerCase());
     }
   } catch (error) {
     console.error('Error handling help command:', error);
+    debug('Error in handleHelp:', error.message, error.stack);
     await sendReply(sock, message, "❌ An error occurred while showing help.");
   }
 }
@@ -30,11 +44,16 @@ async function handleHelp(sock, message, args, sender) {
  * @param {Object} message - Message object
  */
 async function sendMainHelp(sock, message) {
+  debug('Starting sendMainHelp function');
   // Create a composite image of all the category icons for the main help menu
   // For now, just use a generic help image
-  const mainHelpImage = fs.readFileSync(path.join(__dirname, '../assets/images/help.svg'));
-  
-  const helpText = `🎮 *VRYZEN BOT COMMANDS* 🎮
+  try {
+    const imagePath = path.join(__dirname, '../assets/images/help.svg');
+    debug('Reading help image from:', imagePath);
+    const mainHelpImage = fs.readFileSync(imagePath);
+    debug('Successfully read help image, size:', mainHelpImage.length);
+    
+    const helpText = `🎮 *VRYZEN BOT COMMANDS* 🎮
 
 *CATEGORIES:*
 • *Gambling* - Games of chance and jackpot
@@ -79,12 +98,27 @@ Type "${config.prefix}help [category]" for detailed commands.
    ${config.prefix}profile - View your profile
    ${config.prefix}maingc - Join our official group`;
 
-  try {
-    await sendReply(sock, message, helpText, mainHelpImage);
+    try {
+      debug('Sending help message with image');
+      await sendReply(sock, message, helpText, mainHelpImage);
+      debug('Help message with image sent successfully');
+    } catch (error) {
+      console.error('Error sending main help with image:', error);
+      debug('Error details:', error.message, error.stack);
+      // Fallback to text-only if image fails
+      debug('Attempting to send text-only help message');
+      await sendReply(sock, message, helpText);
+      debug('Text-only help message sent');
+    }
   } catch (error) {
-    console.error('Error sending main help with image:', error);
-    // Fallback to text-only if image fails
-    await sendReply(sock, message, helpText);
+    console.error('Error in sendMainHelp function:', error);
+    debug('Error in sendMainHelp:', error.message, error.stack);
+    // Fallback to simple text without image
+    try {
+      await sendReply(sock, message, "📱 *VRYZEN BOT* 📱\n\nAn error occurred while loading the help menu. Please try again later or contact the bot owner.");
+    } catch (replyError) {
+      console.error('Failed to send error message:', replyError);
+    }
   }
 }
 
@@ -95,13 +129,18 @@ Type "${config.prefix}help [category]" for detailed commands.
  * @param {String} category - Help category
  */
 async function sendCategoryHelp(sock, message, category) {
+  debug('Starting sendCategoryHelp for category:', category);
   let helpText = '';
-  // Get the appropriate image for this category
-  const categoryImage = getCategoryImage(category);
+  
+  try {
+    // Get the appropriate image for this category
+    debug('Getting image for category:', category);
+    const categoryImage = getCategoryImage(category);
+    debug('Got category image');
 
-  switch (category) {
-    case 'gambling':
-      helpText = `🎲 *GAMBLING HELP* 🎲
+    switch (category) {
+      case 'gambling':
+        helpText = `🎲 *GAMBLING HELP* 🎲
 
 • ${config.prefix}cointoss [amount] [heads/tails] - Bet on coin toss
   Example: ${config.prefix}cointoss 100 heads
@@ -127,11 +166,11 @@ async function sendCategoryHelp(sock, message, category) {
 
 Min bet: ${config.minBet} coins
 Max bet: ${config.maxBet} coins`;
-      break;
+        break;
 
-    case 'bank':
-    case 'banking':
-      helpText = `🏦 *BANKING HELP* 🏦
+      case 'bank':
+      case 'banking':
+        helpText = `🏦 *BANKING HELP* 🏦
 
 • ${config.prefix}dep [amount/all] or ${config.prefix}deposit [amount/all] - Add coins to your bank
   Example: ${config.prefix}dep 5000 or ${config.prefix}deposit all
@@ -154,11 +193,11 @@ Max bet: ${config.maxBet} coins`;
 • Upgrade your capacity to store more coins
 
 Tip: Higher prestige levels increase your interest rate!`;
-      break;
+        break;
 
-    case 'leaderboard':
-    case 'leaderboards':
-      helpText = `🏆 *LEADERBOARDS HELP* 🏆
+      case 'leaderboard':
+      case 'leaderboards':
+        helpText = `🏆 *LEADERBOARDS HELP* 🏆
 
 • ${config.prefix}topRich - View richest players
 
@@ -173,11 +212,11 @@ Tip: Higher prestige levels increase your interest rate!`;
 • ${config.prefix}topCompanies - Most valuable companies
 
 Leaderboards update in real-time and show the top 10 in each category`;
-      break;
+        break;
 
-    case 'company':
-    case 'companies':
-      helpText = `🏢 *COMPANY HELP* 🏢
+      case 'company':
+      case 'companies':
+        helpText = `🏢 *COMPANY HELP* 🏢
 
 • ${config.prefix}cc [amount] [name] - Create a company
   Example: ${config.prefix}cc 6000 TechCorp
@@ -203,11 +242,11 @@ Leaderboards update in real-time and show the top 10 in each category`;
   ${config.prefix}crn [oldName] [newName] - Rename company
   ${config.prefix}cclose [name] - Close your company
   ${config.prefix}ckick [name] @user - Remove an investor`;
-      break;
+        break;
 
-    case 'xp':
-    case 'levels':
-      helpText = `⭐ *XP & LEVELS HELP* ⭐
+      case 'xp':
+      case 'levels':
+        helpText = `⭐ *XP & LEVELS HELP* ⭐
 
 • ${config.prefix}xp - View your current XP
 
@@ -224,11 +263,11 @@ Leaderboards update in real-time and show the top 10 in each category`;
 Level formula: level = sqrt(xp/100) + 1
 
 Each prestige level gives +${config.prestigeRewardBonus * 100}% daily reward bonus!`;
-      break;
+        break;
 
-    case 'pvp':
-    case 'challenge':
-      helpText = `⚔️ *PVP CHALLENGE HELP* ⚔️
+      case 'pvp':
+      case 'challenge':
+        helpText = `⚔️ *PVP CHALLENGE HELP* ⚔️
 
 • ${config.prefix}challenge @user [amount] - Challenge another user
   Example: ${config.prefix}challenge @John 1000
@@ -243,10 +282,10 @@ Each prestige level gives +${config.prestigeRewardBonus * 100}% daily reward bon
 - Max ${config.maxChallengesPerHour} challenges per hour
 - Timeout: ${config.challengeTimeout} seconds to accept/decline
 - Refund: ${config.challengeRefundMin * 100}%-${config.challengeRefundMax * 100}% if opponent doesn't respond`;
-      break;
+        break;
 
-    case 'market':
-      helpText = `🛒 *MARKET HELP* 🛒
+      case 'market':
+        helpText = `🛒 *MARKET HELP* 🛒
 
 • ${config.prefix}market – View all active sell orders
 • ${config.prefix}market [Company] – View sell orders for that company
@@ -256,10 +295,10 @@ Each prestige level gives +${config.prestigeRewardBonus * 100}% daily reward bon
 • ${config.prefix}transfer [Company] [@user] [qty] – Transfer shares directly
 
 *Market fees:* ${config.marketFee * 100}% transaction fee on all trades`;
-      break;
+        break;
 
-    case 'daily':
-      helpText = `📅 *DAILY REWARDS HELP* 📅
+      case 'daily':
+        helpText = `📅 *DAILY REWARDS HELP* 📅
 
 • ${config.prefix}daily - Claim your daily reward
   Base reward: ${config.baseReward} coins
@@ -278,10 +317,10 @@ Each prestige level gives +${config.prestigeRewardBonus * 100}% daily reward bon
 • Claim your reward every 24 hours to maintain your streak
 • Missing a day resets your streak to 0
 • Higher prestige levels significantly increase your daily rewards`;
-      break;
+        break;
 
-    case 'shop':
-      helpText = `🛍️ *SHOP HELP* 🛍️
+      case 'shop':
+        helpText = `🛍️ *SHOP HELP* 🛍️
 
 • ${config.prefix}shop - Browse available items and boosts
 
@@ -299,11 +338,11 @@ Each prestige level gives +${config.prestigeRewardBonus * 100}% daily reward bon
 • Bank Boost (15,000 coins) - +0.5% interest rate for 7 days
 • Jackpot Ticket (25,000 coins) - 2x entries in jackpot for 24 hours
 • Company Analyst (50,000 coins) - Reduces company investment fees by 50% for 3 days`;
-      break;
-      
-    case 'register':
-    case 'registration':
-      helpText = `📝 *REGISTRATION HELP* 📝
+        break;
+        
+      case 'register':
+      case 'registration':
+        helpText = `📝 *REGISTRATION HELP* 📝
 
 *Registration Command:*
 • ${config.prefix}register [username] - Register with a unique username
@@ -329,11 +368,11 @@ Registration is required to:
 • Your username will be displayed in leaderboards and transactions
 
 After registering, you'll have full access to all bot features.`;
-      break;
-      
-    case 'groups':
-    case 'group':
-      helpText = `👥 *GROUP USAGE HELP* 👥
+        break;
+        
+      case 'groups':
+      case 'group':
+        helpText = `👥 *GROUP USAGE HELP* 👥
 
 *Using the Bot in Different Groups:*
 This bot can work in any group where it is an admin, not just in the Vryzen group.
@@ -359,14 +398,40 @@ Admin privileges allow the bot to:
 • The official group always has full bot functionality
 
 Questions or issues? Contact the bot owners.`;
-      break;
+        break;
 
-    default:
-      helpText = `❌ Unknown help category: "${category}"\n\nTry ${config.prefix}help to see all available categories.`;
-      break;
+      default:
+        helpText = `❌ Unknown help category: "${category}"\n\nTry ${config.prefix}help to see all available categories.`;
+        break;
+    }
+
+    debug('Sending help for category:', category);
+    try {
+      await sendReply(sock, message, helpText, categoryImage);
+      debug('Successfully sent help for category:', category);
+    } catch (error) {
+      console.error('Error sending category help with image:', error);
+      debug('Error details:', error.message, error.stack);
+      // Fallback to text-only if image fails
+      try {
+        debug('Attempting to send text-only category help');
+        await sendReply(sock, message, helpText);
+        debug('Text-only category help sent');
+      } catch (fallbackError) {
+        console.error('Error sending fallback text-only help:', fallbackError);
+        debug('Fallback error details:', fallbackError.message, fallbackError.stack);
+      }
+    }
+  } catch (error) {
+    console.error('Error in sendCategoryHelp:', error);
+    debug('Error in sendCategoryHelp:', error.message, error.stack);
+    // Send simple error message
+    try {
+      await sendReply(sock, message, `❌ Error showing help for "${category}". Try ${config.prefix}help for the main menu.`);
+    } catch (replyError) {
+      console.error('Failed to send error message:', replyError);
+    }
   }
-
-  await sendReply(sock, message, helpText, categoryImage);
 }
 
 module.exports = { handleHelp };

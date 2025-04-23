@@ -1,24 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#8B5CF6" />
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="60" viewBox="0 0 160 60">
+  <rect width="160" height="60" rx="10" fill="#9333EA" />
   <g fill="#FFFFFF">
-    <!-- Store Building -->
-    <path d="M10,16 L38,16 L38,38 L10,38 Z" />
-    
-    <!-- Store Roof/Awning -->
-    <path d="M8,16 L40,16 L36,10 L12,10 Z" />
-    
-    <!-- Store Windows -->
-    <rect x="14" y="22" width="8" height="8" fill="#8B5CF6" />
-    <rect x="26" y="22" width="8" height="8" fill="#8B5CF6" />
-    
-    <!-- Door -->
-    <rect x="22" y="30" width="4" height="8" fill="#8B5CF6" />
-    
-    <!-- Shopping Items -->
-    <circle cx="18" cy="26" r="2" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1" />
-    <circle cx="30" cy="26" r="2" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1" />
-    
     <!-- Shopping Bag -->
-    <path d="M20,14 L22,6 L26,6 L28,14" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1" />
+    <path d="M35,20 L45,20 L45,15 Q45,10 40,10 Q35,10 35,15 Z" />
+    <rect x="30" y="20" width="20" height="25" rx="2" />
+    
+    <!-- Potion -->
+    <path d="M70,25 L75,25 L75,20 L72.5,18 L70,20 Z" />
+    <path d="M70,25 Q65,30 65,40 Q65,45 72.5,45 Q80,45 80,40 Q80,30 75,25 Z" fill="#10B981" />
+    
+    <!-- Coin Stack -->
+    <ellipse cx="100" cy="42" rx="10" ry="3" />
+    <ellipse cx="100" cy="38" rx="10" ry="3" />
+    <ellipse cx="100" cy="34" rx="10" ry="3" />
+    <ellipse cx="100" cy="30" rx="10" ry="3" fill="#FCD34D" />
+    <ellipse cx="100" cy="26" rx="10" ry="3" fill="#FCD34D" />
+    <ellipse cx="100" cy="22" rx="10" ry="3" fill="#FCD34D" />
+    <text x="100" y="24" font-family="Arial" font-size="5" text-anchor="middle" fill="#9333EA">$</text>
+    
+    <!-- Item Box -->
+    <rect x="120" y="15" width="30" height="30" rx="3" />
+    <rect x="123" y="18" width="24" height="24" rx="2" fill="#9333EA" />
+    <path d="M135,27 L140,32 L142,30 L137,25 L132,30 L134,32 L135,27 Z" />
   </g>
 </svg>

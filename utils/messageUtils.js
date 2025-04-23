@@ -10,39 +10,56 @@
  * @param {Buffer} image - Optional image buffer
  */
 async function sendReply(sock, message, text, image = null) {
+  // Debug information
+  console.log('REPLY_DEBUG: Attempting to send reply');
+  console.log(`REPLY_DEBUG: To chat ${message.key.remoteJid}`);
+  console.log(`REPLY_DEBUG: With image? ${image ? 'Yes, size=' + (image ? image.length : 0) : 'No'}`);
+  console.log(`REPLY_DEBUG: Text length: ${text.length} chars`);
+  
   try {
     const remoteJid = message.key.remoteJid;
     
     if (image) {
+      console.log('REPLY_DEBUG: Sending message with image');
       // Send reply with image
       await sock.sendMessage(
         remoteJid,
         { 
           image,
-          caption: text 
+          caption: text,
+          mimetype: 'image/svg+xml' // Specify MIME type for SVG
         },
         { quoted: message }
       );
+      console.log('REPLY_DEBUG: Image message sent successfully');
     } else {
+      console.log('REPLY_DEBUG: Sending text-only message');
       // Send text-only reply
       await sock.sendMessage(
         remoteJid,
         { text },
         { quoted: message }
       );
+      console.log('REPLY_DEBUG: Text message sent successfully');
     }
   } catch (error) {
-    console.error('Error sending reply:', error);
+    console.error('REPLY_DEBUG: Error sending reply:', error);
+    console.error('Error details:', error.message);
+    console.error('Error stack:', error.stack);
+    
     // Fallback to text-only if image sending fails
     if (image) {
       try {
+        console.log('REPLY_DEBUG: Attempting text-only fallback');
         await sock.sendMessage(
           message.key.remoteJid,
           { text },
           { quoted: message }
         );
+        console.log('REPLY_DEBUG: Fallback message sent successfully');
       } catch (fallbackError) {
-        console.error('Error sending fallback text reply:', fallbackError);
+        console.error('REPLY_DEBUG: Error sending fallback text reply:', fallbackError);
+        console.error('Fallback error details:', fallbackError.message);
       }
     }
   }

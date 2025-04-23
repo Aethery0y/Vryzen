@@ -2,6 +2,11 @@ const config = require('../config');
 const { sendReply } = require('../utils/messageUtils');
 const { checkUserRegistered } = require('../utils/registrationUtils');
 
+// Debug logger
+function debug(...args) {
+  console.log('[COMMAND_DEBUG]', ...args);
+}
+
 // Import command handlers
 const helpCommands = require('../commands/help');
 const generalCommands = require('../commands/general');
@@ -39,7 +44,21 @@ async function handleCommand(sock, message, commandText, sender, user) {
         
       // Help commands
       case 'help':
-        await helpCommands.handleHelp(sock, message, args, sender);
+        console.log('COMMAND_HANDLER: Processing help command');
+        console.log('COMMAND_HANDLER: Arguments:', args);
+        try {
+          await helpCommands.handleHelp(sock, message, args, sender);
+          console.log('COMMAND_HANDLER: Help command processed successfully');
+        } catch (error) {
+          console.error('COMMAND_HANDLER: Error processing help command:', error);
+          console.error('COMMAND_HANDLER: Error stack:', error.stack);
+          // Try to send a simple error message
+          try {
+            await sendReply(sock, message, "❌ Error processing help command. Please try again later.");
+          } catch (replyError) {
+            console.error('COMMAND_HANDLER: Error sending error reply:', replyError);
+          }
+        }
         break;
       
       // General commands

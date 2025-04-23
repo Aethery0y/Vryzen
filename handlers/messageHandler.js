@@ -62,6 +62,10 @@ async function handleMessage(sock, message) {
       return;
     }
     
+    // Debug message content
+    console.log(`Received message: ${messageContent}`);
+    console.log(`From: ${sender} in chat: ${remoteJid}`);
+    
     // Check if it's a command (starts with the prefix)
     if (!messageContent.startsWith(config.prefix)) {
       return;
@@ -69,6 +73,17 @@ async function handleMessage(sock, message) {
     
     // Remove the prefix from the command
     const commandText = messageContent.slice(config.prefix.length).trim();
+    console.log(`Processing command: ${commandText}`);
+    
+    // Print debugging info for message
+    try {
+      console.log('Message object details:');
+      console.log(`- Key ID: ${message.key.id}`);
+      console.log(`- Key fromMe: ${message.key.fromMe}`);
+      console.log(`- Message type: ${Object.keys(message.message).join(', ')}`);
+    } catch (err) {
+      console.log('Error extracting message details:', err.message);
+    }
     
     // Check if it's a group message or from an owner
     const isGroupMessage = remoteJid.endsWith('@g.us');
@@ -92,7 +107,12 @@ async function handleMessage(sock, message) {
       }
       
       // Check if the group is already approved
-      if (isGroupApproved(remoteJid)) {
+      console.log(`Checking if group ${remoteJid} is approved`);
+      const groupApproved = isGroupApproved(remoteJid);
+      console.log(`Group approval status: ${groupApproved}`);
+      
+      if (groupApproved) {
+        console.log(`Group is approved, handling command`);
         const user = getUser(sender);
         await handleCommand(sock, message, commandText, sender, user);
         return;

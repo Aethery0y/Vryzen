@@ -1,19 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#059669" />
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="60" viewBox="0 0 160 60">
+  <rect width="160" height="60" rx="10" fill="#16A34A" />
   <g fill="#FFFFFF">
     <!-- Star -->
-    <path d="M24,8 L27,17 L37,17 L29,23 L32,32 L24,26 L16,32 L19,23 L11,17 L21,17 Z" />
+    <path d="M40,15 L44,25 L55,25 L46,32 L50,42 L40,36 L30,42 L34,32 L25,25 L36,25 Z" />
     
     <!-- Level Bar -->
-    <rect x="10" y="34" width="28" height="6" rx="3" stroke="#FFFFFF" stroke-width="2" fill="none" />
-    <rect x="12" y="36" width="18" height="2" fill="#FFFFFF" />
+    <rect x="65" y="20" width="70" height="10" rx="5" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+    <rect x="65" y="20" width="40" height="10" rx="5" fill="#22C55E" />
     
-    <!-- Small Stars -->
-    <circle cx="14" cy="16" r="1" />
-    <circle cx="34" cy="16" r="1" />
-    <circle cx="18" cy="12" r="1" />
-    <circle cx="30" cy="12" r="1" />
-    <circle cx="14" cy="28" r="1" />
-    <circle cx="34" cy="28" r="1" />
+    <!-- Level Number -->
+    <circle cx="65" cy="25" r="12" fill="#FFFFFF" stroke="#16A34A" stroke-width="2" />
+    <text x="65" y="29" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#16A34A">5</text>
+    
+    <!-- XP Text -->
+    <text x="100" y="30" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#FFFFFF">XP: 1250/2000</text>
+    
+    <!-- Sparkles -->
+    <path d="M30,50 L32,46 L34,50 L30,48 L34,48 Z" />
+    <path d="M50,55 L52,51 L54,55 L50,53 L54,53 Z" />
+    <path d="M140,20 L142,16 L144,20 L140,18 L144,18 Z" />
+    <path d="M150,30 L152,26 L154,30 L150,28 L154,28 Z" />
+    
+    <!-- Prestige Crown -->
+    <path d="M110,45 L120,45 L120,52 L115,48 L110,52 Z" fill="#FBBF24" />
+    <circle cx="110" cy="45" r="2" fill="#FBBF24" />
+    <circle cx="120" cy="45" r="2" fill="#FBBF24" />
+    <circle cx="115" cy="42" r="2" fill="#FBBF24" />
   </g>
 </svg>
