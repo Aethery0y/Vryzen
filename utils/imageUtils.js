@@ -27,9 +27,10 @@ async function convertSvgToPng(svgBuffer, cacheKey) {
     
     console.log(`Converting SVG to PNG for ${cacheKey}`);
     
-    // Convert SVG to PNG using sharp with good resolution
-    const pngBuffer = await sharp(svgBuffer)
-      .resize(400, 400, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    // Convert SVG to PNG using sharp with improved settings
+    // No resize to prevent the black empty areas, keep original dimensions
+    // Use transparent background
+    const pngBuffer = await sharp(svgBuffer, { density: 300 })
       .png()
       .toBuffer();
     

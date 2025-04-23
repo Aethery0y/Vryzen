@@ -1,4 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#6B7280" />
-  <path d="M24 12c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm-2-15v10l9-5-9-5z" fill="#FFFFFF" />
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#64748B" />
+  
+  <!-- Question Mark Icon -->
+  <circle cx="365" cy="300" r="150" fill="#FFFFFF" />
+  <text x="365" y="370" font-family="Arial, sans-serif" font-size="220" font-weight="bold" text-anchor="middle" fill="#64748B">?</text>
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">UNKNOWN COMMAND</text>
 </svg>

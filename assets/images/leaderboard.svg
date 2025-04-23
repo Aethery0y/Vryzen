@@ -1,26 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="160" height="60" viewBox="0 0 160 60">
-  <rect width="160" height="60" rx="10" fill="#D97706" />
-  <g fill="#FFFFFF">
-    <!-- Trophy -->
-    <path d="M40,15 L50,15 L50,20 Q60,20 60,30 Q60,37 53,37 Q50,42 45,42 Q40,42 37,37 Q30,37 30,30 Q30,20 40,20 Z" />
-    <rect x="42" y="42" width="6" height="5" />
-    <rect x="39" y="47" width="12" height="3" />
-    
-    <!-- Medal 1st Place -->
-    <circle cx="85" cy="25" r="10" fill="#FEF08A" stroke="#FFFFFF" stroke-width="2" />
-    <text x="85" y="29" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#D97706">1</text>
-    
-    <!-- Medal 2nd Place -->
-    <circle cx="110" cy="30" r="8" fill="#E5E7EB" stroke="#FFFFFF" stroke-width="2" />
-    <text x="110" y="34" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#D97706">2</text>
-    
-    <!-- Medal 3rd Place -->
-    <circle cx="130" cy="35" r="7" fill="#D97706" stroke="#FFFFFF" stroke-width="2" />
-    <text x="130" y="38" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle" fill="#FFFFFF">3</text>
-    
-    <!-- Podium -->
-    <rect x="75" y="45" width="20" height="15" />
-    <rect x="100" y="50" width="20" height="10" />
-    <rect x="125" y="53" width="20" height="7" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#9333EA" />
+  
+  <!-- Trophy -->
+  <rect x="345" y="180" width="40" height="60" fill="#FFD700" />
+  <rect x="325" y="240" width="80" height="20" fill="#FFD700" />
+  <rect x="345" y="260" width="40" height="40" fill="#FFD700" />
+  <rect x="325" y="300" width="80" height="20" fill="#FFD700" />
+  
+  <path d="M325,240 C275,240 275,200 275,180 L325,180 Z" fill="#FFD700" />
+  <path d="M405,240 C455,240 455,200 455,180 L405,180 Z" fill="#FFD700" />
+  
+  <!-- Podium -->
+  <rect x="120" y="430" width="140" height="90" fill="#C0C0C0" />
+  <text x="190" y="490" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#000000">2</text>
+  
+  <rect x="260" y="380" width="140" height="140" fill="#FFD700" />
+  <text x="330" y="490" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#000000">1</text>
+  
+  <rect x="400" y="460" width="140" height="60" fill="#CD7F32" />
+  <text x="470" y="490" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#000000">3</text>
+  
+  <!-- Stars -->
+  <polygon points="120,180 135,205 165,210 145,230 150,260 120,245 90,260 95,230 75,210 105,205" fill="#FFD700" />
+  <polygon points="520,220 535,245 565,250 545,270 550,300 520,285 490,300 495,270 475,250 505,245" fill="#FFD700" />
+  <polygon points="575,280 585,295 605,298 590,310 595,330 575,320 555,330 560,310 545,298 565,295" fill="#FFD700" />
+  <polygon points="190,320 200,335 220,338 205,350 210,370 190,360 170,370 175,350 160,338 180,335" fill="#FFD700" />
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">LEADERBOARD COMMANDS</text>
 </svg>

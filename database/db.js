@@ -25,7 +25,8 @@ let db = {
   },
   groups: {        // Group data
     approved: {}   // Approved groups where bot can function
-  }
+  },
+  blacklist: {}    // Blacklisted users who can't use the bot
 };
 
 // Database file path
@@ -366,6 +367,43 @@ function getAllApprovedGroups() {
   return db.groups.approved ? Object.values(db.groups.approved) : [];
 }
 
+// Blacklist functions
+function blacklistUser(userId, blacklisted = true) {
+  // Initialize blacklist if it doesn't exist
+  if (!db.blacklist) {
+    db.blacklist = {};
+  }
+  
+  if (blacklisted) {
+    // Add to blacklist
+    db.blacklist[userId] = {
+      userId,
+      blacklistedAt: Date.now()
+    };
+  } else {
+    // Remove from blacklist
+    if (db.blacklist[userId]) {
+      delete db.blacklist[userId];
+    }
+  }
+  
+  return true;
+}
+
+function isUserBlacklisted(userId) {
+  // Initialize blacklist if it doesn't exist
+  if (!db.blacklist) {
+    db.blacklist = {};
+    return false;
+  }
+  
+  return !!db.blacklist[userId];
+}
+
+function getAllBlacklistedUsers() {
+  return db.blacklist ? Object.values(db.blacklist) : [];
+}
+
 // Export all functions
 module.exports = {
   initializeDatabase,
@@ -399,5 +437,8 @@ module.exports = {
   removeGroupApproval,
   isGroupApproved,
   getAllApprovedGroups,
+  blacklistUser,
+  isUserBlacklisted,
+  getAllBlacklistedUsers,
   db // Export db for direct access (careful with this)
 };

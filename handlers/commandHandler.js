@@ -18,6 +18,7 @@ const xpCommands = require('../commands/xp');
 const pvpCommands = require('../commands/pvp');
 const marketCommands = require('../commands/market');
 const registerCommands = require('../commands/register');
+const ownerCommands = require('../commands/owner');
 
 /**
  * Handles command processing
@@ -353,6 +354,32 @@ async function handleCommand(sock, message, commandText, sender, user) {
           if (!isRegistered) return;
         }
         await marketCommands.handleTransfer(sock, message, args, user, sender);
+        break;
+        
+      // Owner commands
+      case 'blacklist':
+        await ownerCommands.handleBlacklist(sock, message, args, user, sender);
+        break;
+      case 'unblacklist':
+        await ownerCommands.handleUnblacklist(sock, message, args, user, sender);
+        break;
+      case 'resetdata':
+        await ownerCommands.handleResetData(sock, message, args, user, sender);
+        break;
+      case 'addcoins':
+        await ownerCommands.handleAddCoins(sock, message, args, user, sender);
+        break;
+      case 'removecoins':
+        await ownerCommands.handleRemoveCoins(sock, message, args, user, sender);
+        break;
+      case 'makeowner':
+        await ownerCommands.handleMakeOwner(sock, message, args, user, sender);
+        break;
+      case 'removeowner':
+        await ownerCommands.handleRemoveOwner(sock, message, args, user, sender);
+        break;
+      case 'setxp':
+        await ownerCommands.handleSetXP(sock, message, args, user, sender);
         break;
       
       // Unknown command

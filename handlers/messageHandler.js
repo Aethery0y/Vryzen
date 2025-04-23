@@ -1,6 +1,6 @@
 const { handleCommand } = require('./commandHandler');
 const config = require('../config');
-const { getUser, isGroupApproved, approveGroup, saveDatabase } = require('../database/db');
+const { getUser, isGroupApproved, approveGroup, saveDatabase, isUserBlacklisted } = require('../database/db');
 const { sendReply } = require('../utils/messageUtils');
 
 /**
@@ -21,6 +21,12 @@ async function isBotAdmin(sock, groupId) {
     console.log(`Checking admin status in group: ${groupMetadata.subject}`);
     console.log(`Bot JID: ${botJid}`);
     
+    // Enhanced logging - print all participants and their admin status
+    console.log('Group participants:');
+    groupMetadata.participants.forEach(p => {
+      console.log(`  - ${p.id.replace(/:.+@/, '@')}: ${p.admin || 'not admin'}`);
+    });
+    
     // Find the bot in the participants list
     const botParticipant = groupMetadata.participants.find(
       participant => participant.id.replace(/:.+@/, '@') === botJid
@@ -34,7 +40,9 @@ async function isBotAdmin(sock, groupId) {
     console.log(`Bot admin status: ${botParticipant.admin}`);
     
     // Check if bot is admin
-    return ['admin', 'superadmin'].includes(botParticipant.admin);
+    const isAdmin = ['admin', 'superadmin'].includes(botParticipant.admin);
+    console.log(`Bot admin status: ${isAdmin}`);
+    return isAdmin;
   } catch (error) {
     console.error('Error checking admin status:', error);
     return false;
@@ -153,9 +161,19 @@ async function handleMessage(sock, message) {
       return;
     }
     
+    // Check if user is blacklisted
+    if (isUserBlacklisted(sender)) {
+      await sendReply(sock, message, 
+        `⛔ *ACCESS DENIED* ⛔\n\n` +
+        `You have been blacklisted and cannot use this bot.\n\n` +
+        `If you believe this is a mistake, please contact the bot owner.`
+      );
+      return;
+    }
+    
     // Handle group messages
     if (isGroupMessage) {      
-      // Check if bot is an admin in this group
+      // ALWAYS check if bot is an admin in this group, regardless of approval status
       console.log(`Checking if bot is an admin in group ${remoteJid}`);
       const admin = await isBotAdmin(sock, remoteJid);
       console.log(`Bot admin status: ${admin}`);
@@ -175,7 +193,8 @@ async function handleMessage(sock, message) {
             // Approve the group
             approveGroup(remoteJid, {
               name: groupMetadata.subject,
-              participants: groupMetadata.participants.length
+              participants: groupMetadata.participants.length,
+              approvedAt: Date.now()
             });
             
             // Save the database
@@ -189,7 +208,7 @@ async function handleMessage(sock, message) {
             });
           }
           
-          // Process the command
+          // Process the command - bot is admin and group is (now) approved
           const user = getUser(sender);
           await handleCommand(sock, message, commandText, sender, user);
         } catch (error) {
@@ -197,11 +216,18 @@ async function handleMessage(sock, message) {
         }
       } else {
         // Bot is not admin, ask to make it admin
-        await sendReply(sock, message, 
-          `⚠️ *ADMIN REQUIRED* ⚠️\n\n` +
-          `To use this bot in this group, please make the bot an admin first.\n\n` +
-          `Once the bot is made an admin, it will automatically be activated for everyone in this group!`
-        );
+        let replyMessage = `⚠️ *ADMIN PRIVILEGES REQUIRED* ⚠️\n\n`;
+        
+        // Check if group was previously approved (bot was admin before)
+        if (isGroupApproved(remoteJid)) {
+          replyMessage += `I need to be an admin in this group to function.\n\n`;
+          replyMessage += `It seems my admin privileges have been removed. Please restore them to use my commands.`;
+        } else {
+          replyMessage += `To use this bot in this group, please make me an admin first.\n\n`;
+          replyMessage += `Once I'm given admin privileges, I'll automatically activate all commands for everyone!`;
+        }
+        
+        await sendReply(sock, message, replyMessage);
       }
       return;
     }

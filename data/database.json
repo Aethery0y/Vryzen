@@ -167,6 +167,48 @@
       "lastChallengeTime": null,
       "lastOpponent": null,
       "joinDate": 1745439396514
+    },
+    "6283140560467@s.whatsapp.net": {
+      "id": "6283140560467@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745439669955
+    },
+    "919335442589@s.whatsapp.net": {
+      "id": "919335442589@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745440686509
     }
   },
   "companies": {},
@@ -224,5 +266,6 @@
         "participants": 6
       }
     }
-  }
+  },
+  "blacklist": {}
 }

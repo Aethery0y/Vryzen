@@ -1,6 +1,6 @@
 const { sendReply } = require('../utils/messageUtils');
 const config = require('../config');
-const { getUser, updateUser, createChallenge, getChallenge, getPendingChallengesForUser, updateChallenge, cleanupExpiredChallenges } = require('../database/db');
+const { getUser, getUserByUsername, updateUser, createChallenge, getChallenge, getPendingChallengesForUser, updateChallenge, cleanupExpiredChallenges, isUserRegistered } = require('../database/db');
 const { formatNumber } = require('../utils/formatter');
 const { coinToss } = require('../utils/games');
 const { addXP } = require('./xp');
@@ -18,9 +18,15 @@ async function handleChallenge(sock, message, args, user, sender) {
     // Clean up expired challenges
     cleanupExpiredChallenges();
     
+    // Check if user is registered with a username
+    if (!user.isRegistered || !user.username) {
+      await sendReply(sock, message, `❌ You must register with a username before using PvP commands.\nUse "${config.prefix}register [username]" to register.`);
+      return;
+    }
+    
     // Check if there are valid arguments
     if (args.length < 2) {
-      await sendReply(sock, message, `❌ Incorrect format. Use ${config.prefix}challenge @user [amount]`);
+      await sendReply(sock, message, `❌ Incorrect format. Use ${config.prefix}challenge [username] [amount]`);
       return;
     }
     
@@ -47,34 +53,8 @@ async function handleChallenge(sock, message, args, user, sender) {
       });
     }
     
-    // Get mentioned user
-    let opponent = '';
-    const mentionedUser = message.message.extendedTextMessage?.contextInfo?.mentionedJid?.[0];
-    
-    if (mentionedUser) {
-      opponent = mentionedUser;
-    } else {
-      // Try to get from the first argument (might be a phone number)
-      const firstArg = args[0];
-      if (firstArg.startsWith('@')) {
-        const userNumber = firstArg.slice(1);
-        opponent = userNumber.includes('@') ? userNumber : `${userNumber}@s.whatsapp.net`;
-      }
-    }
-    
-    if (!opponent) {
-      await sendReply(sock, message, "❌ Please mention the user you want to challenge.");
-      return;
-    }
-    
-    // Check if player is challenging themselves
-    if (opponent === sender) {
-      await sendReply(sock, message, "❌ You cannot challenge yourself.");
-      return;
-    }
-    
-    // Check if opponent exists in the database
-    const opponentUser = getUser(opponent);
+    // Get target username (first argument)
+    const targetUsername = args[0];
     
     // Parse bet amount
     const betAmount = parseInt(args[args.length - 1]);
@@ -82,6 +62,29 @@ async function handleChallenge(sock, message, args, user, sender) {
     // Validate bet amount
     if (isNaN(betAmount) || betAmount <= 0) {
       await sendReply(sock, message, "❌ Please enter a valid bet amount.");
+      return;
+    }
+    
+    // Look up the opponent by username
+    const opponentUser = getUserByUsername(targetUsername);
+    
+    // Check if opponent exists
+    if (!opponentUser) {
+      await sendReply(sock, message, `❌ User "${targetUsername}" not found. Make sure the username is correct.`);
+      return;
+    }
+    
+    const opponent = opponentUser.id;
+    
+    // Check if player is challenging themselves
+    if (opponent === sender || opponentUser.username.toLowerCase() === user.username.toLowerCase()) {
+      await sendReply(sock, message, "❌ You cannot challenge yourself.");
+      return;
+    }
+    
+    // Check if opponent is registered
+    if (!opponentUser.isRegistered) {
+      await sendReply(sock, message, `❌ User "${targetUsername}" is not registered and cannot participate in challenges.`);
       return;
     }
     
@@ -105,7 +108,7 @@ async function handleChallenge(sock, message, args, user, sender) {
     
     // Check if opponent has enough balance
     if (betAmount > opponentUser.balance) {
-      await sendReply(sock, message, `❌ ${opponent.split('@')[0]} doesn't have enough coins for this challenge.`);
+      await sendReply(sock, message, `❌ ${opponentUser.username} doesn't have enough coins for this challenge.`);
       return;
     }
     
@@ -125,7 +128,7 @@ async function handleChallenge(sock, message, args, user, sender) {
         opponent,
         {
           text: `⚔️ *CHALLENGE RECEIVED* ⚔️\n\n` +
-            `${sender.split('@')[0]} has challenged you to a duel!\n\n` +
+            `${user.username} has challenged you to a duel!\n\n` +
             `Bet Amount: ${formatNumber(betAmount)} coins\n\n` +
             `Type "${config.prefix}accept" to accept or "${config.prefix}decline" to decline.\n` +
             `You have ${config.challengeTimeout} seconds to respond.`
@@ -137,7 +140,7 @@ async function handleChallenge(sock, message, args, user, sender) {
     
     // Send confirmation to challenger
     await sendReply(sock, message, `⚔️ *CHALLENGE SENT* ⚔️\n\n` +
-      `You've challenged ${opponent.split('@')[0]} to a duel for ${formatNumber(betAmount)} coins!\n\n` +
+      `You've challenged ${opponentUser.username} to a duel for ${formatNumber(betAmount)} coins!\n\n` +
       `They have ${config.challengeTimeout} seconds to accept or decline the challenge.`);
   } catch (error) {
     console.error('Error handling challenge command:', error);
@@ -156,6 +159,12 @@ async function handleAccept(sock, message, user, sender) {
   try {
     // Clean up expired challenges
     cleanupExpiredChallenges();
+    
+    // Check if user is registered with a username
+    if (!user.isRegistered || !user.username) {
+      await sendReply(sock, message, `❌ You must register with a username before using PvP commands.\nUse "${config.prefix}register [username]" to register.`);
+      return;
+    }
     
     // Check if there are any pending challenges
     const pendingChallenges = getPendingChallengesForUser(sender);
@@ -228,7 +237,7 @@ async function handleAccept(sock, message, user, sender) {
           challenger.id,
           {
             text: `🎉 *CHALLENGE WON* 🎉\n\n` +
-              `You won the challenge against ${sender.split('@')[0]}!\n\n` +
+              `You won the challenge against ${user.username}!\n\n` +
               `The coin landed on heads!\n\n` +
               `You won ${formatNumber(betAmount)} coins!\n` +
               `New balance: ${formatNumber(challenger.balance + betAmount)} coins`
@@ -240,7 +249,7 @@ async function handleAccept(sock, message, user, sender) {
       
       // Notify opponent
       await sendReply(sock, message, `❌ *CHALLENGE LOST* ❌\n\n` +
-        `You lost the challenge against ${challenger.id.split('@')[0]}.\n\n` +
+        `You lost the challenge against ${challenger.username}.\n\n` +
         `The coin landed on heads!\n\n` +
         `You lost ${formatNumber(betAmount)} coins.\n` +
         `New balance: ${formatNumber(user.balance - betAmount)} coins`);
@@ -270,7 +279,7 @@ async function handleAccept(sock, message, user, sender) {
           challenger.id,
           {
             text: `❌ *CHALLENGE LOST* ❌\n\n` +
-              `You lost the challenge against ${sender.split('@')[0]}.\n\n` +
+              `You lost the challenge against ${user.username}.\n\n` +
               `The coin landed on tails!\n\n` +
               `You lost ${formatNumber(betAmount)} coins.\n` +
               `New balance: ${formatNumber(challenger.balance - betAmount)} coins`
@@ -282,7 +291,7 @@ async function handleAccept(sock, message, user, sender) {
       
       // Notify opponent
       await sendReply(sock, message, `🎉 *CHALLENGE WON* 🎉\n\n` +
-        `You won the challenge against ${challenger.id.split('@')[0]}!\n\n` +
+        `You won the challenge against ${challenger.username}!\n\n` +
         `The coin landed on tails!\n\n` +
         `You won ${formatNumber(betAmount)} coins!\n` +
         `New balance: ${formatNumber(user.balance + betAmount)} coins`);
@@ -305,6 +314,12 @@ async function handleDecline(sock, message, user, sender) {
     // Clean up expired challenges
     cleanupExpiredChallenges();
     
+    // Check if user is registered with a username
+    if (!user.isRegistered || !user.username) {
+      await sendReply(sock, message, `❌ You must register with a username before using PvP commands.\nUse "${config.prefix}register [username]" to register.`);
+      return;
+    }
+    
     // Check if there are any pending challenges
     const pendingChallenges = getPendingChallengesForUser(sender);
     
@@ -322,6 +337,9 @@ async function handleDecline(sock, message, user, sender) {
       return;
     }
     
+    // Get challenger data
+    const challenger = getUser(challenge.challenger);
+    
     // Mark challenge as declined
     updateChallenge(challenge.id, { status: 'declined' });
     
@@ -331,7 +349,7 @@ async function handleDecline(sock, message, user, sender) {
         challenge.challenger,
         {
           text: `⚠️ *CHALLENGE DECLINED* ⚠️\n\n` +
-            `${sender.split('@')[0]} has declined your challenge.`
+            `${user.username} has declined your challenge.`
         }
       );
     } catch (notifyError) {
@@ -339,7 +357,7 @@ async function handleDecline(sock, message, user, sender) {
     }
     
     // Notify opponent
-    await sendReply(sock, message, `✅ You've declined the challenge from ${challenge.challenger.split('@')[0]}.`);
+    await sendReply(sock, message, `✅ You've declined the challenge from ${challenger.username}.`);
   } catch (error) {
     console.error('Error handling decline command:', error);
     await sendReply(sock, message, "❌ An error occurred while declining the challenge.");
@@ -357,6 +375,12 @@ async function handleRematch(sock, message, user, sender) {
   try {
     // Clean up expired challenges
     cleanupExpiredChallenges();
+    
+    // Check if user is registered with a username
+    if (!user.isRegistered || !user.username) {
+      await sendReply(sock, message, `❌ You must register with a username before using PvP commands.\nUse "${config.prefix}register [username]" to register.`);
+      return;
+    }
     
     // Check if user has a last opponent
     if (!user.lastOpponent) {
@@ -397,6 +421,12 @@ async function handleRematch(sock, message, user, sender) {
       return;
     }
     
+    // Check if opponent is registered
+    if (!opponentUser.isRegistered || !opponentUser.username) {
+      await sendReply(sock, message, "❌ Your last opponent is not registered and cannot participate in challenges.");
+      return;
+    }
+    
     // Determine a default bet amount (last bet or 100 coins)
     const betAmount = Math.min(
       Math.max(100, Math.floor(user.balance * 0.1)),
@@ -421,7 +451,7 @@ async function handleRematch(sock, message, user, sender) {
         opponent,
         {
           text: `⚔️ *REMATCH CHALLENGE* ⚔️\n\n` +
-            `${sender.split('@')[0]} wants a rematch!\n\n` +
+            `${user.username} wants a rematch!\n\n` +
             `Bet Amount: ${formatNumber(betAmount)} coins\n\n` +
             `Type "${config.prefix}accept" to accept or "${config.prefix}decline" to decline.\n` +
             `You have ${config.challengeTimeout} seconds to respond.`
@@ -433,7 +463,7 @@ async function handleRematch(sock, message, user, sender) {
     
     // Send confirmation to challenger
     await sendReply(sock, message, `⚔️ *REMATCH CHALLENGE SENT* ⚔️\n\n` +
-      `You've challenged ${opponent.split('@')[0]} to a rematch for ${formatNumber(betAmount)} coins!\n\n` +
+      `You've challenged ${opponentUser.username} to a rematch for ${formatNumber(betAmount)} coins!\n\n` +
       `They have ${config.challengeTimeout} seconds to accept or decline the challenge.`);
   } catch (error) {
     console.error('Error handling rematch command:', error);

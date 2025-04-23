@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="75" viewBox="0 0 200 75">
+  <!-- Background -->
+  <rect width="200" height="75" rx="10" fill="#4B5563" />
+  
+  <!-- Crown -->
+  <path d="M60,27 L70,42 L80,27 L90,42 L100,27 L100,52 L60,52 Z" fill="#FFD700" />
+  
+  <!-- Admin shield -->
+  <path d="M140,25 C140,25 150,22 160,25 C160,25 165,40 160,48 C155,55 150,55 150,55 C150,55 145,55 140,48 C135,40 140,25 140,25 Z" fill="#FFFFFF" />
+  
+  <!-- Admin badge star -->
+  <path d="M150,32 L152,38 L158,38 L153,42 L155,48 L150,44 L145,48 L147,42 L142,38 L148,38 Z" fill="#FF0000" />
+  
+  <!-- Key parts -->
+  <rect x="125" y="45" width="15" height="5" rx="2" fill="#FFD700" />
+  <rect x="135" y="45" width="5" height="12" rx="2" fill="#FFD700" />
+  <circle cx="140" cy="52" r="3" fill="#FFD700" />
+  
+  <!-- Admin text -->
+  <text x="100" y="65" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#FFFFFF">ADMIN COMMANDS</text>
+</svg>

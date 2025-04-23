@@ -1,21 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="160" height="60" viewBox="0 0 160 60">
-  <rect width="160" height="60" rx="10" fill="#7C3AED" />
-  <g fill="#FFFFFF">
-    <!-- Left Sword -->
-    <path d="M30,45 L50,25 L55,30 L35,50 L30,45 Z" />
-    <rect x="50" y="15" width="5" height="10" />
-    <rect x="47.5" y="10" width="10" height="5" />
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#DC2626" />
+  
+  <!-- Swords crossed -->
+  <g transform="translate(365, 365) rotate(45) translate(-365, -365)">
+    <!-- Sword 1 -->
+    <rect x="170" y="220" width="390" height="40" rx="5" fill="#C0C0C0" />
+    <rect x="170" y="220" width="80" height="40" rx="5" fill="#8B4513" />
+    <rect x="140" y="230" width="30" height="20" rx="5" fill="#C0C0C0" />
     
-    <!-- VS Text -->
-    <text x="80" y="35" font-family="Arial" font-weight="bold" font-size="18" text-anchor="middle" fill="#FFFFFF">VS</text>
-    
-    <!-- Right Sword -->
-    <path d="M130,45 L110,25 L105,30 L125,50 L130,45 Z" />
-    <rect x="105" y="15" width="5" height="10" />
-    <rect x="102.5" y="10" width="10" height="5" />
-    
-    <!-- Shield Outlines -->
-    <path d="M30,25 Q30,40 45,50 Q60,40 60,25 L30,25 Z" fill="none" stroke="#FFFFFF" stroke-width="2" />
-    <path d="M100,25 Q100,40 115,50 Q130,40 130,25 L100,25 Z" fill="none" stroke="#FFFFFF" stroke-width="2" />
+    <!-- Sword 2 -->
+    <rect x="170" y="470" width="390" height="40" rx="5" fill="#C0C0C0" />
+    <rect x="170" y="470" width="80" height="40" rx="5" fill="#8B4513" />
+    <rect x="140" y="480" width="30" height="20" rx="5" fill="#C0C0C0" />
   </g>
+  
+  <!-- Versus Text -->
+  <text x="365" y="365" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="#FFFFFF">VS</text>
+  
+  <!-- Shield 1 -->
+  <path d="M200,180 C200,180 250,160 300,180 C300,180 320,280 300,320 C280,350 250,350 250,350 C250,350 220,350 200,320 C180,280 200,180 200,180 Z" fill="#0000CD" stroke="#FFFFFF" stroke-width="5" />
+  
+  <!-- Shield 2 -->
+  <path d="M430,180 C430,180 480,160 530,180 C530,180 550,280 530,320 C510,350 480,350 480,350 C480,350 450,350 430,320 C410,280 430,180 430,180 Z" fill="#8B0000" stroke="#FFFFFF" stroke-width="5" />
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">PVP COMMANDS</text>
 </svg>

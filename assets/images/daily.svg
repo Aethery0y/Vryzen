@@ -1,29 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="160" height="60" viewBox="0 0 160 60">
-  <rect width="160" height="60" rx="10" fill="#0EA5E9" />
-  <g fill="#FFFFFF">
-    <!-- Calendar -->
-    <rect x="20" y="15" width="45" height="35" rx="3" />
-    <rect x="25" y="25" width="5" height="5" fill="#0EA5E9" />
-    <rect x="35" y="25" width="5" height="5" fill="#0EA5E9" />
-    <rect x="45" y="25" width="5" height="5" fill="#0EA5E9" />
-    <rect x="55" y="25" width="5" height="5" fill="#0EA5E9" />
-    <rect x="25" y="35" width="5" height="5" fill="#0EA5E9" />
-    <rect x="35" y="35" width="5" height="5" fill="#0EA5E9" />
-    <rect x="45" y="35" width="5" height="5" fill="#0EA5E9" />
-    <rect x="55" y="35" width="5" height="5" fill="#22D3EE" />
-    <rect x="20" y="10" width="45" height="10" rx="3" fill="#22D3EE" />
-    <line x1="30" y1="10" x2="30" y2="20" stroke="#0EA5E9" stroke-width="2" />
-    <line x1="40" y1="10" x2="40" y2="20" stroke="#0EA5E9" stroke-width="2" />
-    <line x1="50" y1="10" x2="50" y2="20" stroke="#0EA5E9" stroke-width="2" />
-    
-    <!-- Clock -->
-    <circle cx="100" cy="30" r="15" stroke="#FFFFFF" stroke-width="2" fill="none" />
-    <circle cx="100" cy="30" r="2" />
-    <line x1="100" y1="30" x2="100" y2="20" stroke="#FFFFFF" stroke-width="2" />
-    <line x1="100" y1="30" x2="108" y2="30" stroke="#FFFFFF" stroke-width="2" />
-    
-    <!-- Streak Flame -->
-    <path d="M130,45 Q125,30 130,25 Q135,30 138,25 Q140,35 145,30 Q148,40 138,45 Z" fill="#F97316" />
-    <path d="M132,43 Q130,32 134,28 Q137,32 138,28 Q140,37 142,35 Q144,42 136,43 Z" fill="#FDBA74" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="730" height="730" viewBox="0 0 730 730">
+  <!-- Background -->
+  <rect width="730" height="730" rx="40" fill="#F59E0B" />
+  
+  <!-- Calendar Outline -->
+  <rect x="180" y="180" width="370" height="320" rx="20" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+  
+  <!-- Calendar Header -->
+  <rect x="180" y="180" width="370" height="60" rx="20" fill="#EF4444" stroke="#000000" stroke-width="4" />
+  
+  <!-- Calendar Binding Holes -->
+  <circle cx="230" y="210" r="10" fill="#4B5563" />
+  <circle cx="320" y="210" r="10" fill="#4B5563" />
+  <circle cx="410" y="210" r="10" fill="#4B5563" />
+  <circle cx="500" y="210" r="10" fill="#4B5563" />
+  
+  <!-- Calendar Grid Lines -->
+  <line x1="180" y1="240" x2="550" y2="240" stroke="#000000" stroke-width="4" />
+  <line x1="180" y1="300" x2="550" y2="300" stroke="#000000" stroke-width="2" />
+  <line x1="180" y1="360" x2="550" y2="360" stroke="#000000" stroke-width="2" />
+  <line x1="180" y1="420" x2="550" y2="420" stroke="#000000" stroke-width="2" />
+  
+  <line x1="240" y1="240" x2="240" y2="500" stroke="#000000" stroke-width="2" />
+  <line x1="302" y1="240" x2="302" y2="500" stroke="#000000" stroke-width="2" />
+  <line x1="364" y1="240" x2="364" y2="500" stroke="#000000" stroke-width="2" />
+  <line x1="426" y1="240" x2="426" y2="500" stroke="#000000" stroke-width="2" />
+  <line x1="488" y1="240" x2="488" y2="500" stroke="#000000" stroke-width="2" />
+  
+  <!-- Calendar Dates -->
+  <text x="210" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">1</text>
+  <text x="270" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">2</text>
+  <text x="332" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">3</text>
+  <text x="394" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">4</text>
+  <text x="456" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">5</text>
+  <text x="518" y="270" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">6</text>
+  
+  <text x="210" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">7</text>
+  <text x="270" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">8</text>
+  <text x="332" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">9</text>
+  <text x="394" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">10</text>
+  <text x="456" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">11</text>
+  <text x="518" y="330" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">12</text>
+  
+  <text x="210" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">13</text>
+  <text x="270" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">14</text>
+  <text x="332" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">15</text>
+  
+  <!-- Highlighted Date with Checkmark -->
+  <circle cx="394" cy="390" r="15" fill="#22C55E" />
+  <text x="394" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#FFFFFF">16</text>
+  
+  <!-- More Dates -->
+  <text x="456" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">17</text>
+  <text x="518" y="390" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">18</text>
+  
+  <text x="210" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">19</text>
+  <text x="270" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">20</text>
+  <text x="332" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">21</text>
+  <text x="394" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">22</text>
+  <text x="456" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">23</text>
+  <text x="518" y="450" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">24</text>
+  
+  <text x="210" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">25</text>
+  <text x="270" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">26</text>
+  <text x="332" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">27</text>
+  <text x="394" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">28</text>
+  <text x="456" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">29</text>
+  <text x="518" y="510" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#000000">30</text>
+  
+  <!-- Month Display -->
+  <text x="365" y="220" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">APRIL</text>
+  
+  <!-- Text -->
+  <text x="365" y="600" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FFFFFF">DAILY COMMANDS</text>
 </svg>

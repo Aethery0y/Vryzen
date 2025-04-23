@@ -71,20 +71,20 @@ async function connectToWhatsApp() {
   sock.ev.on('group-participants.update', async (update) => {
     console.log('Group participant update:', update);
     try {
-      const { approveGroup, isGroupApproved, saveDatabase } = require('./database/db');
+      const { approveGroup, isGroupApproved, removeGroupApproval, saveDatabase } = require('./database/db');
       const botJid = sock.user.id;
       
+      // Normalize bot JID to handle different formats
+      const normalizedBotJid = botJid.replace(/:.+@/, '@');
+      
       // Check if bot was added to a group
-      if (update.action === 'add' && update.participants.some(p => p.replace(/:.+@/, '@') === botJid.replace(/:.+@/, '@'))) {
+      if (update.action === 'add' && update.participants.some(p => p.replace(/:.+@/, '@') === normalizedBotJid)) {
         // Bot was added to a group, check if it's admin
         const groupMetadata = await sock.groupMetadata(update.id);
         
         // Log for debugging
         console.log(`Bot added to group: ${groupMetadata.subject}`);
         console.log(`Bot JID: ${botJid}`);
-        
-        // Normalize bot JID by removing instance-specific part
-        const normalizedBotJid = botJid.replace(/:.+@/, '@');
         
         // Check if bot is admin
         const botParticipant = groupMetadata.participants.find(
@@ -132,9 +132,6 @@ async function connectToWhatsApp() {
         // Get group metadata
         const groupMetadata = await sock.groupMetadata(update.id);
         
-        // Normalize bot JID
-        const normalizedBotJid = botJid.replace(/:.+@/, '@');
-        
         // Check if our bot was promoted to admin
         const wasBotPromoted = update.participants.some(
           p => p.replace(/:.+@/, '@') === normalizedBotJid
@@ -143,25 +140,74 @@ async function connectToWhatsApp() {
         console.log(`Promotion event in group: ${groupMetadata.subject}`);
         console.log(`Bot was promoted: ${wasBotPromoted}`);
         
-        if (wasBotPromoted && !isGroupApproved(update.id)) {
-          // Approve the group
-          approveGroup(update.id, {
-            name: groupMetadata.subject,
-            participants: groupMetadata.participants.length,
-            promotedAt: Date.now()
-          });
-          
-          // Save the database
-          saveDatabase();
-          
-          // Send welcome message
+        if (wasBotPromoted) {
+          // Check if the group is already approved
+          if (!isGroupApproved(update.id)) {
+            // Approve the group
+            approveGroup(update.id, {
+              name: groupMetadata.subject,
+              participants: groupMetadata.participants.length,
+              promotedAt: Date.now()
+            });
+            
+            // Save the database
+            saveDatabase();
+            
+            // Send welcome message
+            await sock.sendMessage(update.id, {
+              text: `🎉 *THANK YOU FOR ADMIN PRIVILEGES* 🎉\n\n` +
+                   `This group has been approved for bot usage! All commands are now available to members.\n\n` +
+                   `Use "${config.prefix}help" to see available commands.`
+            });
+            
+            console.log(`Bot was promoted to admin in group: ${groupMetadata.subject}. Group approved.`);
+          } else {
+            // Group was already approved, but bot was re-promoted after being demoted
+            await sock.sendMessage(update.id, {
+              text: `✅ *ADMIN PRIVILEGES RESTORED* ✅\n\n` +
+                   `Thank you for restoring my admin privileges! All commands are now available again.\n\n` +
+                   `Use "${config.prefix}help" to see available commands.`
+            });
+            
+            console.log(`Bot was re-promoted in group: ${groupMetadata.subject}`);
+          }
+        }
+      }
+      
+      // Handle demote event - detect when bot loses admin rights
+      if (update.action === 'demote') {
+        // Get group metadata
+        const groupMetadata = await sock.groupMetadata(update.id);
+        
+        // Check if our bot was demoted from admin
+        const wasBotDemoted = update.participants.some(
+          p => p.replace(/:.+@/, '@') === normalizedBotJid
+        );
+        
+        console.log(`Demotion event in group: ${groupMetadata.subject}`);
+        console.log(`Bot was demoted: ${wasBotDemoted}`);
+        
+        if (wasBotDemoted && isGroupApproved(update.id)) {
+          // No need to remove approval as we'll check admin status for each command
+          // Just inform the group that admin privileges are required
           await sock.sendMessage(update.id, {
-            text: `🎉 *THANK YOU FOR ADMIN PRIVILEGES* 🎉\n\n` +
-                 `This group has been approved for bot usage! All commands are now available to members.\n\n` +
-                 `Use "${config.prefix}help" to see available commands.`
+            text: `⚠️ *ADMIN PRIVILEGES REQUIRED* ⚠️\n\n` +
+                 `I've been demoted from admin status in this group.\n\n` +
+                 `To use my commands, please restore my admin privileges.`
           });
           
-          console.log(`Bot was promoted to admin in group: ${groupMetadata.subject}. Group approved.`);
+          console.log(`Bot was demoted from admin in group: ${groupMetadata.subject}`);
+        }
+      }
+      
+      // Handle remove event when bot is removed from group
+      if (update.action === 'remove' && update.participants.some(p => p.replace(/:.+@/, '@') === normalizedBotJid)) {
+        // Bot was removed from the group
+        // Remove the group from approved groups
+        if (isGroupApproved(update.id)) {
+          removeGroupApproval(update.id);
+          saveDatabase();
+          console.log(`Bot was removed from group ${update.id}. Group approval removed.`);
         }
       }
     } catch (error) {

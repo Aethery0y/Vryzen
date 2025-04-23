@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="60" viewBox="0 0 160 60">
+  <rect width="160" height="60" rx="10" fill="#475569" />
+  <g fill="#FFFFFF">
+    <!-- Group of Users -->
+    <!-- Center User -->
+    <circle cx="80" cy="25" r="8" fill="#F3F4F6" />
+    <circle cx="80" cy="22" r="3" />
+    <path d="M72,35 Q72,28 80,28 Q88,28 88,35 Z" />
+    
+    <!-- Left User -->
+    <circle cx="60" cy="30" r="7" fill="#F3F4F6" />
+    <circle cx="60" cy="27" r="2.5" />
+    <path d="M53,39 Q53,33 60,33 Q67,33 67,39 Z" />
+    
+    <!-- Right User -->
+    <circle cx="100" cy="30" r="7" fill="#F3F4F6" />
+    <circle cx="100" cy="27" r="2.5" />
+    <path d="M93,39 Q93,33 100,33 Q107,33 107,39 Z" />
+    
+    <!-- Chat Bubbles -->
+    <path d="M30,15 L45,15 L45,25 L40,25 L35,30 L35,25 L30,25 Z" />
+    <path d="M25,30 L40,30 L40,40 L35,40 L30,45 L30,40 L25,40 Z" fill="#94A3B8" />
+    
+    <!-- Admin Badge -->
+    <rect x="120" y="15" width="25" height="8" rx="4" fill="#FCD34D" />
+    <text x="132" y="21" font-family="Arial" font-size="6" font-weight="bold" text-anchor="middle" fill="#475569">ADMIN</text>
+    
+    <!-- Group Icon -->
+    <rect x="120" y="30" width="25" height="20" rx="2" />
+    <circle cx="132" cy="35" r="2" />
+    <rect x="125" y="40" width="15" height="2" rx="1" fill="#475569" />
+    <rect x="125" y="45" width="10" height="2" rx="1" fill="#475569" />
+  </g>
+</svg>

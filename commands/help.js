@@ -160,6 +160,9 @@ async function sendMainHelp(sock, message) {
 • *Registration* - How to register with a username
    ${config.prefix}help register
 
+• *Admin* - Owner-only commands (restricted)
+   ${config.prefix}help admin
+
 Type "${config.prefix}help [category]" for detailed commands.
 
 *Basic Commands:*
@@ -470,6 +473,27 @@ This bot works in any group where it's an admin - no exceptions.
 • Use ${config.prefix}help fixowner if owner recognition isn't working
 
 Questions or issues? Contact the bot owners.`;
+        break;
+        
+      case 'admin':
+      case 'owner':
+        helpText = `👑 *ADMIN COMMANDS* 👑
+
+*User Management:*
+• ${config.prefix}blacklist @user - Prevent a user from using the bot
+• ${config.prefix}unblacklist @user - Remove a user from the blacklist
+• ${config.prefix}makeowner @user - Give a user owner privileges
+• ${config.prefix}removeowner @user - Remove owner privileges
+
+*Economy Control:*
+• ${config.prefix}addcoins @user [amount] - Add coins to a user's balance
+• ${config.prefix}removecoins @user [amount] - Remove coins from a user's balance
+• ${config.prefix}setxp @user [amount] - Set a user's XP to a specific amount
+
+*Global Commands:*
+• ${config.prefix}resetdata - Reset all data (use with extreme caution)
+
+*NOTE: These commands are ONLY available to bot owners*`;
         break;
 
       default:
