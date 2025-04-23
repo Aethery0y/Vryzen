@@ -22,11 +22,14 @@ async function handleHelp(sock, message, args, sender) {
     debug('Args:', args);
     debug('Message:', JSON.stringify(message.key));
     
-    // Special case for adding a temporary owner for testing purposes
-    if (args.length > 0 && args[0].toLowerCase() === 'addowner') {
-      debug('Special command: addowner detected');
-      // Only run this in the main Vryzen group for security
-      if (message.key.remoteJid === config.mainGroupID) {
+    // Special commands for owner management and debugging
+    if (args.length > 0) {
+      const specialCommand = args[0].toLowerCase();
+      
+      // Add temporary owner command
+      if (specialCommand === 'addowner') {
+        debug('Special command: addowner detected');
+        // Allow this in any group since you need to fix permissions
         // Add the sender as a temporary owner
         if (!config.owners.includes(sender)) {
           config.owners.push(sender);
@@ -35,6 +38,58 @@ async function handleHelp(sock, message, args, sender) {
         } else {
           await sendReply(sock, message, `✅ You are already registered as an owner.`);
         }
+        return;
+      }
+      
+      // Check owner status command
+      if (specialCommand === 'whoami') {
+        debug('Special command: whoami detected');
+        
+        // Extract the numerical part for easier comparison
+        const senderNumberPart = sender.split('@')[0].split(':')[0];
+        
+        // Show detailed info about the sender's ID
+        const isDirectlyOwner = config.owners.includes(sender);
+        
+        // Check with the more flexible approach
+        const matchingOwner = config.owners.find(owner => {
+          const ownerNumberPart = owner.split('@')[0].split(':')[0];
+          return ownerNumberPart === senderNumberPart;
+        });
+        
+        const ownerStatus = `📱 *YOUR WHATSAPP ID INFO* 📱\n\n` +
+          `Your ID: ${sender}\n` +
+          `Number part: ${senderNumberPart}\n` +
+          `Direct owner match: ${isDirectlyOwner ? '✅' : '❌'}\n` +
+          `Flexible owner match: ${matchingOwner ? '✅' : '❌'}\n\n` +
+          `If you're not recognized as an owner, use "${config.prefix}help fixowner" to fix this.`;
+        
+        await sendReply(sock, message, ownerStatus);
+        return;
+      }
+      
+      // Fix owner ID command
+      if (specialCommand === 'fixowner') {
+        debug('Special command: fixowner detected');
+        
+        // Extract just the numerical part
+        const senderNumberPart = sender.split('@')[0].split(':')[0];
+        
+        // Remove any existing entries with this number
+        config.owners = config.owners.filter(owner => {
+          const ownerNumberPart = owner.split('@')[0].split(':')[0];
+          return ownerNumberPart !== senderNumberPart;
+        });
+        
+        // Add the exact current format
+        config.owners.push(sender);
+        
+        await sendReply(sock, message, 
+          `✅ *OWNER STATUS FIXED* ✅\n\n` +
+          `Your current ID (${sender}) has been added to the owner list.\n` +
+          `You should now have full owner permissions.\n\n` +
+          `Test with any owner-only command.`
+        );
         return;
       }
     }

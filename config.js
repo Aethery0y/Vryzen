@@ -10,8 +10,20 @@ module.exports = {
   owners: [
     '918920659106@s.whatsapp.net', 
     '918810502592@s.whatsapp.net',
-    // Adding the number from the screenshot (temporary for testing)
-    '263789771339@s.whatsapp.net'
+    // Adding all possible formats of your number to ensure you're recognized
+    '263789771339@s.whatsapp.net',
+    '263789771339@g.us',
+    '263789771339:3@s.whatsapp.net',
+    '263789771339:4@s.whatsapp.net',
+    '263789771339:5@s.whatsapp.net',
+    '263789771339:6@s.whatsapp.net',
+    '263789771339:7@s.whatsapp.net',
+    '263789771339:8@s.whatsapp.net',
+    '263789771339:9@s.whatsapp.net',
+    '263789771339:10@s.whatsapp.net',
+    '263789771339:11@s.whatsapp.net',
+    '263789771339:12@s.whatsapp.net',
+    '263789771339:13@s.whatsapp.net'
   ],
   
   // Game settings

@@ -49,7 +49,24 @@ async function isBotAdmin(sock, groupId) {
 async function handleMessage(sock, message) {
   try {
     const remoteJid = message.key.remoteJid;
-    const sender = message.key.participant || message.key.remoteJid;
+    
+    // More robust sender identification for group messages
+    let sender = '';
+    
+    if (remoteJid.endsWith('@g.us')) {
+      // For group messages, we MUST use the participant field
+      sender = message.key.participant;
+      console.log(`GROUP MESSAGE: participant=${message.key.participant}`);
+    } else {
+      // For direct messages
+      sender = message.key.remoteJid;
+    }
+    
+    // Fallback in case the above logic fails
+    if (!sender) {
+      sender = message.key.remoteJid;
+      console.log(`WARNING: Using fallback sender ID: ${sender}`);
+    }
     
     // Get message content (text)
     let messageContent = '';
@@ -62,9 +79,24 @@ async function handleMessage(sock, message) {
       return;
     }
     
-    // Debug message content
+    // Debug message content with detailed sender info
     console.log(`Received message: ${messageContent}`);
     console.log(`From: ${sender} in chat: ${remoteJid}`);
+    console.log(`DETAILED-SENDER-INFO: ${JSON.stringify({
+      sender,
+      fromMe: message.key.fromMe,
+      remoteJid,
+      pushName: message.pushName,
+      isGroup: remoteJid.endsWith('@g.us'),
+      participantId: message.key.participant || sender
+    }, null, 2)}`);
+    
+    // Very important for troubleshooting the owner issue
+    if (messageContent.startsWith(config.prefix)) {
+      console.log(`🔍 OWNER CHECK: Checking if ${sender} is in owner list...`);
+      console.log(`🔍 OWNER LIST: ${JSON.stringify(config.owners)}`);
+      console.log(`🔍 IS OWNER: ${config.owners.includes(sender)}`);
+    }
     
     // Check if it's a command (starts with the prefix)
     if (!messageContent.startsWith(config.prefix)) {
@@ -92,8 +124,25 @@ async function handleMessage(sock, message) {
     console.log(`DEBUG-OWNERS: Checking if ${sender} is an owner...`);
     console.log(`DEBUG-OWNERS: Owner list:`, config.owners);
     
-    const isOwner = config.owners.includes(sender);
-    console.log(`DEBUG-OWNERS: Result: ${isOwner}`);
+    // More flexible owner checking - check if any form of the number is in the owners list
+    let isOwner = config.owners.includes(sender);
+    
+    // If not found directly, try a more flexible check (numerical part matching)
+    if (!isOwner && sender) {
+      // Extract just the numerical part of the sender ID
+      const senderNumberPart = sender.split('@')[0].split(':')[0];
+      console.log(`DEBUG-OWNERS: Checking with number part only: ${senderNumberPart}`);
+      
+      // Check if any owner entry contains this number
+      isOwner = config.owners.some(owner => {
+        const ownerNumberPart = owner.split('@')[0].split(':')[0];
+        const matches = (ownerNumberPart === senderNumberPart);
+        console.log(`DEBUG-OWNERS: Comparing ${ownerNumberPart} with ${senderNumberPart}: ${matches}`);
+        return matches;
+      });
+    }
+    
+    console.log(`DEBUG-OWNERS: Final owner check result: ${isOwner}`);
     
     const isFromMainGroup = remoteJid === config.mainGroupID;
     
