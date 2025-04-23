@@ -1,0 +1,49 @@
+{
+  "users": {
+    "918920659106@s.whatsapp.net": {
+      "id": "918920659106@s.whatsapp.net",
+      "balance": 1111,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 35,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 1,
+      "gamesWon": 1,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745435726599,
+      "username": "Aether",
+      "isRegistered": true
+    }
+  },
+  "companies": {},
+  "market": {
+    "orders": []
+  },
+  "pvp": {
+    "challenges": {}
+  },
+  "jackpot": {
+    "entries": [],
+    "totalAmount": 0,
+    "lastDrawTime": null
+  },
+  "stats": {
+    "totalBets": 1,
+    "totalWagered": 111,
+    "totalWon": 222,
+    "totalLost": 0
+  },
+  "usernames": {
+    "aether": "918920659106@s.whatsapp.net"
+  },
+  "groups": {
+    "approved": {}
+  }
+}

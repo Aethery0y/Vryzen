@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <rect width="48" height="48" rx="8" fill="#8B5CF6" />
+  <g fill="#FFFFFF">
+    <!-- Store Building -->
+    <path d="M10,16 L38,16 L38,38 L10,38 Z" />
+    
+    <!-- Store Roof/Awning -->
+    <path d="M8,16 L40,16 L36,10 L12,10 Z" />
+    
+    <!-- Store Windows -->
+    <rect x="14" y="22" width="8" height="8" fill="#8B5CF6" />
+    <rect x="26" y="22" width="8" height="8" fill="#8B5CF6" />
+    
+    <!-- Door -->
+    <rect x="22" y="30" width="4" height="8" fill="#8B5CF6" />
+    
+    <!-- Shopping Items -->
+    <circle cx="18" cy="26" r="2" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1" />
+    <circle cx="30" cy="26" r="2" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1" />
+    
+    <!-- Shopping Bag -->
+    <path d="M20,14 L22,6 L26,6 L28,14" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="1" />
+  </g>
+</svg>
