@@ -172,62 +172,13 @@ async function handleMessage(sock, message) {
     }
     
     // Handle group messages
-    if (isGroupMessage) {      
-      // ALWAYS check if bot is an admin in this group, regardless of approval status
-      console.log(`Checking if bot is an admin in group ${remoteJid}`);
-      const admin = await isBotAdmin(sock, remoteJid);
-      console.log(`Bot admin status: ${admin}`);
-      
-      if (admin) {
-        try {
-          // Check if the group is already approved
-          console.log(`Checking if group ${remoteJid} is approved`);
-          const groupApproved = isGroupApproved(remoteJid);
-          console.log(`Group approval status: ${groupApproved}`);
-          
-          // If not already approved, approve it
-          if (!groupApproved) {
-            // Get group metadata
-            const groupMetadata = await sock.groupMetadata(remoteJid);
-            
-            // Approve the group
-            approveGroup(remoteJid, {
-              name: groupMetadata.subject,
-              participants: groupMetadata.participants.length,
-              approvedAt: Date.now()
-            });
-            
-            // Save the database
-            saveDatabase();
-            
-            // Send approval message
-            await sock.sendMessage(remoteJid, {
-              text: `🎉 *GROUP ACTIVATED* 🎉\n\n` +
-                   `This bot is now active in this group! All commands are available to members.\n\n` +
-                   `Use "${config.prefix}help" to see available commands.`
-            });
-          }
-          
-          // Process the command - bot is admin and group is (now) approved
-          const user = getUser(sender);
-          await handleCommand(sock, message, commandText, sender, user);
-        } catch (error) {
-          console.error('Error handling group command:', error);
-        }
-      } else {
-        // Bot is not admin, ask to make it admin
-        let replyMessage = `⚠️ *ADMIN PRIVILEGES REQUIRED* ⚠️\n\n`;
-        
-        // Check if group was previously approved (bot was admin before)
-        if (isGroupApproved(remoteJid)) {
-          replyMessage += `I need to be an admin in this group to function.\n\n`;
-          replyMessage += `It seems my admin privileges have been removed. Please restore them to use my commands.`;
-        } else {
-          replyMessage += `To use this bot in this group, please make me an admin first.\n\n`;
-          replyMessage += `Once I'm given admin privileges, I'll automatically activate all commands for everyone!`;
-        }
-        
-        await sendReply(sock, message, replyMessage);
+    if (isGroupMessage) {
+      try {
+        // Process commands in any group without admin requirement
+        const user = getUser(sender);
+        await handleCommand(sock, message, commandText, sender, user);
+      } catch (error) {
+        console.error('Error handling group command:', error);
       }
       return;
     }
