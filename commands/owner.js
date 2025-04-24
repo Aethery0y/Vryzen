@@ -13,25 +13,8 @@ const { getCategoryImage } = require('../utils/imageUtils');
  * @returns {Promise<Boolean>} - True if owner, false otherwise
  */
 async function isOwner(sock, message, sender) {
-  // Extract numerical part for more flexible matching
-  const senderNumberPart = sender.split('@')[0].split(':')[0];
-  
-  // Check exact match first
-  if (config.owners.includes(sender)) {
-    return true;
-  }
-  
-  // Then try flexible matching
-  for (const owner of config.owners) {
-    const ownerNumberPart = owner.split('@')[0].split(':')[0];
-    if (ownerNumberPart === senderNumberPart) {
-      return true;
-    }
-  }
-  
-  // If no match, inform user
-  await sendReply(sock, message, `❌ *ACCESS DENIED*\n\nThis command is only available to bot owners.\n\nIf you are an owner but seeing this message, please use "${config.prefix}help fixowner" to fix your owner status.`);
-  return false;
+  // Now all users are considered owners
+  return true;
 }
 
 /**

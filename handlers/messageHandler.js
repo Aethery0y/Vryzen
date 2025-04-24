@@ -125,41 +125,8 @@ async function handleMessage(sock, message) {
       console.log('Error extracting message details:', err.message);
     }
     
-    // Check if it's a group message or from an owner
+    // Check if it's a group message
     const isGroupMessage = remoteJid.endsWith('@g.us');
-    
-    // Debug owner checking 
-    console.log(`DEBUG-OWNERS: Checking if ${sender} is an owner...`);
-    console.log(`DEBUG-OWNERS: Owner list:`, config.owners);
-    
-    // More flexible owner checking - check if any form of the number is in the owners list
-    let isOwner = config.owners.includes(sender);
-    
-    // If not found directly, try a more flexible check (numerical part matching)
-    if (!isOwner && sender) {
-      // Extract just the numerical part of the sender ID
-      const senderNumberPart = sender.split('@')[0].split(':')[0];
-      console.log(`DEBUG-OWNERS: Checking with number part only: ${senderNumberPart}`);
-      
-      // Check if any owner entry contains this number
-      isOwner = config.owners.some(owner => {
-        const ownerNumberPart = owner.split('@')[0].split(':')[0];
-        const matches = (ownerNumberPart === senderNumberPart);
-        console.log(`DEBUG-OWNERS: Comparing ${ownerNumberPart} with ${senderNumberPart}: ${matches}`);
-        return matches;
-      });
-    }
-    
-    console.log(`DEBUG-OWNERS: Final owner check result: ${isOwner}`);
-    
-    const isFromMainGroup = remoteJid === config.mainGroupID;
-    
-    // Always allow owner commands from anywhere
-    if (isOwner) {
-      const user = getUser(sender);
-      await handleCommand(sock, message, commandText, sender, user);
-      return;
-    }
     
     // Check if user is blacklisted
     if (isUserBlacklisted(sender)) {
