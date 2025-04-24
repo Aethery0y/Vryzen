@@ -273,6 +273,27 @@
       "lastChallengeTime": null,
       "lastOpponent": null,
       "joinDate": 1745478934945
+    },
+    "918810502592@s.whatsapp.net": {
+      "id": "918810502592@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745481754085
     }
   },
   "usernames": {
