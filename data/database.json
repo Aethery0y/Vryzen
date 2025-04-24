@@ -188,9 +188,96 @@
       "lastChallengeTime": null,
       "lastOpponent": null,
       "joinDate": 1745470212439
+    },
+    "923188672232@s.whatsapp.net": {
+      "id": "923188672232@s.whatsapp.net",
+      "username": "Ryu",
+      "isRegistered": true,
+      "balance": 1900,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 365,
+      "level": 2,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 1,
+      "gamesPlayed": 15,
+      "gamesWon": 7,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745471053717,
+      "lastDaily": 1745471079163
+    },
+    "917736178108@s.whatsapp.net": {
+      "id": "917736178108@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745471968046
+    },
+    "6283140560467@s.whatsapp.net": {
+      "id": "6283140560467@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745473911777
+    },
+    "917642800849@s.whatsapp.net": {
+      "id": "917642800849@s.whatsapp.net",
+      "username": null,
+      "isRegistered": false,
+      "balance": 1000,
+      "bankBalance": 0,
+      "bankCapacity": 10000,
+      "xp": 0,
+      "level": 1,
+      "prestige": 0,
+      "lastDailyReward": null,
+      "dailyStreak": 0,
+      "gamesPlayed": 0,
+      "gamesWon": 0,
+      "investedCompanies": {},
+      "shares": {},
+      "challengesMade": 0,
+      "lastChallengeTime": null,
+      "lastOpponent": null,
+      "joinDate": 1745478934945
     }
   },
-  "usernames": {},
+  "usernames": {
+    "ryu": "923188672232@s.whatsapp.net"
+  },
   "companies": {},
   "market": {
     "orders": []
@@ -204,10 +291,10 @@
     "lastDrawTime": null
   },
   "stats": {
-    "totalBets": 0,
-    "totalWagered": 0,
-    "totalWon": 0,
-    "totalLost": 0
+    "totalBets": 15,
+    "totalWagered": 5800,
+    "totalWon": 5600,
+    "totalLost": 3000
   },
   "groups": {
     "approved": {
