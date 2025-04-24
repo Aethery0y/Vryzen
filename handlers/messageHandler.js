@@ -149,8 +149,18 @@ async function handleMessage(sock, message) {
     }
     
     // Handle messages (both group and DM)
-    const user = getUser(sender);
-    await handleCommand(sock, message, commandText, sender, user);
+    try {
+      console.log(`Attempting to process command ${commandText} from ${sender} in chat ${remoteJid}`);
+      const user = getUser(sender);
+      console.log(`User data retrieved:`, user ? 'Found' : 'Not found');
+      
+      // Process command with better error handling
+      await handleCommand(sock, message, commandText, sender, user);
+      console.log(`Command processing completed for ${commandText}`);
+    } catch (cmdError) {
+      console.error(`Error processing command ${commandText}:`, cmdError);
+      await sendReply(sock, message, "❌ An error occurred while processing your command. Please try again.");
+    }
     
   } catch (error) {
     console.error('Error handling message:', error);
