@@ -138,19 +138,7 @@ async function handleMessage(sock, message) {
       return;
     }
     
-    // Handle group messages
-    if (isGroupMessage) {
-      try {
-        // Process commands in any group without admin requirement
-        const user = getUser(sender);
-        await handleCommand(sock, message, commandText, sender, user);
-      } catch (error) {
-        console.error('Error handling group command:', error);
-      }
-      return;
-    }
-    
-    // Handle DM messages
+    // Handle messages (both group and DM)
     const user = getUser(sender);
     await handleCommand(sock, message, commandText, sender, user);
     
