@@ -112,7 +112,7 @@ function getUser(userId) {
       id: userId,
       username: null, // Will be set during registration
       isRegistered: false, // User needs to register
-      balance: 1000, // Starting balance
+      balance: 50000, // Starting balance
       bankBalance: 0,
       bankCapacity: 10000,
       xp: 0,

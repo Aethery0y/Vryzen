@@ -13,8 +13,19 @@ const { getCategoryImage } = require('../utils/imageUtils');
  * @returns {Promise<Boolean>} - True if owner, false otherwise
  */
 async function isOwner(sock, message, sender) {
-  // Now all users are considered owners
-  return true;
+  // Check if sender is in the owners list
+  const isOwner = config.owners.some(owner => {
+    // Normalize both numbers for comparison
+    const ownerNumberPart = owner.split('@')[0].split(':')[0];
+    const senderNumberPart = sender.split('@')[0].split(':')[0];
+    return ownerNumberPart === senderNumberPart;
+  });
+
+  if (!isOwner) {
+    await sendReply(sock, message, `❌ *ERROR*\n\nThis command is only available to bot owners.`);
+  }
+
+  return isOwner;
 }
 
 /**
@@ -165,25 +176,16 @@ async function handleResetAllData(sock, message, args, user, sender) {
     // Check if user is owner
     if (!await isOwner(sock, message, sender)) return;
     
-    console.log("RESETALLDATA DEBUG: Args received:", args);
-    
     // Get the full command text from the message
     const fullCommand = message.message?.extendedTextMessage?.text || 
                        message.message?.conversation || 
                        "";
     
-    console.log("RESETALLDATA DEBUG: Full command:", fullCommand);
+    // Check if the command matches the confirmation pattern
+    const confirmationPattern = `${config.prefix}resetalldata wipealldatabase confirm`;
+    const isConfirmed = fullCommand.trim().toLowerCase() === confirmationPattern.toLowerCase();
     
-    // Check if the full command matches exactly after prefix removal
-    const confirmationText = `resetalldata wipealldatabase confirm`;
-    const commandWithoutPrefix = fullCommand.trim().toLowerCase().replace(/^\./, '');
-    const isExactConfirmation = commandWithoutPrefix === confirmationText.toLowerCase();
-    
-    console.log("RESETALLDATA DEBUG: Exact confirmation match:", isExactConfirmation);
-    
-    if (isExactConfirmation) {
-      console.log("RESETALLDATA DEBUG: Confirmation matched, proceeding with reset");
-      
+    if (isConfirmed) {
       // Get the admin image
       const adminImage = await getCategoryImage('admin');
       
@@ -191,9 +193,7 @@ async function handleResetAllData(sock, message, args, user, sender) {
       await sendReply(sock, message, `⏳ *PROCESSING COMPLETE DATABASE WIPE*\n\nThis might take a moment...`);
       
       // Reset the database
-      console.log("RESETALLDATA DEBUG: Initializing database with reset flag");
       db.initializeDatabase(true); // true = force reset
-      console.log("RESETALLDATA DEBUG: Database reset complete");
       
       // Send success message
       await sendReply(
@@ -205,11 +205,9 @@ async function handleResetAllData(sock, message, args, user, sender) {
         `Bot is ready for a fresh start.`, 
         adminImage
       );
-      console.log("RESETALLDATA DEBUG: Success message sent");
       return;
     }
     
-    console.log("RESETALLDATA DEBUG: Sending warning message");
     // Send warning message if confirmation not matched
     await sendReply(
       sock, 
