@@ -62,9 +62,19 @@ async function handleMessage(sock, message) {
     let sender = '';
     
     if (remoteJid.endsWith('@g.us')) {
-      // For group messages, we MUST use the participant field
-      sender = message.key.participant || message.participant || message.key.remoteJid;
-      console.log(`Processing group message from: ${sender}`);
+      // For group messages, use participant field with fallbacks
+      sender = message.key.participant || 
+               message.participant || 
+               (message.key && message.key.participant) ||
+               (message.message && message.message.participant) ||
+               message.key.remoteJid;
+               
+      // Normalize the sender ID format
+      if (!sender.includes('@s.whatsapp.net')) {
+        sender = sender.split(':')[0] + '@s.whatsapp.net';
+      }
+      
+      console.log(`Processing group message from: ${sender} in group: ${remoteJid}`);
     } else {
       // For direct messages
       sender = message.key.remoteJid;
