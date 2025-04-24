@@ -64,7 +64,6 @@ async function handleMessage(sock, message) {
     if (remoteJid.endsWith('@g.us')) {
       // For group messages, we MUST use the participant field
       sender = message.key.participant;
-      console.log(`GROUP MESSAGE: participant=${message.key.participant}`);
     } else {
       // For direct messages
       sender = message.key.remoteJid;
