@@ -150,15 +150,9 @@ async function handleMessage(sock, message) {
       return;
     }
     
-    // If DM and not owner, reject
-    await sendReply(sock, message, 
-      `⚠️ *GROUP ONLY* ⚠️\n\n` +
-      `This bot only works in groups where it's an admin.\n\n` +
-      `To use this bot in your group:\n` +
-      `1. Add the bot to your group\n` +
-      `2. Make the bot an admin\n` +
-      `3. The bot will automatically activate all commands for everyone`
-    );
+    // Handle DM messages
+    const user = getUser(sender);
+    await handleCommand(sock, message, commandText, sender, user);
     
   } catch (error) {
     console.error('Error handling message:', error);
